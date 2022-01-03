@@ -151,17 +151,11 @@ CREATE TABLE `users`
     email_verified_at varchar(255),
     password varchar(255),
     active tinyint(4),
+    api_token VARCHAR(60) UNIQUE,
     remember_token varchar(100),
     created_at timestamp,
     updated_at timestamp
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
-
--- EJECUTAR EN PRODUCCIÓN
-ALTER TABLE users
-ADD COLUMN api_token VARCHAR(60) UNIQUE AFTER active;
-UPDATE users
-SET updated_at = '2021-12-27 01:04:32';
--- EJECUTAR EN PRODUCCIÓN
 
 DROP TABLE IF EXISTS `TabGrupos`;
 CREATE TABLE `TabGrupos` (
@@ -303,7 +297,6 @@ CREATE TABLE tabasidiscipulados
     observaciones text,
     totfaltas INTEGER,
     totasistencia INTEGER,
-    totpermisos INTEGER,
     mes INTEGER,
     anio INTEGER,
     activo TINYINT(1) DEFAULT 1,
@@ -342,6 +335,7 @@ CREATE TABLE FaltasCultoDS (
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 SET autocommit=1;
 
+DROP TABLE IF EXISTS TabActividades;
 CREATE TABLE TabActividades(
 	CodAct VARCHAR(3) NOT NULL,
     FecReg DATETIME,
@@ -360,6 +354,7 @@ CREATE TABLE TabActividades(
     PRIMARY KEY(CodAct)
 );
 
+DROP TABLE IF EXISTS TabDocumentos;
 CREATE TABLE TabDocumentos (
 	NumReg VARCHAR(12) NOT NULL,
     FecReg DATE,
@@ -372,12 +367,13 @@ CREATE TABLE TabDocumentos (
     PRIMARY KEY(NumReg)
 );
 
+DROP TABLE IF EXISTS TabDetDocumentos;
 CREATE TABLE TabDetDocumentos (
 	NumReg VARCHAR(12) NOT NULL,
     CodAct VARCHAR(3)
 );
 
-DROP TABLE TabInfCaspaz;
+DROP TABLE IF EXISTS TabInfCaspaz;
 CREATE TABLE TabInfCasPaz (
 	NumInf int(10) unsigned NOT NULL AUTO_INCREMENT,
     CodCasPaz VARCHAR(8),
@@ -393,7 +389,7 @@ CREATE TABLE TabInfCasPaz (
     PRIMARY KEY(NumInf)
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
-DROP TABLE TabDetInfCas;
+DROP TABLE IF EXISTS TabDetInfCas;
 CREATE TABLE TabDetInfCas (
 	NumInf int(10) unsigned NOT NULL AUTO_INCREMENT,
     CodCon VARCHAR(8) NOT NULL, 
@@ -405,7 +401,7 @@ CREATE TABLE TabDetInfCas (
     PRIMARY KEY (`NumInf`, `CodCon`)
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
-DROP TABLE miembros_observados;
+DROP TABLE IF EXISTS miembros_observados;
 CREATE TABLE miembros_observados(
 	id int AUTO_INCREMENT,
 	CodCon VARCHAR(8) NOT NULL,

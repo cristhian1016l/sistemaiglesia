@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\ReportMember;
 use App\Tabasi;
-use \Illuminate\Support\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Tabcasasdepaz;
 use App\Tabcon;
 use App\Tabgrupos;
-use App\User;
 
 class DashboardController extends Controller
 {
