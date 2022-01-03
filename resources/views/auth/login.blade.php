@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Iniciar Sesión - Iglesia Primitiva</title>
+    <title>Iniciar Sesión - Ministerio Internacional Avivamiento y fuego</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
@@ -21,7 +21,7 @@
             <div class="user_card">
                 <div class="d-flex justify-content-center">
                     <div class="brand_logo_container">
-                        <img src="{{ asset('dist/img/logo.png') }}" class="brand_logo" alt="Logo">
+                        <img src="{{ asset('dist/img/logo-miaf.jpg') }}" class="brand_logo" alt="Logo">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center form_container">

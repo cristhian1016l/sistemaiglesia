@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title') - Iglesia Primitiva</title>
+  <title>@yield('title') - Ministerio Internacional Avivamiento y Fuego</title>
   <!-- Google Font: Source Sans Pro -->
   <!-- <link href="{{asset('css/app.css')}}" rel="stylesheet"> Añadimos el css generado con webpack -->
   @yield('css')
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="shortcut icon" type="image/png" href="{{ asset('/dist/img/logo.png') }}">
-  <link rel="shortcut icon" sizes="192x192" href="{{ asset('/dist/img/logo.png') }}">
+  <link rel="shortcut icon" type="image/png" href="{{ asset('/dist/img/logo-miaf.jpg') }}">
+  <link rel="shortcut icon" sizes="192x192" href="{{ asset('/dist/img/logo-miaf.jpg') }}">
 </head>
 <!-- <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"> -->
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -17,7 +17,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="{{ asset('dist/img/logo.png') }}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__wobble" src="{{ asset('dist/img/logo-miaf.jpg') }}" alt="MIAF" height="60" width="60" style="border-radius: 20px;">
   </div>
 
   <!-- Navbar -->
@@ -57,8 +57,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="{{ asset('dist/img/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Iglesia Primitiva</span>
+      <img src="{{ asset('dist/img/logo-miaf.jpg') }}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">M I A F</span>
     </a>
 
     <!-- Sidebar -->
@@ -66,7 +66,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/logo.png') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('dist/img/logo-miaf.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->tabcon->NomCon }}</a>
