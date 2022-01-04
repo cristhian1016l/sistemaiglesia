@@ -77,12 +77,7 @@
     </style>
 </head>
 <body>
-    <!-- <img src="{{ asset('dist/img/logo.png') }}" alt="Logo" width="50" height="50" align="right"> -->        
     <div>
-        <!-- <u style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold;">REGISTRO DE ASISTENCIA</u>         -->
-        <!-- <p style="font-family: 'Inter', sans-serif; font-size: 12x; font-weight: bold; text-align: center;">REPORTE DE ORACIÓN DE DISCIPULOS</p>     -->
-        
-        
         <table>
             <tr>
                 <td>
