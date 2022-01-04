@@ -100,23 +100,16 @@
         @foreach($discipulados as $disp)
         <?php $codarea = $disp->CodArea; ?>
         <br>
-        <!-- <hr style="border: 0 none; border-top: 2px dashed #332f32; background: none; height: 0;"> -->
             <table style="margin-top: -10px;">
                 <tr>
                     <td style="width: 40%">
                         <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold">Tipo de Grupo: DISCIPULADO</p>            
                     </td>
-                    <!-- <td style="width: 60%; text-align: center;">
-                        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-align: center; margin-left: 100px">Descripción: {{ $disp->DesArea }}</p>            
-                    </td> -->
                 </tr>            
                 <tr>
                     <td style="width: 40%; text-align: center;">
                         <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-align: center">Descripción: {{ $disp->DesArea }}</p>            
-                    </td>
-                    <!-- <td style="width: 40%; text-align: center;">
-                        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-align: center; text-align: center; margin-top: -10px;">Encargado: {{ $disp->EncArea }}</p>            
-                    </td> -->
+                    </td>                    
                 </tr>    
             </table>        
         <hr style="border: 0 none; border-top: 2px dashed #332f32; background: none; height: 0; margin-top: -5px;">
