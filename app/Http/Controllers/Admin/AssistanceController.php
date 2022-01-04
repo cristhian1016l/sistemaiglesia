@@ -331,7 +331,7 @@ class AssistanceController extends Controller
         }        
     }  
 
-    public function printPrayer(){
+    public function printPrayer(Request $request){
         $discipulos = DB::select("SELECT t.CodArea, t.CodCon, t.NomCon, t.ApeCon, t.Lunes, t.Martes, t.Miercoles, t.Jueves, t.Viernes,
                                 t.Sabado, t.Domingo, t.NumAsi, t.TotAsi, g.DesArea, g.EncArea, g.TipGrup FROM TabTempOracion t INNER JOIN
                                 TabGrupos g ON t.CodArea = g.CodArea ORDER BY t.CodArea, t.ApeCon ASC");
