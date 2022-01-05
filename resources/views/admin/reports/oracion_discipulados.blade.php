@@ -138,6 +138,7 @@
                     </td>
                 </tr>                
             </thead>
+            <tbody>
                 @foreach($discipulos as $dis)
                     @if($dis->CodArea == $codarea)
                     <tr>         

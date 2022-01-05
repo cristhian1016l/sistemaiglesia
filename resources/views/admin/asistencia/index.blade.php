@@ -144,7 +144,7 @@
               <!-- /.card-body -->
             </div>        
             <a href="{{ route('admin.imprimir_oracion') }}" target="_blank">
-              <button type="button" class="btn btn-block btn-primary">Generar PDF de oración</button>
+              <button type="submit" class="btn btn-block btn-primary">Generar PDF de oración</button>
             </a>
           </div>
           <!-- /.col (right) -->          
