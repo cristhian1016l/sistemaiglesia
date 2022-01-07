@@ -81,14 +81,14 @@
         <table>
             <tr>
                 <td>
-                    <p style="margin-top: -8px; font-style:normal;font-weight:bold;font-size:9pt;font-family:Arial;color:#000000">
+                    <span style="font-family: 'Inter', sans-serif; font-size: 8pt; font-weight: bold; text-align: center">
                     <?php 
                         echo date('Y-m-d');
                     ?>
-                    </p>
+                    </span>
                 </td>
                 <td>
-                    <p style="margin-top: -8px; font-style:normal;font-weight:bold;font-size:9pt;font-family:Arial;color:#000000"> 
+                    <span style="font-family: 'Inter', sans-serif; font-size: 8pt; font-weight: bold; text-align: center">  
                     <?php 
                         echo date('H:i:s a');
                         // 3:26 p.m.

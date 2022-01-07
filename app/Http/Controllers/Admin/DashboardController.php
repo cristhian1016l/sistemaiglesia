@@ -143,12 +143,14 @@ class DashboardController extends Controller
                 $SQLAsistencia = DB::select("SELECT da.CodCon, da.NomApeCon,  da.Asistio, da.EstAsi  FROM TabAsi a INNER JOIN 
                                 TabDetAsi da ON a.Codasi = da.CodAsi WHERE da.CodAsi = '".$codasi."' 
                                 AND da.CodCon = '".$ms->CodCon."' ORDER BY a.FecAsi");
-                array_push($discipulosArray, ['CodCon' => $SQLAsistencia[0]->CodCon,
-                'NomApeCon' => $SQLAsistencia[0]->NomApeCon,
-                'Asistio' => $SQLAsistencia[0]->Asistio,
-                'EstAsi' => $SQLAsistencia[0]->EstAsi,
-                'CodArea' => $gp->CodArea,
-                'CarDis' => $ms->CarDis]);
+                if($SQLAsistencia[0]->Asistio == 'F'){
+                    array_push($discipulosArray, ['CodCon' => $SQLAsistencia[0]->CodCon,
+                    'NomApeCon' => $SQLAsistencia[0]->NomApeCon,
+                    'Asistio' => $SQLAsistencia[0]->Asistio,
+                    'EstAsi' => $SQLAsistencia[0]->EstAsi,
+                    'CodArea' => $gp->CodArea,
+                    'CarDis' => $ms->CarDis]);                
+                }                
             }
         }
         // $colect = collect($discipulosArray);

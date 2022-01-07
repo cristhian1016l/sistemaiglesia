@@ -84,14 +84,14 @@
         <table>
             <tr>
                 <td>
-                    <p style="margin-top: -8px; font-style:normal;font-weight:bold;font-size:9pt;font-family:Arial;color:#000000">
+                    <span style="font-family: 'Inter', sans-serif; font-size: 8pt; font-weight: bold; text-align: center">
                     <?php 
                         echo date('Y-m-d');
                     ?>
-                    </p>
+                    </span>
                 </td>
                 <td>
-                    <p style="margin-top: -8px; font-style:normal;font-weight:bold;font-size:9pt;font-family:Arial;color:#000000"> 
+                    <span style="font-family: 'Inter', sans-serif; font-size: 8pt; font-weight: bold; text-align: center">  
                     <?php 
                         echo date('H:i:s a');
                         // 3:26 p.m.
@@ -101,7 +101,7 @@
             </tr>
         </table>
         <p style="margin-top: -8px; font-family: 'Inter', sans-serif; font-size: 20px; font-weight: bold; text-align: center;">FALTA DEL LIDERAZGO</p>    
-        <p style="margin-top: -15px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold; text-align: center;">CULTO: <?php echo strtoupper(strftime("%A", DateTime::createFromFormat("D", $fecha))); ?> {{ $fecha }}</p>
+        <p style="margin-top: -15px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold; text-align: center;">FECHA DEL CULTO: {{ $fecha }}</p>
 
 
 
@@ -109,12 +109,7 @@
         @foreach($discipulados as $disp)
         <?php $codarea = $disp->CodArea; ?>
         <br>
-            <table style="margin-top: -10px;">
-                <tr>
-                    <td style="width: 40%">
-                        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold">Tipo de Grupo: DISCIPULADO</p>            
-                    </td>
-                </tr>            
+            <table style="margin-top: -10px;">           
                 <tr>
                     <td style="width: 40%; text-align: center;">
                         <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-align: center">Descripción: {{ $disp->DesArea }}</p> 
@@ -186,7 +181,7 @@
                     </td>
                 </tr> -->
             </tbody>                
-            <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-align: left">{{ $mentor }} mentores, {{ $lidercdp }} líderes de casas de paz y {{ $sublider }} sublíderes de casa de paz</p>
+            <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-align: left">{{ $mentor }} mentor(es), {{ $lidercdp }} líder(es) de casa de paz y {{ $sublider }} sublíder(es) de casa de paz</p>
         </table>        
         @endforeach
     </div>
