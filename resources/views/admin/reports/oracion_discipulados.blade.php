@@ -81,10 +81,19 @@
         <table>
             <tr>
                 <td>
-                    <p style="margin-top: -8px; font-style:normal;font-weight:bold;font-size:9pt;font-family:Arial;color:#000000">31/07/2021</p>                    
+                    <p style="margin-top: -8px; font-style:normal;font-weight:bold;font-size:9pt;font-family:Arial;color:#000000">
+                    <?php 
+                        echo date('Y-m-d');
+                    ?>
+                    </p>
                 </td>
                 <td>
-                    <p style="margin-top: -8px; font-style:normal;font-weight:bold;font-size:9pt;font-family:Arial;color:#000000"> 3:26 p.m.</p>
+                    <p style="margin-top: -8px; font-style:normal;font-weight:bold;font-size:9pt;font-family:Arial;color:#000000"> 
+                    <?php 
+                        echo date('H:i:s a');
+                        // 3:26 p.m.
+                    ?>
+                    </p>
                 </td>
             </tr>
         </table>

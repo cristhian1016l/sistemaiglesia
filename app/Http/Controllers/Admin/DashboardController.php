@@ -127,4 +127,38 @@ class DashboardController extends Controller
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
+
+    public function reportAsisCultLideresDownload($codasi)
+    {        
+        // dd($codasi);
+        $fecasi = DB::select("SELECT FecAsi FROM TabAsi WHERE CodAsi = '".$codasi."'");
+        $fecha_culto = date('Y-m-d', strtotime($fecasi[0]->FecAsi));
+        $discipulosArray = array();
+        $grupos = DB::select("SELECT CodArea, DesArea FROM TabGrupos WHERE TipGrup = 'D' ORDER BY CodArea");
+        foreach($grupos as $gp){
+            $discipulos = DB::select("SELECT c.CodCon, c.ApeCon, c.NomCon, gm.CarDis, gm.CodArea FROM TabGruposMiem gm INNER JOIN TabCon c ON
+                                    gm.CodCon = c.CodCon WHERE CodArea = '".$gp->CodArea."' AND CarDis 
+                                    in('MENTOR', 'LIDER CDP', 'SUBLIDER CDP')  ORDER BY c.ApeCon");                
+            foreach($discipulos as $ms){         
+                $SQLAsistencia = DB::select("SELECT da.CodCon, da.NomApeCon,  da.Asistio, da.EstAsi  FROM TabAsi a INNER JOIN 
+                                TabDetAsi da ON a.Codasi = da.CodAsi WHERE da.CodAsi = '".$codasi."' 
+                                AND da.CodCon = '".$ms->CodCon."' ORDER BY a.FecAsi");
+                array_push($discipulosArray, ['CodCon' => $SQLAsistencia[0]->CodCon,
+                'NomApeCon' => $SQLAsistencia[0]->NomApeCon,
+                'Asistio' => $SQLAsistencia[0]->Asistio,
+                'EstAsi' => $SQLAsistencia[0]->EstAsi,
+                'CodArea' => $gp->CodArea,
+                'CarDis' => $ms->CarDis]);
+            }
+        }
+        // $colect = collect($discipulosArray);
+        // dd($colect);
+        // foreach($colect as $col){
+        //     dd($col['CodCon']);
+        // }
+
+        $data = ['discipulados' => $grupos, 'discipulos' => collect($discipulosArray), 'fecha' => $fecha_culto];
+        $pdf=PDF::loadView('admin.reports.asistencia_culto_lideres', $data);
+        return $pdf->stream();
+    }
 }

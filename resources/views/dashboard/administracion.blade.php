@@ -101,24 +101,31 @@
             <div class="card">
               <div class="card-header border-0">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <div class="d-flex justify-content-between">
                       <h3 class="card-title mt-1">ASISTENCIA A LOS CULTOS POR REDES</h3>
                     </div>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-10">
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <select name="miembro" class="form-control select2" style="width: 100%;" id="miselect">       
                           @foreach($cultos as $culto)
                           <option value="<?php echo $culto->CodAsi ?>">{{ $culto->TipAsi.' - '.\Carbon\Carbon::parse($culto->FecAsi)->format('d-m-Y') }}</option>
                           @endforeach
                         </select>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <a href="#">
                           <button type="button" class="btn btn-outline-info btn-block btn-flat" onclick="imprimirAsistencias()">
-                            <i class="fas fa-file-pdf"></i> Imprimir Asistencias por CDP's 
+                            <i class="fas fa-file-pdf"></i> Asistencias por CDP's 
+                          </button>
+                        </a>                        
+                      </div>
+                      <div class="col-md-4">
+                        <a href="#">
+                          <button type="button" class="btn btn-outline-danger btn-block btn-flat" onclick="imprimirAsistenciasLideres()">
+                            <i class="fas fa-file-pdf"></i> Asistencias Liderazgo
                           </button>
                         </a>                        
                       </div>
@@ -285,6 +292,15 @@
   function imprimirAsistencias(){
     var codasi = $('#miselect').val();
     var url = '{{ route("admin.dashboard.reportAsisCultDownload", ":id") }}'
+    url = url.replace(':id', codasi);
+    window.open(
+      url,
+      "_blank"
+    );    
+  }
+  function imprimirAsistenciasLideres(){
+    var codasi = $('#miselect').val();
+    var url = '{{ route("admin.dashboard.reportAsisCultLideresDownload", ":id") }}'
     url = url.replace(':id', codasi);
     window.open(
       url,

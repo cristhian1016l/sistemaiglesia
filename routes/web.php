@@ -157,6 +157,7 @@ Route::group(['middleware' => 'isAdmin'], function(){
     Route::post('/administracion/obtenerAsistenciasCultoXRed', 'Admin\DashboardController@getGraphicAssistanceCultosXRed'); // ASISTENCIAS GRÁFICAS DE CULTOS
     Route::post('/administracion/obtenerMiembrosXRed', 'Admin\DashboardController@getGraphicMembersXRed'); // ASISTENCIAS GRÁFICAS DE CULTOS
     Route::get('/administracion/reportes/asistencias-cultos/{codasi}','Admin\DashboardController@reportAsisCultDownload')->name('admin.dashboard.reportAsisCultDownload'); //IMPRIMIR LAS ASISTENCIAS AL CULTO POR CASAS DE PAZ
+    Route::get('/administracion/reportes/asistencias-cultos-lideres/{codasi}','Admin\DashboardController@reportAsisCultLideresDownload')->name('admin.dashboard.reportAsisCultLideresDownload'); //IMPRIMIR LAS ASISTENCIAS AL CULTO POR CASAS DE PAZ
 
     Route::group(['middleware' => ['can:ver miembros']], function () {
         //MEMBRESÍA
