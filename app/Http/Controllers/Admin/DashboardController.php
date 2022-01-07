@@ -158,7 +158,7 @@ class DashboardController extends Controller
                 unset($grupos[$key]);
             }
         }
-        dd($grupos);
+        // dd($grupos);
         // $colect = collect($discipulosArray);
         // dd($colect);
         // foreach($colect as $col){
