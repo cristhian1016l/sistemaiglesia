@@ -209,12 +209,17 @@ class AssistanceDetailsController extends Controller
                 $HORA_MAXIMA = Carbon::parse($tabasi->HorHasta)->format('H:i:s');
                 $estado = 'A';
 
-                if($HORA_ACTUAL > $HORA_MAXIMA){                    
-                    $estado = 'T';
-                    DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);                    
+                if($request->codact == '001'){
+                    if($HORA_ACTUAL > $HORA_MAXIMA){                    
+                        $estado = 'T';
+                        DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);
+                    }else{
+                        DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);                    
+                    }
                 }else{
-                    DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);                    
+                    DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);
                 }
+                
                 DB::update("UPDATE TabAsi set TotFaltas = TotFaltas - 1, TotAsistencia = TotAsistencia + 1 WHERE CodAsi = '".$request->codasi."'");
                 
                 $detasi = DB::table('TabDetAsi')
@@ -222,8 +227,8 @@ class AssistanceDetailsController extends Controller
                     ->where('CodAsi', $request->codasi)
                     ->orderBy('NomApeCon')
                     ->get();                
-
-                return response()->json(['200', "miembros" => $detasi, "tabasi" => $estado ]);
+                    
+                return response()->json(['200', "miembros" => $detasi]);
                 // Carbon::parse($fecha)->addMinutes(15)->toTimeString()
             }  
                         

@@ -78,6 +78,10 @@
                 <input name="asistencia" class="form-control form-control-sm" id="asistencia" value="{{ $asistencia->CodAsi }}" readonly>
               </div>
               <div class="form-group">
+                <label for="asistencia">Asistencia</label>
+                <input name="asistencia" class="form-control form-control-sm" id="codact" value="{{ $asistencia->CodAct }}" readonly>
+              </div>
+              <div class="form-group">
                 <label for="exampleInputPassword1">Fecha</label>
                 <input name="fecha" type="text" class="form-control form-control-sm" id="exampleInputPassword1" value="{{ \Carbon\Carbon::parse($asistencia->FecAsi)->toDateString() }}" readonly>
               </div>
@@ -283,6 +287,7 @@
 <!-- ADMINISTRACION -->
 <script>
   function updateRegisterMember(Codcon, Codasi) {
+    var codact = $('#codact').val();
     $('#example1').dataTable().fnClearTable();
     $('#example1').dataTable().fnDestroy();
     $('#example1').DataTable({
@@ -291,7 +296,8 @@
         "url": "/administracion/registrarAsistencia",
         "data": {
           'codcon': Codcon,
-          "codasi": Codasi
+          "codasi": Codasi,
+          "codact": codact
         },
         "dataSrc": function(data) {
           val = data.error;
@@ -302,7 +308,6 @@
               // alert("El usuario ya está registrado, intenta recargando la página");
               location.reload();
             } else {
-              console.log(data.tabasi);
               toastr.options.positionClass = 'toast-bottom-right';
               miembros = data.miembros;
               toastr.success('Asistencia de miembro registrada correctamente');
@@ -511,7 +516,7 @@
   }
 
   function deleteAssistanceMember(Codcon, Codasi) {
-
+    var codact = $('#codact').val();
     $('#example1').dataTable().fnClearTable();
     $('#example1').dataTable().fnDestroy();
     $('#example1').DataTable({
@@ -520,7 +525,8 @@
         "url": "/administracion/eliminarAsistencia",
         "data": {
           'codcon': Codcon,
-          "codasi": Codasi
+          "codasi": Codasi,
+          "codact": codact
         },
         "dataSrc": function(data) {
           val = data.error;
