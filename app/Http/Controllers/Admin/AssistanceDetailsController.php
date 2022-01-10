@@ -195,7 +195,8 @@ class AssistanceDetailsController extends Controller
     public function updateAssistanceMember(Request $request)
     {        
         try{
-            $fecha = Carbon::now();           
+            $fecha = Carbon::now();
+            $tabasi = DB::table('TabAsi')->select('HorHasta')->where('CodAsi', $request->codasi)->first();
             $asis = DB::table('TabDetAsi')
                 ->select('Asistio')
                 ->where('CodAsi', $request->codasi)
@@ -203,17 +204,27 @@ class AssistanceDetailsController extends Controller
                 ->first();
             if($asis->Asistio == 1){
                 return response()->json(["state" => "OK"]);
-            }else{  
-                DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha,'A',true,$request->codasi,$request->codcon]);
+            }else{
+                $HORA_ACTUAL = Carbon::parse($fecha)->toTimeString();
+                $HORA_MAXIMA = Carbon::parse($tabasi->HorHasta)->format('H:i:s');
+                $estado = 'A';
+
+                if($HORA_ACTUAL > $HORA_MAXIMA){                    
+                    $estado = 'T';
+                    DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);                    
+                }else{
+                    DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);                    
+                }
                 DB::update("UPDATE TabAsi set TotFaltas = TotFaltas - 1, TotAsistencia = TotAsistencia + 1 WHERE CodAsi = '".$request->codasi."'");
                 
                 $detasi = DB::table('TabDetAsi')
                     ->select('CodAsi', 'CodCon', 'NomApeCon', 'HorLlegAsi', 'EstAsi','Asistio')
                     ->where('CodAsi', $request->codasi)
                     ->orderBy('NomApeCon')
-                    ->get();
+                    ->get();                
 
-                return response()->json(['200', "miembros" => $detasi]);
+                return response()->json(['200', "miembros" => $detasi, "tabasi" => $estado ]);
+                // Carbon::parse($fecha)->addMinutes(15)->toTimeString()
             }  
                         
         }catch(\Exception $th){

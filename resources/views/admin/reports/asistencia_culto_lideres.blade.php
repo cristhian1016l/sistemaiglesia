@@ -132,7 +132,13 @@
                     <td style="text-align: center; width: 25%">
                         <span style="font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; text-align: center;">Cargo</span>
                     </td>
-                    <td style="width: 35%;"></td>
+                    <td style="text-align: center; width: 10%">
+                        <span style="font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; text-align: center;">Estado</span>
+                    </td>
+                    <td style="text-align: center; width: 10%">
+                        <span style="font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; text-align: center;">Hora</span>
+                    </td>
+                    <td style="width: 15%;"></td>
                 </tr>
             </thead>
             <tbody>
@@ -157,7 +163,34 @@
                         <td style="text-align: center; width: 25%;">
                             <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">{{ $dis['CarDis'] }}</span>
                         </td>
-                        <td style="width: 35%;"></td>
+                        <td style="text-align: center; width: 10%;">
+                        @switch($dis['EstAsi'])
+                            @case ('F')
+                                <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
+                                    FALTÓ
+                                </span>
+                                @break
+                            @case ('T')
+                                <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
+                                    TARDE
+                                </span>
+                                @break
+                            @default
+                                @break
+                        @endswitch                                                    
+                        </td>
+                        <td style="text-align: center; width: 10%;">
+                        @if($dis['HorLlegAsi'] != null)
+                            <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
+                                {{ \Carbon\Carbon::parse($dis['HorLlegAsi'])->format('H:i A') }}
+                            </span>
+                        @else
+                            <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
+                                -----
+                            </span>
+                        @endif                                                    
+                        </td>
+                        <td style="width: 5%;"></td>
                     </tr> 
                     <?php 
                     $i++; 

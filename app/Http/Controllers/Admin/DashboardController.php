@@ -141,17 +141,17 @@ class DashboardController extends Controller
                                     gm.CodCon = c.CodCon WHERE CodArea = '".$gp->CodArea."' AND CarDis 
                                     in('MENTOR', 'LIDER CDP', 'SUBLIDER CDP')  ORDER BY c.ApeCon");                
             foreach($discipulos as $ms){         
-                $SQLAsistencia = DB::select("SELECT da.CodCon, da.NomApeCon,  da.Asistio, da.EstAsi  FROM TabAsi a INNER JOIN 
+                $SQLAsistencia = DB::select("SELECT da.CodCon, da.NomApeCon,  da.Asistio, da.EstAsi, da.HorLlegAsi  FROM TabAsi a INNER JOIN 
                                 TabDetAsi da ON a.Codasi = da.CodAsi WHERE da.CodAsi = '".$codasi."' 
                                 AND da.CodCon = '".$ms->CodCon."' ORDER BY a.FecAsi");
-                if($SQLAsistencia[0]->EstAsi == 'F'){
+                if($SQLAsistencia[0]->EstAsi == 'F' || $SQLAsistencia[0]->EstAsi == 'T'){
                     $i++;
                     array_push($discipulosArray, ['CodCon' => $SQLAsistencia[0]->CodCon,
                     'NomApeCon' => $SQLAsistencia[0]->NomApeCon,
-                    'Asistio' => $SQLAsistencia[0]->Asistio,
                     'EstAsi' => $SQLAsistencia[0]->EstAsi,
+                    'HorLlegAsi' => $SQLAsistencia[0]->HorLlegAsi,
                     'CodArea' => $gp->CodArea,
-                    'CarDis' => $ms->CarDis]);                
+                    'CarDis' => $ms->CarDis]);
                 }                
             }
             if($i==0){
