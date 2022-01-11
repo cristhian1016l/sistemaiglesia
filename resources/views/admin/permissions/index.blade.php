@@ -412,7 +412,7 @@ function getPermission(numreg){
         "numreg": numreg
       },
     success:function(data) {
-      console.log(data[0]);
+      // console.log(data[0]);
       // $("#codcon").select2("val", data[0].CodCon);
       $("#codcon").prop("disabled", true);
       $("#codcon").val(data[0].CodCon).trigger('change');
@@ -421,7 +421,7 @@ function getPermission(numreg){
       document.getElementById('motivo').value = data[0].Motivo;
       document.getElementById('numreg').value = data[0].NumReg;
       let perCon = data[0].PerCon;
-      console.log(perCon);
+      // console.log(perCon);
       if(perCon == 0){
         constante = document.getElementById("constante");
         constante.checked = false;
@@ -452,7 +452,7 @@ function getPermissions() {
       "type": "POST",
       "url":"/administracion/permisos/obtener-permisos",      
       "dataSrc": function(data){
-        console.log(data.permissions);
+        // console.log(data.permissions);
         return data.permissions;        
       },
       "headers": {
@@ -489,7 +489,8 @@ function getPermissions() {
         render: function(data, type, row){
           var today = new Date();
           var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-          if(row.PerCon == false && row.FecFinReg < date){
+          // console.log(row.ApeCon, Date.parse(row.FecFinReg), Date.parse(date));
+          if(row.PerCon == false && Date.parse(row.FecFinReg) < Date.parse(date)){
             return '<p style="color: red; font-weight: bold">'+data+' '+row.NomCon+'</p>';
           }else{
             if(row.PerCon == true){
