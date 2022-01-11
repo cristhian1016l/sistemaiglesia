@@ -491,13 +491,13 @@ function getPermissions() {
           var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
           if(row.PerCon == false && row.FecFinReg < date){
             return '<p style="color: red; font-weight: bold">'+data+' '+row.NomCon+'</p>';
-          }
-          
-          if(row.PerCon == true){
-            return '<p style="color: red;">'+data+' '+row.NomCon+'</p>';
           }else{
-            return '<p>'+data+' '+row.NomCon+'</p>';
-          }          
+            if(row.PerCon == true){
+              return '<p style="color: red;">'+data+' '+row.NomCon+'</p>';
+            }else{
+              return '<p>'+data+' '+row.NomCon+'</p>';
+            }          
+          }                    
         }
       },
       {
