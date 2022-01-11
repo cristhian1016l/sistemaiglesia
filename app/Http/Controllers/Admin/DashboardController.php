@@ -36,10 +36,10 @@ class DashboardController extends Controller
     {
         // $codasi = Tabasi::select('CodAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'DESC')->first();
         $asistencias_faltas = DB::select("SELECT 
-                                        SUM(case when da.EstAsi = 'A' and c.ID_Red = 4 then 1 else 0 end ) as asistencia_adonai,
-                                        SUM(case when da.EstAsi = 'A' and c.ID_Red = 2 then 1 else 0 end ) as asistencia_yeshua,
-                                        SUM(case when da.EstAsi = 'A' and c.ID_Red = 1 then 1 else 0 end ) as asistencia_emanuel,
-                                        SUM(case when da.EstAsi = 'A' and c.ID_Red = 5 then 1 else 0 end ) as asistencia_shadai,
+                                        SUM(case when (da.EstAsi = 'A' OR da.EstAsi = 'T') and c.ID_Red = 4 then 1 else 0 end ) as asistencia_adonai,
+                                        SUM(case when (da.EstAsi = 'A' OR da.EstAsi = 'T') and c.ID_Red = 2 then 1 else 0 end ) as asistencia_yeshua,
+                                        SUM(case when (da.EstAsi = 'A' OR da.EstAsi = 'T') and c.ID_Red = 1 then 1 else 0 end ) as asistencia_emanuel,
+                                        SUM(case when (da.EstAsi = 'A' OR da.EstAsi = 'T') and c.ID_Red = 5 then 1 else 0 end ) as asistencia_shadai,
                                         SUM(case when da.EstAsi = 'F' and c.ID_Red = 4 then 1 else 0 end ) as ausencia_adonai,
                                         SUM(case when da.EstAsi = 'F' and c.ID_Red = 2 then 1 else 0 end ) as ausencia_yeshua,
                                         SUM(case when da.EstAsi = 'F' and c.ID_Red = 1 then 1 else 0 end ) as ausencia_emanuel,
