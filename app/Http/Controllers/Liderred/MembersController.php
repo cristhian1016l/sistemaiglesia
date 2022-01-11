@@ -18,7 +18,7 @@ class MembersController extends Controller
 
     public function getMembers()
     {
-        $members = DB::table('TabCon')->where('EstCon', 'ACTIVO')->where('ID_RED', Auth::user()->tabredes->ID_RED)->orderBy('ApeCon')->get();
+        $members = DB::table('TabCon')->where('EstCon', 'ACTIVO')->where('ID_Red', Auth::user()->tabredes->ID_RED)->orderBy('ApeCon')->get();
         $data = ['members' => $members];
         return view('liderred.membresia.index', $data);
     }
