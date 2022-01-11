@@ -64,7 +64,7 @@ class DashboardController extends Controller
         
 
         $asistencia = Tabdetasi::where('CodAsi', $request->codasi)->where('Asistio', 1)->count();
-        $falta = Tabdetasi::where('CodAsi', $request->codasi)->where('Asistio', 0)->count();
+        $falta = Tabdetasi::where('CodAsi', $request->codasi)->where('EstAsi', 'F')->count();
         $data = ['asistencias' => $asistencias_faltas, 'permisos' => $permisos, 'asistencia' => $asistencia, 'falta' => $falta];
         return response()->json($data);
     }
