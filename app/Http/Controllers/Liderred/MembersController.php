@@ -25,7 +25,8 @@ class MembersController extends Controller
 
     public function getDetailsMember($codcon)
     {
-        $members = TabCon::select('CodCon')->where('ID_Red', Auth::user()->tabredes->ID_RED)->get();
+        $members = DB::select("SELECT CodCon FROM TabCon WHERE ID_Red = '".Auth::user()->tabredes->ID_RED."'");
+
         // $array = array("1","2","3");
         $array = array();
 
