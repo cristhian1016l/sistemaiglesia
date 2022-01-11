@@ -554,7 +554,7 @@
             {
               backgroundColor: '#C82333',
               borderColor: '#C82333',
-              data: [data.asistencias[0].ausencia_adonai-data.permisos[0].permisos_adonai, data.asistencias[0].ausencia_yeshua-data.permisos[0].permisos_yeshua, data.asistencias[0].ausencia_emanuel-data.permisos[0].permisos_emanuel, data.asistencias[0].ausencia_shadai-data.permisos[0].permisos_shadai]
+              data: [data.asistencias[0].ausencia_adonai, data.asistencias[0].ausencia_yeshua, data.asistencias[0].ausencia_emanuel, data.asistencias[0].ausencia_shadai]
             },          
             {
               backgroundColor: '#6C757D',
