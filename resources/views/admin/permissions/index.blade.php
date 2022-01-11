@@ -73,8 +73,8 @@
                   <tr>                    
                     @if($perm->PerCon == true)
                       <td style=" color: red;">{{ $perm->ApeCon.' '.$perm->NomCon }}</td>                      
-                      <td style=" color: red;">{{ $perm->FecIniReg }}</td>
-                      <td style=" color: red;">{{ $perm->FecFinReg }}</td>
+                      <td style=" color: red;">---</td>
+                      <td style=" color: red;">---</td>
                       <td style=" color: red;">{{ $perm->Motivo }}</td>
                       @switch($perm->ID_Red)
                         @case(1)
@@ -92,7 +92,17 @@
                       @endswitch                      
                       <td style=" font-weight: bold;">
                     @else
-                      <td>{{ $perm->ApeCon.' '.$perm->NomCon }}</td>
+                      <?php
+                        if($perm->FecFinReg < date("Y-m-d")){
+                          ?>
+                            <td style=" color: red; font-weight: bold">{{ $perm->ApeCon.' '.$perm->NomCon }}</td>
+                          <?php
+                        }else{
+                          ?>
+                            <td>{{ $perm->ApeCon.' '.$perm->NomCon }}</td>
+                          <?php
+                        }
+                      ?>
                       <td>{{ $perm->FecIniReg }}</td>
                       <td>{{ $perm->FecFinReg }}</td>
                       <td>{{ $perm->Motivo }}</td>
@@ -477,6 +487,12 @@ function getPermissions() {
       {
         "targets": [0],
         render: function(data, type, row){
+          var today = new Date();
+          var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+          if(row.PerCon == false && row.FecFinReg < date){
+            return '<p style="color: red; font-weight: bold">'+data+' '+row.NomCon+'</p>';
+          }
+          
           if(row.PerCon == true){
             return '<p style="color: red;">'+data+' '+row.NomCon+'</p>';
           }else{
@@ -507,6 +523,26 @@ function getPermissions() {
             return '<p style="color: red;">'+data+'</p>';
           }else{
             return '<p>'+data+'</p>';
+          }          
+        }},
+      {"targets": [4], "searchable": true,
+        render: function(data, type, row){
+          switch(data){
+            case "1":
+              return '<td style=" color: red;">EMANUEL</td>';
+              break;
+            case "2":
+              return '<td style=" color: red;">YESHUA</td>';
+              break;
+            case "4":
+              return '<td style=" color: red;">ADONAI</td>';
+              break;
+            case "5":
+              return '<td style=" color: red;">SHADAI</td>';
+              break;
+            default:
+            return '<td></td>';
+
           }          
         }},
       {
