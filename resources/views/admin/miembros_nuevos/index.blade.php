@@ -475,6 +475,9 @@
                 case 'A':
                     asistencia = '<td><span class="badge bg-success">Asistió</span></td>'
                     break;
+                case 'T':
+                    asistencia = '<td><span class="badge bg-success">Asistió (Tarde)</span></td>'
+                    break;
                 case 'F':
                     asistencia = '<td><span class="badge bg-danger">No asistió</span></td>'
                     break;

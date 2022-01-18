@@ -131,7 +131,7 @@
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A')
+                                    @case('A' || 'T')
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                         @break
                                     @case('P')
@@ -145,7 +145,7 @@
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A')
+                                    @case('A' || 'T')
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                         @break
                                     @case('P')
@@ -159,7 +159,7 @@
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A')
+                                    @case('A' || 'T')
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                         @break
                                     @case('P')
@@ -173,7 +173,7 @@
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A')
+                                    @case('A' || 'T')
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                         @break
                                     @case('P')
@@ -187,7 +187,7 @@
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A')
+                                    @case('A' || 'T')
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                         @break
                                     @case('P')
@@ -201,7 +201,7 @@
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A')
+                                    @case('A' || 'T')
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                         @break
                                     @case('P')
@@ -215,7 +215,7 @@
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A')
+                                    @case('A' || 'T')
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                         @break
                                     @case('P')
