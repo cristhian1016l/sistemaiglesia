@@ -30,19 +30,19 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout'); //sólo pa
 Route::get('/panel', 'DashboardController@get_news')->name('panel');
                         //RUTA DEL LIDER DE RED
 Route::group(['middleware' => 'isLiderred'], function(){
-    // DASHBOARD
+                                                    // DASHBOARD
     Route::get('/panel-liderred', 'DashboardController@show_dashboard_liderred')->name('panel.liderred');
 
-    // ADMINISTACIÓN DE CASAS DE PAZ
+                                                    // CASAS DE PAZ
     Route::get('/CasasDePaz', 'Liderred\CDPController@getCDP')->name('liderred.getcdp');
-
     // REPORTES
     Route::get('/CasasDePaz/reportes', 'Liderred\CDPController@getReports')->name('liderred.getreports');
-    Route::post('/casasdepaz/reportes/mostrar-cdp-faltantes','Liderred\CDPController@show_cdps')->name('admin.discipulado.show_cdps');    
-
+    Route::post('/casasdepaz/reportes/mostrar-cdp-faltantes','Liderred\CDPController@show_cdps')->name('admin.discipulado.show_cdps');
     //MIEMBROS POR CP
     Route::get('miembros/verMiembros/{CodCasPaz}','Liderred\CDPController@getMembers')->name('liderred.membersCP.show');// VER DETALLES DE MIEMBRO 
     Route::get('miembros/verDetalle/{codcon}','Liderred\CDPController@getDetailsMember')->name('liderred.details.show');// VER DETALLES DE MIEMBRO 
+
+                                                    // USUARIOS
     // ADMINISTRACIÓN DE USUARIOS
     Route::get('usuarios', 'Liderred\UserController@getUsers')->name('liderred.usuarios.getusers');
     Route::get('usuarios/agregar', 'Liderred\UserController@create')->name('liderred.usuarios.form');
@@ -51,9 +51,8 @@ Route::group(['middleware' => 'isLiderred'], function(){
     Route::post('usuarios/actualizar/{id}', 'Liderred\UserController@update')->name('liderred.usuarios.update');
     Route::get('usuarios/activate/{id}', 'Liderred\UserController@activate')->name('liderred.usuarios.activate');
     Route::get('usuarios/desactivate/{id}', 'Liderred\UserController@desactivate')->name('liderred.usuarios.desactivate');    
-    //OBSERVACIONES
-    Route::get('observaciones', 'Liderred\ObservationsController@getObservations')->name('liderred.observations.getObservations'); // RUTA PARA MOSTRAR LAS OBSERVACIONES
-    //MEMBRESÍA
+    
+                                                    //MEMBRESÍA
     Route::get('membresia', 'Liderred\MembersController@getMembers')->name('liderred.membership.getMembers'); // TODOS LOS MIEMBROS ACTIVOS
     Route::get('membresia/verMiembro/{codcon}','Liderred\MembersController@getDetailsMember')->name('liderred.members.show');// VER DETALLES DE MIEMBRO 
     Route::get('membresia/generarQR/{codcon}','Liderred\MembersController@QRGenerate')->name('liderred.members.QRGenerate');// GENERAR CÓDIGO QR
@@ -64,7 +63,8 @@ Route::group(['middleware' => 'isLiderred'], function(){
     Route::post('informes/cpds/cerrar-cdp','Liderred\ReportCdpController@close_cdp')->name('Liderred.cdps.close_cdp');
     Route::post('informes/cpds/abrir-cdp','Liderred\ReportCdpController@open_cdp')->name('Liderred.cdps.open_cdp');
     Route::get('informes/cpds/reporte-cdp/{numinf}','Liderred\ReportCdpController@reportDownload')->name('Liderred.cdps.reportDownload');
-    //PERMISOS
+
+                                                    //PERMISOS
     Route::get('permisos', 'Liderred\PermissionsController@getPermissions')->name('liderred.permisos'); // RUTA PARA MOSTRAR LOS PERMISOS
     // PERMISOS - MÉTODOS AJAX
     Route::post('permisos/obtener-permisos','Liderred\PermissionsController@getPermissionsAjax')->name('liderred.permiso.getPermissionsAjax');
@@ -74,6 +74,11 @@ Route::group(['middleware' => 'isLiderred'], function(){
     Route::post('permisos/eliminar-permiso','Liderred\PermissionsController@deletePermission')->name('liderred.permiso.deletePermission');
     Route::post('permisos/obtener-permiso','Liderred\PermissionsController@getPermission')->name('liderred.permiso.getPermission');
     Route::post('permisos/editar-permiso','Liderred\PermissionsController@editPermission')->name('liderred.permiso.editPermission');
+
+                                                        // REPORTES
+    Route::get('reportes', 'Liderred\ReportsController@index')->name('liderred.reportes.index'); // MOSTRAR LOS REPORTES
+    Route::post('reportes/faltas_miembros','Liderred\ReportsController@FaultsOfMemberDownload')->name('liderred.faltasmiembros.FaultsOfMemberDownload'); //IMPRIMIR EN PDF LAS FALTAS POR CASAS DE PAZ 
+    
 });
                             //RUTA DEL LIDER DE CASA DE PAZ
 Route::group(['middleware' => 'isLidercdp'], function(){

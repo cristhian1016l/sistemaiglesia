@@ -35,7 +35,7 @@ class CDPController extends Controller
     }
 
     public function getReports(){
-        return view('liderred.reportes.index');
+        return view('liderred.reportes_cdp.index');
     }
 
     public function getMembers($CodCasPaz){

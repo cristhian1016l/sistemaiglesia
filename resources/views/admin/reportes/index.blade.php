@@ -70,10 +70,10 @@
                       <div class="form-row">
                           <div class="col-md-4">
                               <select name="faltas" class="form-control select2" style="width: 100%;" id="miselect">
-                              <option value="2">2 CULTOS CONSECUTIVOS</option>
-                              <option value="3">3 CULTOS CONSECUTIVOS</option>
-                              <option value="4">4 CULTOS CONSECUTIVOS</option>
-                              <option value="5">5 CULTOS CONSECUTIVOS</option>
+                                <option value="2">2 CULTOS CONSECUTIVOS</option>
+                                <option value="3">3 CULTOS CONSECUTIVOS</option>
+                                <option value="4">4 CULTOS CONSECUTIVOS</option>
+                                <option value="5">5 CULTOS CONSECUTIVOS</option>
                               </select>
                           </div>
                           <div class="col-md-4">

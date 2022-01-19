@@ -210,6 +210,23 @@
             <a href="#" class="nav-link" id="menuusuariosactive">              
               <i class="nav-icon fas fa-users"></i>
               <p>
+                REPORTES
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('liderred.reportes.index') }}" class="nav-link" id="usuarios">
+                  <i class="fas fa-user-cog nav-icon"></i>
+                  <p>Reportes de cultos</p>
+                </a>
+              </li>   
+            </ul>
+          </li>
+          <!-- <li class="nav-item" id="menuusuariosopen">
+            <a href="#" class="nav-link" id="menuusuariosactive">              
+              <i class="nav-icon fas fa-users"></i>
+              <p>
                 USUARIOS
                 <i class="fas fa-angle-left right"></i>
               </p>
@@ -222,7 +239,7 @@
                 </a>
               </li>   
             </ul>
-          </li>
+          </li> -->
           @endrole    
           @role('lidercdp')
           <li class="nav-header">LIDER DE CASA DE PAZ</li>          

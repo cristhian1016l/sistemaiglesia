@@ -282,7 +282,6 @@
     $('#datemask').inputmask('yyyy-mm-dd', { 'placeholder': 'yyyy-mm-dd' })
     $('[data-mask]').inputmask()
 
-    document.getElementById("adminasistenciaactive").className += " active";
     var url = window.location;
     
     $('ul.nav-sidebar a').filter(function () {
