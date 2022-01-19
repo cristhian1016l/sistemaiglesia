@@ -208,7 +208,7 @@
           </li>
           <li class="nav-item" id="menuusuariosopen">
             <a href="#" class="nav-link" id="menuusuariosactive">              
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-file-pdf"></i>
               <p>
                 REPORTES
                 <i class="fas fa-angle-left right"></i>
@@ -217,7 +217,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('liderred.reportes.index') }}" class="nav-link" id="usuarios">
-                  <i class="fas fa-user-cog nav-icon"></i>
+                  <i class="fas fa-network-wired nav-icon"></i>
                   <p>Reportes de cultos</p>
                 </a>
               </li>   

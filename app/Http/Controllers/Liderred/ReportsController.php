@@ -27,12 +27,12 @@ class ReportsController extends Controller
         $id_red = $datosRed->ID_RED;
         $datos = array();
         $cdps = DB::select("SELECT cdp.CodCasPaz, c.ApeCon, c.NomCon FROM TabCasasDePaz cdp INNER JOIN TabCon c 
-                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' ORDER BY cdp.CodCasPaz LIMIT 1");
+                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' ORDER BY cdp.CodCasPaz");
         foreach($cdps as $cdp){
             $cdps = DB::select("SELECT da.NomApeCon, da.EstAsi, c.NumCel FROM TabDetAsi da
                             INNER JOIN TabMimCasPaz mcdp ON da.CodCon = mcdp.CodCon
                             INNER JOIN TabCon c ON mcdp.CodCon = c.CodCon
-                            WHERE da.CodAsi = '100120221220' AND mcdp.CodCasPaz = '".$cdp->CodCasPaz."' AND da.EstAsi = 'F' ORDER BY da.NomApeCon");
+                            WHERE da.CodAsi = '".$request->culto."' AND mcdp.CodCasPaz = '".$cdp->CodCasPaz."' AND da.EstAsi = 'F' ORDER BY da.NomApeCon");
             array_push($datos, ["cdp" => $cdp->CodCasPaz, "lider" => $cdp->ApeCon.' '.$cdp->NomCon, "members" => $cdps]);
         }
 
