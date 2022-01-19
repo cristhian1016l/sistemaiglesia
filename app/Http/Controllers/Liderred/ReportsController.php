@@ -16,12 +16,6 @@ class ReportsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
-        $cultos = DB::select("SELECT CodAsi, FecAsi, TipAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC");
-        $data = ['cultos' => $cultos];
-        return view('liderred.reportes.index', $data);
-    }
-
     public function FaultsOfMemberDownload(Request $request){
         $datosRed = Tabredes::select('ID_RED')->where('LID_RED', Auth::user()->codcon)->first();        
         $id_red = $datosRed->ID_RED;

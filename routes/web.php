@@ -32,7 +32,7 @@ Route::get('/panel', 'DashboardController@get_news')->name('panel');
 Route::group(['middleware' => 'isLiderred'], function(){
                                                     // DASHBOARD
     Route::get('/panel-liderred', 'DashboardController@show_dashboard_liderred')->name('panel.liderred');
-
+    Route::post('reportes/faltas_miembros','Liderred\ReportsController@FaultsOfMemberDownload')->name('liderred.faltasmiembros.FaultsOfMemberDownload'); //IMPRIMIR EN PDF LAS FALTAS POR CASAS DE PAZ 
                                                     // CASAS DE PAZ
     Route::get('/CasasDePaz', 'Liderred\CDPController@getCDP')->name('liderred.getcdp');
     // REPORTES
@@ -73,11 +73,7 @@ Route::group(['middleware' => 'isLiderred'], function(){
     Route::post('permisos/habilitar-permiso','Liderred\PermissionsController@enablePermission')->name('liderred.permiso.enablePermission');
     Route::post('permisos/eliminar-permiso','Liderred\PermissionsController@deletePermission')->name('liderred.permiso.deletePermission');
     Route::post('permisos/obtener-permiso','Liderred\PermissionsController@getPermission')->name('liderred.permiso.getPermission');
-    Route::post('permisos/editar-permiso','Liderred\PermissionsController@editPermission')->name('liderred.permiso.editPermission');
-
-                                                        // REPORTES
-    Route::get('reportes', 'Liderred\ReportsController@index')->name('liderred.reportes.index'); // MOSTRAR LOS REPORTES
-    Route::post('reportes/faltas_miembros','Liderred\ReportsController@FaultsOfMemberDownload')->name('liderred.faltasmiembros.FaultsOfMemberDownload'); //IMPRIMIR EN PDF LAS FALTAS POR CASAS DE PAZ 
+    Route::post('permisos/editar-permiso','Liderred\PermissionsController@editPermission')->name('liderred.permiso.editPermission');    
     
 });
                             //RUTA DEL LIDER DE CASA DE PAZ

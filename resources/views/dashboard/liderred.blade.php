@@ -81,7 +81,41 @@
             </div>
           </div>
           <!-- /.col -->
-        </div>        
+        </div>     
+        <div class="row">
+          <div class="col-md-6">
+          <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Faltas al culto por casas de paz</h3>
+              </div>
+              <div class="card-body"> 
+                <div class="form-group">
+                  <!-- <label>Faltas consecutivas de discipulos al culto</label> -->
+                  {!! Form::open(array('route' => 'liderred.faltasmiembros.FaultsOfMemberDownload', 'role' => 'form', 'id' => "quickForm")) !!}
+                      <div class="form-row">
+                          <div class="col-md-8">
+                            <select name="culto" class="form-control select2" style="width: 100%;" id="miselect">       
+                                @foreach($cultos as $culto)
+                                    <option value="<?php echo $culto->CodAsi; ?>">{{ $culto->TipAsi.' - '.\Carbon\Carbon::parse($culto->FecAsi)->format('d-m-Y') }}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                              <a target="_blank">
+                                  <button type="submit" class='btn btn-success btn-block'>
+                                      Imprimir reporte
+                                  </button>
+                              </a>
+                          </div>
+                      </div>
+                  {!! Form::close() !!}            
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->            
+          </div>          
+        </div>   
       </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
