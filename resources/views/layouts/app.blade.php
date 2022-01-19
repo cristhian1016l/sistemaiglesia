@@ -387,23 +387,6 @@
             </ul>
             @endif
           </li>
-          <!-- <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-eye-dropper"></i>
-              <p>
-                OBSERVACIONES
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('admin.observations.getObservations') }}" class="nav-link">
-                  <i class="fas fa-eye nav-icon"></i>
-                  <p>Mostrar observaciones</p>
-                </a>
-              </li>
-            </ul>
-          </li>     -->
           <li class="nav-item">
             @if(auth()->user()->hasAnyPermission(['administrar roles']))
             <a href="#" class="nav-link">

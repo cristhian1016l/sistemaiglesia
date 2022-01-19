@@ -56,33 +56,4 @@ class CDPController extends Controller
         return view('liderred.membresia.detailsMember', $data);
     }
 
-    public function show_cdps(Request $request){
-        
-        $week = $request->week;
-        $year = $request->year;
-        $selectCDP = DB::select("SELECT CodCasPaz FROM TabInfCasPaz WHERE NumSem = ".$week." AND Anio = ".$year);
-        $listnow = [];
-        foreach($selectCDP as $md){
-            array_push($listnow, $md->codarea);
-        }
-        $id_red = DB::select("SELECT ID_RED FROM TabRedes WHERE LID_RED='".User::find(Auth::user()->id)."'");
-        $discipleships = Tabcasasdepaz::select('CodCasPaz')->where('ID_Red', $id_red)->get();
-        $activelist = [];
-        foreach($discipleships as $md){
-            array_push($activelist, $md->CodArea);
-        }
-
-        $diffAdd = array_diff($activelist, $listnow);        
-
-        $discipleships_fauls = [];
-
-        foreach($diffAdd as $ds){
-            $groups = Tabgrupos::select('CodArea', 'DesArea')
-                                    ->where('CodArea', $ds)
-                                    ->first();
-            array_push($discipleships_fauls, $groups);
-        }
-
-        return response()->json($discipleships_fauls);
-    }
 }

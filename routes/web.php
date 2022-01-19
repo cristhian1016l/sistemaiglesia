@@ -34,10 +34,11 @@ Route::group(['middleware' => 'isLiderred'], function(){
     Route::get('/panel-liderred', 'DashboardController@show_dashboard_liderred')->name('panel.liderred');
     Route::post('reportes/faltas_miembros','Liderred\ReportsController@FaultsOfMemberDownload')->name('liderred.faltasmiembros.FaultsOfMemberDownload'); //IMPRIMIR EN PDF LAS FALTAS POR CASAS DE PAZ 
                                                     // CASAS DE PAZ
-    Route::get('/CasasDePaz', 'Liderred\CDPController@getCDP')->name('liderred.getcdp');
+    // VISTA GENERAL
+    Route::get('/CasasDePaz', 'Liderred\CDPController@getCDP')->name('liderred.getcdp'); // Muestra las casas de paz en la vista
     // REPORTES
     Route::get('/CasasDePaz/reportes', 'Liderred\CDPController@getReports')->name('liderred.getreports');
-    Route::post('/casasdepaz/reportes/mostrar-cdp-faltantes','Liderred\CDPController@show_cdps')->name('admin.discipulado.show_cdps');
+    
     //MIEMBROS POR CP
     Route::get('miembros/verMiembros/{CodCasPaz}','Liderred\CDPController@getMembers')->name('liderred.membersCP.show');// VER DETALLES DE MIEMBRO 
     Route::get('miembros/verDetalle/{codcon}','Liderred\CDPController@getDetailsMember')->name('liderred.details.show');// VER DETALLES DE MIEMBRO 
@@ -90,12 +91,7 @@ Route::group(['middleware' => 'isLidercdp'], function(){
 
     //MIEMBROS
     Route::get('lidercdp/verMiembro/{codcon}','Lidercdp\CDPController@getDetailsMember')->name('lidercdp.members.show');// VER DETALLES DE MIEMBRO 
-    
-    // OBSERVACIONES DE MIEMBROS
-    Route::get('lidercdp/reportarMiembro/{codcon}/{codcaspaz}', 'Lidercdp\ObservationsController@reportMember')->name('lidercdp.observations.reportMember'); // RUTA VER EL FORMULARIO DE REPORTAR MIEMBRO
-    Route::post('lidercdp/reportarMiembro', 'Lidercdp\ObservationsController@reportMemberPost')->name('lidercdp.observations.reportMemberPost'); // RUTA PARA ENVIAR LA INFORMACIÓN DE REPORTAR MIEMBRO
-    Route::get('lidercdp/observaciones', 'Lidercdp\ObservationsController@getObservations')->name('lidercdp.observations.getObservations'); // RUTA PARA MOSTRAR LAS OBSERVACIONES
-    
+        
     // REPORTE SEMANAL DE CASA DE PAZ
     Route::get('lidercdp/reportesemanal/crear_asistencia/{numinf}/{codcaspaz}','Lidercdp\ReportCdpController@create')->name('Lidercdp.reportesemanal.create');    
 });
@@ -243,14 +239,6 @@ Route::group(['middleware' => 'isAdmin'], function(){
         Route::get('administracion/usuarios/desactivate/{id}', 'Admin\UserController@desactivate')->name('admin.usuarios.desactivate');
     });        
     
-
-    //OBSERVACIONES
-    Route::get('administracion/observaciones', 'Admin\ObservationsController@getObservations')->name('admin.observations.getObservations'); // RUTA PARA MOSTRAR LAS OBSERVACIONES
-    Route::post('administracion/observacionLeida/{observationid}', 'Admin\ObservationsController@markasread')->name('admin.observations.markasread'); // MARCAR OBSERVACIÓN COMO LEÍDA
-    Route::post('administracion/eliminarObservacion/{observationid}', 'Admin\ObservationsController@deleteObservation')->name('admin.observations.deleteObservation'); // ELIMINAR OBSERVACIÓN
-    //OBSERVACIONES AJAX
-    Route::post('admin/observacionesajax', 'Admin\ObservationsController@getObservationsAjax')->name('admin.observations.getObservationsAjax'); // RUTA PARA MOSTRAR LAS OBSERVACIONES    
-
     Route::group(['middleware' => ['can:reunion de discipulados']], function () {
         //GESTIÓN DE REUNIÓN DISCIPULADOS
         Route::get('administracion/discipulado/listado','Admin\DiscipleshipController@index')->name('admin.discipulado.index');

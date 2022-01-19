@@ -81,39 +81,48 @@
             </div>
           </div>
           <!-- /.col -->
-        </div>     
+        </div>
+        <div class="progress-group">
+          <strong>Meta de membresía</strong>
+          <?php $percentage = ($miembros/$red->META_RED)*100 ?>
+          <span class="float-right"><b>{{ $miembros }}</b>/{{$red->META_RED}} ({{ $percentage }}%)</span>
+          <div class="progress progress-sm">            
+            <div class="progress-bar bg-primary" style="width: <?php echo $percentage; ?>%"></div>
+          </div>
+        </div>
+        <br>
         <div class="row">
           <div class="col-md-6">
-          <div class="card card-primary">
+            <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Faltas al culto por casas de paz</h3>
+                <h3 class="card-title">Faltas al culto por casas de paz general</h3>
               </div>
               <div class="card-body"> 
                 <div class="form-group">
                   <!-- <label>Faltas consecutivas de discipulos al culto</label> -->
                   {!! Form::open(array('route' => 'liderred.faltasmiembros.FaultsOfMemberDownload', 'role' => 'form', 'id' => "quickForm")) !!}
-                      <div class="form-row">
-                          <div class="col-md-8">
-                            <select name="culto" class="form-control select2" style="width: 100%;" id="miselect">       
-                                @foreach($cultos as $culto)
-                                    <option value="<?php echo $culto->CodAsi; ?>">{{ $culto->TipAsi.' - '.\Carbon\Carbon::parse($culto->FecAsi)->format('d-m-Y') }}</option>
-                                @endforeach
-                            </select>
-                          </div>
-                          <div class="col-md-4">
-                              <a target="_blank">
-                                  <button type="submit" class='btn btn-success btn-block'>
-                                      Imprimir reporte
-                                  </button>
-                              </a>
-                          </div>
+                    <div class="form-row">
+                      <div class="col-md-8">
+                        <select name="culto" class="form-control select2" style="width: 100%;" id="miselect">       
+                          @foreach($cultos as $culto)
+                            <option value="<?php echo $culto->CodAsi; ?>">{{ $culto->TipAsi.' - '.\Carbon\Carbon::parse($culto->FecAsi)->format('d-m-Y') }}</option>
+                          @endforeach
+                        </select>
                       </div>
+                      <div class="col-md-4">
+                        <a target="_blank">
+                          <button type="submit" class='btn btn-success btn-block'>
+                              Imprimir reporte
+                          </button>
+                        </a>
+                      </div>
+                    </div>
                   {!! Form::close() !!}            
                 </div>
               </div>
               <!-- /.card-body -->
             </div>
-            <!-- /.card -->            
+              <!-- /.card -->            
           </div>          
         </div>   
       </div><!--/. container-fluid -->
