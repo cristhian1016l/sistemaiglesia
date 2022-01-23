@@ -301,6 +301,7 @@ class AssistanceController extends Controller
         $actividades = DB::table('TabAsi')
                         ->select('CodAsi', 'TipAsi', 'CodAct')
                         ->where('FecAsi', $fecha)
+                        ->orderBy('CodAct', 'DESC')
                         ->get();
         if(isset($actividades[0])){
             if($actividades[0]->CodAct != '002'){
