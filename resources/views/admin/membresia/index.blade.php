@@ -115,7 +115,7 @@
                                 <i class="fas fa-user-minus"></i>
                             </button>         
                         </a>
-                        <a href="{{ route('admin.membership.show', $member->CodCon)}}">
+                        <a href="{{ route('admin.membership.show', $member->CodCon)}}" target="_blank">
                             <button class="btn btn-success btn-sm"  title="Ver detalles de <?php echo $member->NomCon ?>">
                                 <i class="fas fa-eye"></i>
                             </button>         
@@ -349,7 +349,7 @@
                 '<i class="fas fa-user-minus"></i>'+
               '</button>'+
             '</a>'+
-            '<a href="verDetalle/'+codcon+'" >'+
+            '<a href="verDetalle/'+codcon+'" target="_blank">'+
               '<button class="btn btn-success btn-sm" title="Ver detalles de '+apecon+' '+nomcon+'">'+
                 '<i class="fas fa-eye"></i>'+
               '</button>'+

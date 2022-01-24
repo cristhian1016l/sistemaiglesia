@@ -137,7 +137,7 @@
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
-                                    @case('N')
+                                    @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
                                 @endswitch
@@ -151,7 +151,7 @@
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
-                                    @case('N')
+                                    @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
                                 @endswitch
@@ -165,7 +165,7 @@
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
-                                    @case('N')
+                                    @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
                                 @endswitch
@@ -179,7 +179,7 @@
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
-                                    @case('N')
+                                    @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
                                 @endswitch
@@ -193,7 +193,7 @@
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
-                                    @case('N')
+                                    @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
                                 @endswitch
@@ -207,7 +207,7 @@
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
-                                    @case('N')
+                                    @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
                                 @endswitch
@@ -221,7 +221,7 @@
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
-                                    @case('N')
+                                    @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
                                 @endswitch
