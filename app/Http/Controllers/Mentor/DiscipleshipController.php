@@ -20,9 +20,17 @@ class DiscipleshipController extends Controller
     }
 
     public function index(){
-        $codarea = Tabgrupos::select('CodArea')->where('CodCon', Auth::user()->codcon)->where('TipGrup', 'D')->first();
-        $discipleship = DB::select("SELECT * FROM tabasidiscipulados WHERE codarea = '".$codarea['CodArea']."' ORDER BY mes DESC, anio = YEAR(now()) DESC");
-        $data = ['discipleship' => $discipleship];
+        $codarea = Tabgrupos::select('CodArea')->where('CodCon', Auth::user()->codcon)->where('TipGrup', 'D')->get();
+        $reports = array();
+        foreach($codarea as $carea){
+            // $discipleship = DB::select("SELECT * FROM tabasidiscipulados WHERE codarea = '".$carea['CodArea']."' ORDER BY mes DESC, anio = YEAR(now()) DESC");
+            $discipleship = DB::select("SELECT * FROM tabasidiscipulados WHERE codarea = '".$carea['CodArea']."' AND activo = 1");
+            if($discipleship != []){
+                array_push($reports, $discipleship[0]);
+            }
+        }
+        $data = ['discipleship' => collect($reports)];            
+        // dd($data);
         return view('mentor.discipleship.index', $data);
     }
 
@@ -30,19 +38,14 @@ class DiscipleshipController extends Controller
         $validation = Tabasidiscipulados::select('activo')->where('codasi', $codasi)->first();
         if($validation['activo'] == 1){
             $codarea = Tabgrupos::select('CodArea', 'DesArea')->where('CodCon', Auth::user()->codcon)->where('TipGrup', 'D')->first();
-            $security = strpos($codasi, $codarea['CodArea']);
-            if($security === false){
-                abort('403');
-            }else{
-                $asistencia = DB::table('tabasidiscipulados')
+            $asistencia = DB::table('tabasidiscipulados')
                         ->select('codasi', 'fecasi', 'tema', 'ofrenda', 'testimonios', 'observaciones', 'totfaltas', 'totasistencia', 'mes', 'anio')
                         ->where('codasi', $codasi)
                         ->first();          
                         // dd($asistencia->codasi);
-                $discipulos = Tabdetasidiscipulados::where('codasi', $codasi)->get();
-                $data = ['asistencia' => $asistencia, 'discipulos' => $discipulos, 'desarea' => $codarea['DesArea']];
-                return view('mentor.discipleship.registerAssistance', $data);                
-            } 
+            $discipulos = Tabdetasidiscipulados::where('codasi', $codasi)->get();
+            $data = ['asistencia' => $asistencia, 'discipulos' => $discipulos, 'desarea' => $codarea['DesArea']];
+            return view('mentor.discipleship.registerAssistance', $data);
         }else{            
             return redirect('mentor/discipulado/listado')
                     ->with('msg', 'El informe de discipulado ha sido cerrado')
