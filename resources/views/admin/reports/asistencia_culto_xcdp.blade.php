@@ -97,25 +97,26 @@
                     <tr>
                         @switch($red['id_red'])
                             @case(1)
-                                <td colspan="2" class="td" style="font-size: 16px; font-weight: bold; background-color: #2DC7FF;">{{ $red['nombre_red'] }}</td>
+                                <td colspan="3" class="td" style="font-size: 16px; font-weight: bold; background-color: #2DC7FF;">{{ $red['nombre_red'] }}</td>
                                 @break
                             @case(2)
-                                <td colspan="2" class="td" style="font-size: 16px; font-weight: bold; background-color: #731963; color: white;">{{ $red['nombre_red'] }}</td>
+                                <td colspan="3" class="td" style="font-size: 16px; font-weight: bold; background-color: #731963; color: white;">{{ $red['nombre_red'] }}</td>
                                 @break
                             @case(4)
-                                <td colspan="2" class="td" style="font-size: 16px; font-weight: bold; background-color: #C1292E; color: white;">{{ $red['nombre_red'] }}</td>
+                                <td colspan="3" class="td" style="font-size: 16px; font-weight: bold; background-color: #C1292E; color: white;">{{ $red['nombre_red'] }}</td>
                                 @break
                             @case(5)
-                                <td colspan="2" class="td" style="font-size: 16px; font-weight: bold; background-color: #275DAD; color: white;">{{ $red['nombre_red'] }}</td>
+                                <td colspan="3" class="td" style="font-size: 16px; font-weight: bold; background-color: #275DAD; color: white;">{{ $red['nombre_red'] }}</td>
                                 @break
                             @default
-                                <td colspan="2" class="td" style="font-size: 16px; font-weight: bold">{{ $red['nombre_red'] }}</td>
+                                <td colspan="3" class="td" style="font-size: 16px; font-weight: bold">{{ $red['nombre_red'] }}</td>
                         @endswitch                        
                     </tr>                    
                     <tr style="background-color: #275DAD; color: white;">
                         <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 5%">N°</td>
-                        <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 20%">N° CASA DE PAZ</td>
-                        <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 35%">NOMBRE DEL LIDER</td>
+                        <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 6%">N° CDP</td>
+                        <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 25%">DIRECCIÓN</td>
+                        <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 24%;">NOMBRE DEL LIDER</td>
                         <td class="td" colspan="4" style="font-size: 13px; font-weight: bold; width: 40%;">SERVICIO {{ $dia.' '.$dia_numero .' DE '.$mes.' DEL '.$anio }}</td>
                     </tr>
                     <tr style="background-color: #275DAD; color: white;">
@@ -126,21 +127,26 @@
                     </tr>
                     <?php $i = 1; ?>
                     @foreach($detalles as $detalle)                                      
-                        @if($red['id_red'] == $detalle['id_red'])                        
-                        <tr>
-                            <td class="td" style="padding: 2.5px;">{{ $i }}</td>
-                            <td class="td" style="padding: 2.5px;">{{ $detalle['cdp'] }}</td>
-                            <td class="td" style="padding: 2.5px;">{{ $detalle['lider'] }}</td>
-                            <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['total_miembros'] }}</td>
-                            <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['asistencias'] }}</td>
-                            <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['faltas'] }}</td>
-                            <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['permisos'] }}</td>
-                        </tr> 
-                        <?php $i++; ?>
+                        @if($red['id_red'] == $detalle['id_red'])                                                
+                            @if($detalle['faltas'] > 0.5*$detalle['total_miembros'])
+                            <tr style="background-color: orangered; color: #fff;">
+                            @else
+                            <tr>
+                            @endif                            
+                                <td class="td" style="padding: 2.5px;">{{ $i }}</td>
+                                <td class="td" style="padding: 2.5px;">{{ $detalle['cdp'] }}</td>
+                                <td class="td" style="padding: 2.5px; text-align: left">{{ $detalle['direccion'] }}</td>                            
+                                <td class="td" style="padding: 2.5px; text-align: left">{{ $detalle['lider'] }}</td>
+                                <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['total_miembros'] }}</td>
+                                <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['asistencias'] }}</td>
+                                <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['faltas'] }}</td>
+                                <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['permisos'] }}</td>
+                            </tr> 
+                            <?php $i++; ?>
                         @endif
                     @endforeach
                     <tr>
-                        <td class="td" colspan="3"></td>
+                        <td class="td" colspan="4"></td>
                         <td class="td" style="font-size: 12px; font-weight: bold; background-color: #44AF69; color: white;">{{ $red['total_miembros_red'] }}</td>
                         <td class="td" style="font-size: 12px; font-weight: bold; background-color: #44AF69; color: white;">{{ $red['total_miembros_asistencias'] }}</td>
                         <td class="td" style="font-size: 12px; font-weight: bold; background-color: #44AF69; color: white;">{{ $red['total_miembros_faltas'] }}</td>
@@ -148,6 +154,8 @@
                     </tr>                    
                 </tbody>
             </table>
+            <br>
+            <h4>- Si el 50% de los miembros de una casa de paz faltaron, la fila se mostrará de un color diferente</h4>
             <div style="page-break-after:always;"></div>                    
             @endforeach
         </div>
