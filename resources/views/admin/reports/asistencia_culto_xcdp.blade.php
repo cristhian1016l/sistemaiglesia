@@ -115,21 +115,21 @@
                     <tr style="background-color: #275DAD; color: white;">
                         <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 5%">N°</td>
                         <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 6%">N° CDP</td>
-                        <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 25%">DIRECCIÓN</td>
+                        <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 35%">DIRECCIÓN</td>
                         <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 24%;">NOMBRE DEL LIDER</td>
-                        <td class="td" colspan="4" style="font-size: 13px; font-weight: bold; width: 40%;">SERVICIO {{ $dia.' '.$dia_numero .' DE '.$mes.' DEL '.$anio }}</td>
+                        <td class="td" colspan="4" style="font-size: 13px; font-weight: bold; width: 30%;">SERVICIO {{ $dia.' '.$dia_numero .' DE '.$mes.' DEL '.$anio }}</td>
                     </tr>
                     <tr style="background-color: #275DAD; color: white;">
-                        <td class="td" style="font-size: 12px; font-weight: bold;">TOT. MIEM</td>
-                        <td class="td" style="font-size: 12px; font-weight: bold;">ASISTENCIA</td>
-                        <td class="td" style="font-size: 12px; font-weight: bold;">FALTAS</td>
-                        <td class="td" style="font-size: 12px; font-weight: bold;">PERMISOS</td>
+                        <td class="td" style="font-size: 10px; font-weight: bold;">TOT. MIEM</td>
+                        <td class="td" style="font-size: 10px; font-weight: bold;">ASISTENCIA</td>
+                        <td class="td" style="font-size: 10px; font-weight: bold;">FALTAS</td>
+                        <td class="td" style="font-size: 10px; font-weight: bold;">PERMISOS</td>
                     </tr>
                     <?php $i = 1; ?>
                     @foreach($detalles as $detalle)                                      
                         @if($red['id_red'] == $detalle['id_red'])                                                
                             @if($detalle['faltas'] > 0.5*$detalle['total_miembros'])
-                            <tr style="background-color: orangered; color: #fff;">
+                            <tr style="background-color: red; color: #fff;">
                             @else
                             <tr>
                             @endif                            
