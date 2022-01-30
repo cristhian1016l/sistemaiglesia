@@ -123,13 +123,10 @@
                     <td style="text-align: center; width: 5%">
                         <span style="font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; text-align: center;">N°</span>
                     </td>
-                    <td style="text-align: center; width: 10%">
-                        <span style="font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; text-align: center;">Código</span>
-                    </td>
                     <td style="width: 25%;">
                         <span style="font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; text-align: center;">Discípulo</span>
                     </td>
-                    <td style="text-align: center; width: 25%">
+                    <td style="text-align: center; width: 15%">
                         <span style="font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; text-align: center;">Cargo</span>
                     </td>
                     <td style="text-align: center; width: 10%">
@@ -137,6 +134,9 @@
                     </td>
                     <td style="text-align: center; width: 10%">
                         <span style="font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; text-align: center;">Hora</span>
+                    </td>
+                    <td style="text-align: center; width: 20%">
+                        <span style="font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; text-align: center;">Motivo</span>
                     </td>
                     <td style="width: 15%;"></td>
                 </tr>
@@ -153,14 +153,11 @@
                     <tr>         
                         <td style="text-align: center; width: 5%">
                             <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">{{ $i }}</span>
-                        </td>
-                        <td style="text-align: center; width: 10%">
-                            <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">{{ $dis['CodCon'] }}</span>
-                        </td>
+                        </td>                        
                         <td style="width: 25%;">
                             <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">{{ $dis['NomApeCon'] }}</span>
                         </td>
-                        <td style="text-align: center; width: 25%;">
+                        <td style="text-align: center; width: 15%;">
                             <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">{{ $dis['CarDis'] }}</span>
                         </td>
                         <td style="text-align: center; width: 10%;">
@@ -189,6 +186,9 @@
                                 -----
                             </span>
                         @endif                                                    
+                        </td>
+                        <td style="text-align: center; width: 20%">
+                            <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">{{ $dis['Motivo'] }}</span>
                         </td>
                         <td style="width: 5%;"></td>
                     </tr> 

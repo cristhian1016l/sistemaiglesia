@@ -141,29 +141,25 @@ class DashboardController extends Controller
                                     gm.CodCon = c.CodCon WHERE CodArea = '".$gp->CodArea."' AND CarDis 
                                     in('MENTOR', 'LIDER CDP', 'SUBLIDER CDP')  ORDER BY c.ApeCon");                
             foreach($discipulos as $ms){         
-                $SQLAsistencia = DB::select("SELECT da.CodCon, da.NomApeCon,  da.Asistio, da.EstAsi, da.HorLlegAsi  FROM TabAsi a INNER JOIN 
+                $SQLAsistencia = DB::select("SELECT da.NomApeCon,  da.Asistio, da.EstAsi, da.HorLlegAsi, da.Motivo FROM TabAsi a INNER JOIN 
                                 TabDetAsi da ON a.Codasi = da.CodAsi WHERE da.CodAsi = '".$codasi."' 
                                 AND da.CodCon = '".$ms->CodCon."' ORDER BY a.FecAsi");
                 if($SQLAsistencia[0]->EstAsi == 'F' || $SQLAsistencia[0]->EstAsi == 'T'){
                     $i++;
-                    array_push($discipulosArray, ['CodCon' => $SQLAsistencia[0]->CodCon,
-                    'NomApeCon' => $SQLAsistencia[0]->NomApeCon,
-                    'EstAsi' => $SQLAsistencia[0]->EstAsi,
-                    'HorLlegAsi' => $SQLAsistencia[0]->HorLlegAsi,
-                    'CodArea' => $gp->CodArea,
-                    'CarDis' => $ms->CarDis]);
+                    array_push($discipulosArray, [
+                        'NomApeCon' => $SQLAsistencia[0]->NomApeCon,
+                        'EstAsi' => $SQLAsistencia[0]->EstAsi,
+                        'HorLlegAsi' => $SQLAsistencia[0]->HorLlegAsi,
+                        'CodArea' => $gp->CodArea,
+                        'CarDis' => $ms->CarDis,
+                        'Motivo' => $SQLAsistencia[0]->Motivo
+                    ]);
                 }                
             }
             if($i==0){
                 unset($grupos[$key]);
             }
         }
-        // dd($grupos);
-        // $colect = collect($discipulosArray);
-        // dd($colect);
-        // foreach($colect as $col){
-        //     dd($col['CodCon']);
-        // }
 
         $data = ['discipulados' => $grupos, 'discipulos' => collect($discipulosArray), 'fecha' => $fecha_culto];
         $pdf=PDF::loadView('admin.reports.asistencia_culto_lideres', $data);
