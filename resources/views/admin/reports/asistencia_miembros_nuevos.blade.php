@@ -131,7 +131,10 @@
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A' || 'T')
+                                    @case('A')
+                                        <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
+                                        @break
+                                    @case('T')
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                         @break
                                     @case('P')
@@ -140,84 +143,72 @@
                                     @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
-                                @endswitch
-                                @switch($member['asis6'])
+                                    @endswitch
+                                    @switch($member['asis6'])
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A' || 'T')
-                                        <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
-                                        @break
+                                    @case('A')
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
                                     @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
-                                @endswitch
-                                @switch($member['asis5'])
+                                    @endswitch
+                                    @switch($member['asis5'])
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A' || 'T')
-                                        <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
-                                        @break
+                                                                            <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
                                     @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
-                                @endswitch
-                                @switch($member['asis4'])
+                                    @endswitch
+                                    @switch($member['asis4'])
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A' || 'T')
-                                        <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
-                                        @break
+                                                                            @break
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
                                     @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
-                                @endswitch
-                                @switch($member['asis3'])
+                                    @endswitch
+                                    @switch($member['asis3'])
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A' || 'T')
-                                        <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
-                                        @break
+                                                                        @case('T')
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
                                     @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
-                                @endswitch
-                                @switch($member['asis2'])
+                                    @endswitch
+                                    @switch($member['asis2'])
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A' || 'T')
-                                        <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
-                                        @break
+                                                                            <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
                                     @default
                                         <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">----</td>
                                         @break
-                                @endswitch
-                                @switch($member['asis1'])
+                                    @endswitch
+                                    @switch($member['asis1'])
                                     @case('F')
                                         <td class="td" style="text-align: center !important; color: red; border: 1px solid #ddd; font-weight: bold;">FALTÓ</td>
                                         @break
-                                    @case('A' || 'T')
-                                        <td class="td" style="text-align: center !important; border: 1px solid #ddd; font-weight: bold;">ASISTIÓ</td>
-                                        @break
+                                                                            @break
                                     @case('P')
                                         <td class="td" style="text-align: center !important; color: #3a73a6; border: 1px solid #ddd; font-weight: bold;">PERMISO</td>
                                         @break                                    
