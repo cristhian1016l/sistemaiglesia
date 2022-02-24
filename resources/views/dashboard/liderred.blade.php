@@ -4,6 +4,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Theme style -->
@@ -95,7 +98,7 @@
           <div class="col-md-6">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Faltas al culto por casas de paz general</h3>
+                <h3 class="card-title">Faltas al culto por casas de paz general para visitas</h3>
               </div>
               <div class="card-body"> 
                 <div class="form-group">
@@ -124,6 +127,38 @@
             </div>
               <!-- /.card -->            
           </div>          
+          <div class="col-md-6">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Faltas de miembros (Reporte)</h3>
+              </div>
+              <div class="card-body"> 
+                <div class="form-group">
+                  <!-- <label>Faltas consecutivas de discipulos al culto</label> -->
+
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <select name="culto" class="form-control select2" style="width: 100%;" id="miselectcdp">       
+                        @foreach($cdps as $cdp)
+                          <option value="<?php echo $cdp->CodCasPaz; ?>">{{ $cdp->CodCasPaz }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-md-8">
+                      <a href="#">
+                        <button type="button" class="btn btn-outline-info btn-block btn-flat" onclick="imprimirAsistencias()">
+                          <i class="fas fa-file-pdf"></i> Descargar reporte de asistencia
+                        </button>
+                      </a> 
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+              <!-- /.card -->            
+          </div>          
         </div>   
       </div><!--/. container-fluid -->
     </section>
@@ -139,6 +174,8 @@
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
@@ -175,6 +212,22 @@
         .css({'display': 'block'})
         .addClass('menu-open').prev('a')
         .addClass('active');        
-  });
+
+    $('.select2').select2();
+    $('#miselectcdp').trigger('change');
+  });  
+
+
+  function imprimirAsistencias(){
+
+    var codcaspaz = $('#miselectcdp').val();
+    var url = '{{ route("liderred.dashboard.reportAsisCultXCDPDownload", ":id") }}'
+    url = url.replace(':id', codcaspaz);
+    window.open(
+      url,
+      "_blank"
+    );    
+  }
+
 </script>
 @endsection

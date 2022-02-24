@@ -30,9 +30,13 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout'); //sólo pa
 Route::get('/panel', 'DashboardController@get_news')->name('panel');
                         //RUTA DEL LIDER DE RED
 Route::group(['middleware' => 'isLiderred'], function(){
+
                                                     // DASHBOARD
     Route::get('/panel-liderred', 'DashboardController@show_dashboard_liderred')->name('panel.liderred');
     Route::post('reportes/faltas_miembros','Liderred\ReportsController@FaultsOfMemberDownload')->name('liderred.faltasmiembros.FaultsOfMemberDownload'); //IMPRIMIR EN PDF LAS FALTAS POR CASAS DE PAZ 
+    // DASHBOARD - MÉTODOS AJAX
+    Route::get('/reportes/asistencias-cultos/{codcaspaz}','LiderRed\DashboardController@reportAsisCultXCDPDownload')->name('liderred.dashboard.reportAsisCultXCDPDownload'); //IMPRIMIR LAS ASISTENCIAS AL CULTO POR CASAS DE PAZ
+
                                                     // CASAS DE PAZ
     // VISTA GENERAL
     Route::get('/CasasDePaz', 'Liderred\CDPController@getCDP')->name('liderred.getcdp'); // Muestra las casas de paz en la vista
