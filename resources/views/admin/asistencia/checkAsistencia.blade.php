@@ -279,9 +279,11 @@
     var table = $('#example1').DataTable();
     $('div.dataTables_filter input', table.table().container()).focus();
   });
-  document.getElementById("menuasistenciaopen").className += ' menu-open';
-  document.getElementById("menuasistenciaactive").className += " active";
-  document.getElementById("assistance").className += " active";
+
+  document.getElementById("menuasistenciaopen").className += ' menu-open';    
+  document.getElementById("adminasistenciaactive").className += " active";    
+  document.getElementById("assistance").className += " active";   
+
 </script>
 
 <!-- ADMINISTRACION -->
@@ -302,7 +304,8 @@
         "dataSrc": function(data) {
           val = data.error;
           if (val === "500") {
-            toastr.error("Ha ocurrido un error, no se puede registrar la asistencia del miembro")
+            // toastr.error("Ha ocurrido un error, no se puede registrar la asistencia del miembro")
+            toastr.error(data.msg);
           } else {
             if (data.state === "OK") {
               // alert("El usuario ya está registrado, intenta recargando la página");

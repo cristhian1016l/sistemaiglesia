@@ -153,7 +153,7 @@
     });
 
     document.getElementById("menuasistenciaopen").className += ' menu-open';    
-    document.getElementById("menuasistenciaactive").className += " active";    
+    document.getElementById("adminasistenciaactive").className += " active";    
     document.getElementById("assistance").className += " active";    
   });
 </script>
