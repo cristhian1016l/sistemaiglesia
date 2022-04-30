@@ -76,4 +76,55 @@ class DashboardController extends Controller
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
+
+    public function weekReportCDP(){
+
+        $datos = array();
+        $datosCulto = array();
+        $datosRed = Tabredes::where('LID_RED', Auth::user()->codcon)->first();
+        $liderred = DB::select("SELECT ApeCon, NomCon FROM TabCon WHERE CodCon = '".$datosRed->LID_RED."'");
+        // $CDPs = Tabcasasdepaz::where('ID_Red', $datosRed->ID_RED)->get();        
+
+        // $CDPs = Tabcasasdepaz::join('TabCon', 'TabCasasDePaz.CodLid', '=', 'TabCon.CodCon')
+        //         ->get(['TabCasasDePaz.CodCasPaz', 'TabCon.ApeCon', 'TabCon.NomCon', 'TabCasasDePaz.ID_Red'])
+        //         ->where('TabCasasDePaz.ID_Red', $datosRed->ID_RED)
+        //         ->take(2);
+        
+        $CDPs = DB::select("SELECT cdp.CodCasPaz, c.ApeCon, c.NomCon, cdp.ID_Red FROM TabCasasDePaz cdp INNER JOIN TabCon c
+                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$datosRed->ID_RED."'");
+        
+        $fecCulto = Tabasi::select('FecAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->first();        
+        $miembros = array();
+        foreach($CDPs as $cdp){
+
+            $members = DB::select("SELECT c.CodCon, c.ApeCon, c.NomCon FROM TabMimCasPaz mcdp INNER JOIN TabCon c ON
+                                    mcdp.CodCon = c.CodCon WHERE mcdp.CodCasPaz = '".$cdp->CodCasPaz."' ORDER BY ApeCon ASC");
+                        
+            foreach($members as $key=>$member){
+                $asistio = 'FALTO';
+                $asistenciaCulto = DB::select("SELECT da.Asistio, da.EstAsi FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi 
+                                            WHERE a.FecAsi = '".$fecCulto->FecAsi."' AND da.CodCon = '".$member->CodCon."' AND CodAct = '001'");
+                // dd($fecCulto->FecAsi);
+                foreach($asistenciaCulto as $ac){
+                    
+                    if($ac->EstAsi == 'P'){
+                        $asistio = 'PERMISO';
+                    }else{
+                        if($ac->Asistio == 1){
+                            $asistio = 'ASISTIO';
+                        }
+                    }
+                    
+                }
+                array_push($miembros, ["miembro" => $member, "asistencias" => $asistio]);
+            }    
+
+            array_push($datos, ['cdp' => $cdp->CodCasPaz, 'lider' => $cdp->ApeCon.' '.$cdp->NomCon, 'miembros' => $miembros]);
+        }                        
+
+        $data = ['datos' => collect($datos), 'red' => $datosRed->NOM_RED,'liderred' => $liderred[0]];
+// dd($data);
+        $pdf=PDF::loadView('liderred.reports.reporte_semanal_cdp', $data);        
+        return $pdf->stream();
+    }
 }

@@ -36,6 +36,7 @@ Route::group(['middleware' => 'isLiderred'], function(){
     Route::post('reportes/faltas_miembros','Liderred\ReportsController@FaultsOfMemberDownload')->name('liderred.faltasmiembros.FaultsOfMemberDownload'); //IMPRIMIR EN PDF LAS FALTAS POR CASAS DE PAZ 
     // DASHBOARD - MÉTODOS AJAX
     Route::get('/reportes/asistencias-cultos/{codcaspaz}','Liderred\DashboardController@reportAsisCultXCDPDownload')->name('liderred.dashboard.reportAsisCultXCDPDownload'); //IMPRIMIR LAS ASISTENCIAS AL CULTO POR CASAS DE PAZ
+    Route::get('/reportes/informe-semanal-cdp','Liderred\DashboardController@weekReportCDP')->name('liderred.dashboard.weekReportCDP'); //IMPRIMIR LOS RPEORTES DE CASAS DE PAZ SEMANALES
 
                                                     // CASAS DE PAZ
     // VISTA GENERAL

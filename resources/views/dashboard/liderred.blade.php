@@ -160,6 +160,33 @@
               <!-- /.card -->            
           </div>          
         </div>   
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Informe semanal de casas de paz</h3>
+              </div>
+              <div class="card-body"> 
+                <div class="form-group">
+                  <!-- <label>Faltas consecutivas de discipulos al culto</label> -->
+
+                  <div class="form-row">                    
+                    <div class="col-md-12">
+                      <a >
+                        <button type="button" class="btn btn-outline-info btn-block btn-flat" onclick="imprimirReportesCDP()">
+                          <i class="fas fa-file-pdf"></i> Descargar reporte semanal de casa de paz
+                        </button>
+                      </a> 
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+              <!-- /.card -->            
+          </div>          
+        </div>
       </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
@@ -221,12 +248,21 @@
   function imprimirAsistencias(){
 
     var codcaspaz = $('#miselectcdp').val();
-    var url = '{{ route("liderred.dashboard.reportAsisCultXCDPDownload", ":id") }}'
+    var url = '{{ route("liderred.dashboard.weekReportCDP", ":id") }}'
     url = url.replace(':id', codcaspaz);
     window.open(
       url,
       "_blank"
     );    
+  }
+
+  function imprimirReportesCDP(){   
+
+    var url = '{{ route("liderred.dashboard.weekReportCDP") }}'
+    window.open(
+      url,
+      "_blank"
+    );        
   }
 
 </script>
