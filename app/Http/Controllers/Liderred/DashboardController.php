@@ -91,13 +91,13 @@ class DashboardController extends Controller
         //         ->take(2);
         
         $CDPs = DB::select("SELECT cdp.CodCasPaz, c.ApeCon, c.NomCon, cdp.ID_Red FROM TabCasasDePaz cdp INNER JOIN TabCon c
-                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$datosRed->ID_RED."'");
+                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$datosRed->ID_RED."' LIMIT 2");
         
         $fecCulto = Tabasi::select('FecAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->first();        
         $miembros = array();
         foreach($CDPs as $cdp){
 
-            $members = DB::select("SELECT c.CodCon, c.ApeCon, c.NomCon FROM TabMimCasPaz mcdp INNER JOIN TabCon c ON
+            $members = DB::select("SELECT c.CodCon, c.ApeCon, c.NomCon, c.TipCon FROM TabMimCasPaz mcdp INNER JOIN TabCon c ON
                                     mcdp.CodCon = c.CodCon WHERE mcdp.CodCasPaz = '".$cdp->CodCasPaz."' ORDER BY ApeCon ASC");
                         
             foreach($members as $key=>$member){
@@ -120,6 +120,7 @@ class DashboardController extends Controller
             }    
 
             array_push($datos, ['cdp' => $cdp->CodCasPaz, 'lider' => $cdp->ApeCon.' '.$cdp->NomCon, 'miembros' => $miembros]);
+            $miembros = [];
         }                        
 
         $data = ['datos' => collect($datos), 'red' => $datosRed->NOM_RED,'liderred' => $liderred[0]];
