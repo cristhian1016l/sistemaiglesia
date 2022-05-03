@@ -23,7 +23,7 @@
         }   
         #table {
             font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
+            /* border-collapse: collapse; */
             /* width: 100%; */
             /* margin: 0 auto; */
             width: 100%;  /* Este será el ancho que tendrá tu columna */
@@ -174,5 +174,212 @@
         </div>
     </div>
     <div style="page-break-after:always;"></div>
+
+
+
+    <p style="font-family: 'Inter', sans-serif; font-size: 12x; font-weight: bold; text-align: center;"><u>REPORTE DE CASA DE PAZ</u></p>
+    <div>
+        <p style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold; margin: 0; color: #000;">RESUMEN DE LA REUNIÓN</p>
+    </div>        
+    <div id="left">
+        <!-- PRIMERA PARTE -->        
+        <span style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: blue; color: #002138;">
+        Asistencia PRESENCIAL:  _____
+        </span><br/>
+        <span style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: blue; color: #002138;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Faltas Justificadas:  _____
+        </span><br/>        
+        <!-- PRIMERA PARTE FIN -->
+
+    </div>    
+    <div id="right">
+        <!-- PRIMERA PARTE -->        
+        <span style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: blue; color: #002138;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Faltas:  _____
+        </span><br/>
+        <span style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: blue; color: #002138;">
+        Invitados:  _____
+        </span>
+        <!-- PRIMERA PARTE FIN -->
+    </div>    
+    <div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="margin-top: 10px;">
+            <table id="table">
+                <thead>
+                    <tr style="border: 1px solid">
+                        <th style="background-color: #3ed42a" colspan="2">MIEMBROS PARA AÑADIR AL SISTEMA</th>
+                    </tr>                                        
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center; font-size: 10px; width: 50%">APELLIDOS Y NOMBRES</td>
+                        <td style="text-align: center; font-size: 10px; width: 50%">DIRECCIÓN</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                                                
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; font-size: 10px; width: 50%">FECHA DE NACIMIENTO</td>
+                        <td style="text-align: center; font-size: 10px; width: 50%">CELULAR</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                                                
+                    </tr>                    
+                </tbody>
+            </table>            
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="margin-top: 10px;">
+            <table id="table">                
+                <tbody>
+                    <tr>
+                        <td style="text-align: center; font-size: 10px; width: 50%">APELLIDOS Y NOMBRES</td>
+                        <td style="text-align: center; font-size: 10px; width: 50%">DIRECCIÓN</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                                                
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; font-size: 10px; width: 50%">FECHA DE NACIMIENTO</td>
+                        <td style="text-align: center; font-size: 10px; width: 50%">CELULAR</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                                                
+                    </tr>                    
+                </tbody>
+            </table>            
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="margin-top: 10px;">
+            <table id="table">                
+                <tbody>
+                    <tr>
+                        <td style="text-align: center; font-size: 10px; width: 50%">APELLIDOS Y NOMBRES</td>
+                        <td style="text-align: center; font-size: 10px; width: 50%">DIRECCIÓN</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                                                
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; font-size: 10px; width: 50%">FECHA DE NACIMIENTO</td>
+                        <td style="text-align: center; font-size: 10px; width: 50%">CELULAR</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                                                
+                    </tr>                    
+                </tbody>
+            </table>            
+        </div>
+    </div>
+    <div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="margin-top: 10px;">
+            <table id="table">
+                <thead>
+                    <tr style="border: 1px solid">
+                        <th style="background-color: #ba1c39; color: white;" colspan="3">MIEMBROS PARA SACAR DEL SISTEMA</th>
+                    </tr>                                        
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center; font-size: 10px; width: 40%">APELLIDOS Y NOMBRES</td>
+                        <td style="text-align: center; font-size: 10px; width: 40%">MOTIVO</td>                        
+                        <td style="text-align: center; font-size: 10px; width: 20%">¿ES MIEMBRO O DISCIPULO?</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                                                
+                    </tr>                    
+                </tbody>
+            </table>            
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="margin-top: 10px;">
+            <table id="table">                
+                <tbody>
+                    <tr>
+                        <td style="text-align: center; font-size: 10px; width: 40%">APELLIDOS Y NOMBRES</td>
+                        <td style="text-align: center; font-size: 10px; width: 40%">MOTIVO</td>                        
+                        <td style="text-align: center; font-size: 10px; width: 20%">¿ES MIEMBRO O DISCIPULO?</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                                                
+                    </tr>                    
+                </tbody>
+            </table>            
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="margin-top: 10px;">
+            <table id="table">                
+                <tbody>
+                    <tr>
+                        <td style="text-align: center; font-size: 10px; width: 40%">APELLIDOS Y NOMBRES</td>
+                        <td style="text-align: center; font-size: 10px; width: 40%">MOTIVO</td>                        
+                        <td style="text-align: center; font-size: 10px; width: 20%">¿ES MIEMBRO O DISCIPULO?</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                        
+                        <td>
+                            &nbsp;
+                        </td>                                                
+                    </tr>                    
+                </tbody>
+            </table>            
+        </div>
+    </div>
+    <div style="page-break-after:always;"></div>
+
+    
     @endforeach
 </body>
