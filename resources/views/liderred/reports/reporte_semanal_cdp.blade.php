@@ -132,17 +132,9 @@
         <div style="margin-top: 10px;">
             <table id="table">
                 <thead>
-                    <tr style="border: 1px solid;">
-                        <th style="width: 5%"></th>
-                        <th style="width: 30%"></th>
-                        <th colspan="2" style="width: 14%; background-color: #e0e02b">ASISTENCIAS</th>
-                        <th style="width: 8%"></th>
-                        <th style="width: 40%"></th>
-                    </tr>                    
                     <tr>
                         <th style="width: 5%; background-color: #c7c71e">N°</th>
-                        <th style="width: 30%; font-size: 10px; background-color: #c7c71e">NOMBRES Y APELLIDOS</th>
-                        <th style="width: 6%; font-size: 10px; background-color: #c7c71e">CULTO</th>
+                        <th style="width: 36%; font-size: 10px; background-color: #c7c71e">NOMBRES Y APELLIDOS</th>
                         <th style="width: 6%; font-size: 10px; background-color: #c7c71e">CDP</th>
                         <th style="width: 13%; font-size: 10px; background-color: #c7c71e">TIPO</th>
                         <th style="width: 40%; font-size: 10px; background-color: #c7c71e">OBSERVACIÓN Y/O MOTIVO DE FALTA</th>
@@ -153,19 +145,10 @@
                         <tr>
                             <td class="td">{{ $key+1 }}</td>
                             <td class="td" style="text-align: left !important; padding-left: 10px;">
-                                {{ substr($miembro['miembro']->ApeCon.' '.$miembro['miembro']->NomCon, 0, 34) }}
-                            </td>                                                        
-                            @if($miembro['asistencias'] == 'PERMISO')
-                                <td class="td" style="color: #3a73a6">PERMISO</td>
-                            @endif
-                            @if($miembro['asistencias'] == 'ASISTIO')
-                                <td class="td">ASISTIÓ</td>
-                            @endif
-                            @if($miembro['asistencias'] == 'FALTO')
-                                <td class="td" style="color: #de214a">FALTÓ</td>
-                            @endif
+                                {{ substr($miembro->ApeCon.' '.$miembro->NomCon, 0, 34) }}
+                            </td>                            
                             <td class="td"></td>
-                            <td class="td">{{ $miembro['miembro']->TipCon }}</td>
+                            <td class="td">{{ $miembro->TipCon }}</td>
                             <td class="td"></td>
                         </tr>              
                     @endforeach

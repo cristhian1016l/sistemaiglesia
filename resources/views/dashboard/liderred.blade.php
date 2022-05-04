@@ -248,7 +248,7 @@
   function imprimirAsistencias(){
 
     var codcaspaz = $('#miselectcdp').val();
-    var url = '{{ route("liderred.dashboard.weekReportCDP", ":id") }}'
+    var url = '{{ route("liderred.dashboard.reportAsisCultXCDPDownload", ":id") }}'
     url = url.replace(':id', codcaspaz);
     window.open(
       url,
