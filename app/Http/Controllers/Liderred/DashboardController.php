@@ -84,7 +84,7 @@ class DashboardController extends Controller
         $liderred = DB::select("SELECT ApeCon, NomCon FROM TabCon WHERE CodCon = '".$datosRed->LID_RED."'");        
 
         $CDPs = DB::select("SELECT cdp.CodCasPaz, c.ApeCon, c.NomCon, cdp.ID_Red FROM TabCasasDePaz cdp INNER JOIN TabCon c
-                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$datosRed->ID_RED."' LIMIT 5");
+                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$datosRed->ID_RED."'");
         
         $fecCulto = Tabasi::select('FecAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->first();        
         $miembros = array();

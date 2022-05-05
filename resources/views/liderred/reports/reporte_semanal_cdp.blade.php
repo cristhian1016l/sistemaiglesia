@@ -98,7 +98,11 @@
             <p style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold; margin: 0; color: #000;"><u>NOMBRES DEL LIDERAZGO</u></p>
         </div>               
         <span style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: blue; color: #002138;">
-        &nbsp;&nbsp;ENCARGADO: {{ $liderred->ApeCon.' '.$liderred->NomCon }}
+        @if($red == 'RED YESHUA')
+            &nbsp;&nbsp;ENCARGADO: PERALTA GUERE ROSSANA SONIA
+        @else
+            &nbsp;&nbsp;ENCARGADO: {{ $liderred->ApeCon.' '.$liderred->NomCon }}
+        @endif
         </span><br/>
         <span style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: blue; color: #002138;">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LÍDER: {{ $dato['lider'] }}

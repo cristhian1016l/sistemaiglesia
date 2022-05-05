@@ -22,10 +22,11 @@ class ReportsController extends Controller
         $datosRed = Tabredes::select('ID_RED')->where('LID_RED', Auth::user()->codcon)->first();        
         $id_red = $datosRed->ID_RED;
         $datos = array();
-        $fecCulto = Tabasi::select('FecAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->first();
+        // $fecCulto = Tabasi::select('FecAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->first();
+        $fecCulto = $request->culto;
         $cdps = DB::select("SELECT cdp.CodCasPaz, c.ApeCon, c.NomCon FROM TabCasasDePaz cdp INNER JOIN TabCon c 
-                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' ORDER BY cdp.CodCasPaz LIMIT 2");
-
+                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' ORDER BY cdp.CodCasPaz LIMIT 10");
+        
         $miembros = array();
         // dd($cdps);
         foreach($cdps as $cdp){
@@ -34,22 +35,27 @@ class ReportsController extends Controller
             //                 INNER JOIN TabCon c ON mcdp.CodCon = c.CodCon
             //                 WHERE da.CodAsi = '".$request->culto."' AND mcdp.CodCasPaz = '".$cdp->CodCasPaz."' AND da.EstAsi = 'F' ORDER BY da.NomApeCon");
 
-            $members = DB::select("SELECT c.CodCon, c.TipCon, c.SoloCasPaz FROM TabMimCasPaz mcdp INNER JOIN TabCon c ON mcdp.CodCon = c.CodCon
+            $members = DB::select("SELECT c.CodCon, c.ApeCon, c.NomCon, c.TipCon, c.SoloCasPaz FROM TabMimCasPaz mcdp INNER JOIN TabCon c ON mcdp.CodCon = c.CodCon
                                     WHERE mcdp.CodCasPaz = '".$cdp->CodCasPaz."'");
-
+            
             foreach($members as $member){
-                $asistenciaCulto = DB::select("SELECT da.NomApeCon, da.Asistio, da.EstAsi FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi 
-                                            WHERE a.FecAsi = '".$fecCulto->FecAsi."' AND da.CodCon = '".$member->CodCon."' AND CodAct = '001'");                
+                $asistenciaCulto = DB::select("SELECT da.Asistio, da.EstAsi FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi
+                                            WHERE a.FecAsi = '".$fecCulto."' AND da.CodCon = '".$member->CodCon."' AND CodAct = '001'");
                 
+                $faltas = 0;
                 for($i = 1; $i < count($asistenciaCulto); $i++){
-                    if($asistenciaCulto[$i]->EstAsi === "F"){
-                        array_push($miembros, ["miembro" => $member, "asistencia" => $asistenciaCulto]);   
+                    if($asistenciaCulto[$i]->EstAsi == "F"){
+                        $faltas = $faltas + 1;    
                     }
                 }
+
+                if($faltas >= 0){
+                    array_push($miembros, ["miembro" => $member]);
+                }                
             }
 
-            dd($miembros);
             array_push($datos, ["cdp" => $cdp->CodCasPaz, "lider" => $cdp->ApeCon.' '.$cdp->NomCon, "members" => $miembros]);
+            $miembros = [];
         }
         
         $data = ['cdps' => $datos];

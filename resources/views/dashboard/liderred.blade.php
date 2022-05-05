@@ -108,7 +108,7 @@
                       <div class="col-md-8">
                         <select name="culto" class="form-control select2" style="width: 100%;" id="miselect">       
                           @foreach($cultos as $culto)
-                            <option value="<?php echo $culto->CodAsi; ?>">{{ $culto->TipAsi.' - '.\Carbon\Carbon::parse($culto->FecAsi)->format('d-m-Y') }}</option>
+                            <option value="<?php echo $culto->FecAsi; ?>">{{ 'CULTO GENERAL'.' '.\Carbon\Carbon::parse($culto->FecAsi)->format('d-m-Y') }}</option>
                           @endforeach
                         </select>
                       </div>

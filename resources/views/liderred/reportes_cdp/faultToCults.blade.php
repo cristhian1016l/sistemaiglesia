@@ -143,7 +143,8 @@
                     <tr>
                         <th style="width: 5%">N°</th>
                         <th style="width: 30%">APELLIDOS Y NOMBRES</th>
-                        <th style="width: 10%">CELULAR</th>
+                        <th style="width: 5%">TIPO</th>
+                        <th style="width: 5%">SOLO CDP</th>
                         <th style="width: 55%">¿CÓMO LES FUE?</th>
                     </tr>                    
                 </thead>
@@ -151,8 +152,13 @@
                     @foreach($cdp['members'] as $key=>$member)
                     <tr>
                         <td class="td">{{ $key+1 }}</td>
-                        <td class="td" style="text-align: left !important; padding-left: 10px;">{{ $member->NomApeCon }}</td>
-                        <td class="td">{{ $member->NumCel }}</td>
+                        <td class="td" style="text-align: left !important; padding-left: 10px;">{{ $member['miembro']->ApeCon.' '.$member['miembro']->NomCon }}</td>
+                        <td class="td">{{ $member['miembro']->TipCon }}</td>
+                        @if($member['miembro']->SoloCasPaz)
+                            <td class="td">SI</td>
+                        @else
+                            <td class="td">NO</td>
+                        @endif                        
                         <td class="td"></td>
                     </tr>
                     @endforeach

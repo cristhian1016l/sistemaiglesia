@@ -32,7 +32,8 @@ class DashboardController extends Controller
         $red = DB::table('TabRedes')
                     ->where('ID_RED', $idred)
                     ->first();
-        $cultos = DB::select("SELECT CodAsi, FecAsi, TipAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC");
+        // $cultos = DB::select("SELECT CodAsi, FecAsi, TipAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC");
+        $cultos = DB::select("SELECT DISTINCT FecAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC");
         $cdps = DB::select("SELECT * FROM TabCasasDePaz WHERE ID_Red = '".$idred."'");
         $dataRed = ['CDPs' => count($CDPs), 'users' => count($users), 'miembros' => $miembros, 'red' => $red, 'cultos' => $cultos, 'cdps' => $cdps];
         return view('dashboard.liderred', $dataRed);
