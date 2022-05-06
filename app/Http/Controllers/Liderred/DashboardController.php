@@ -27,6 +27,7 @@ class DashboardController extends Controller
                                     FROM TabMimCasPaz m INNER JOIN TabCon c ON m.CodCon = c.CodCon
                                     WHERE m.CodCasPaz = '".$codcaspaz."'");
         $miembros = array();
+        $fecCulto = DB::select("SELECT FecAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC LIMIT 1");
         foreach($members as $member){
 
             $vuelta = 0;     
@@ -38,7 +39,9 @@ class DashboardController extends Controller
             $datosvuelta[4] = 'N';
 
             foreach($asistencias as $asistencia){
-                $SQLAsistencias = DB::select("SELECT EstAsi, Asistio FROM TabDetAsi WHERE CodAsi = ".$asistencia->CodAsi." AND CodCon = '".$member->CodCon."'");
+                $SQLAsistencias = DB::select("SELECT EstAsi, Asistio FROM TabDetAsi WHERE CodAsi = ".$asistencia->CodAsi." AND CodCon = '".$member->CodCon."'");                
+                // $SQLAsistencias = DB::select("SELECT da.Asistio, da.EstAsi FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi
+                //                             WHERE a.FecAsi = '".$fecCulto[0]->FecAsi."' AND da.CodCon = '".$member->CodCon."' AND CodAct = '001'");
 
                 foreach($SQLAsistencias as $sa){ //RECORRE TODOS LOS DETALLES DE ASISTENCIAS AL CULTO
                     switch($vuelta){
@@ -68,6 +71,7 @@ class DashboardController extends Controller
                                         'Nombrescomp' => $member->ApeCon.' '.$member->NomCon, 'NumCel' => $member->NumCel,
                                         'asis1' => $datosvuelta[0], 'asis2' => $datosvuelta[1], 'asis3' => $datosvuelta[2],
                                         'asis4' => $datosvuelta[3], 'asis5' => $datosvuelta[4], 'faltas' => $faltas]);
+            dd($miembros);
         }
 
         $data = ['asistencias' => $asistencias, 'cdp' => $codcaspaz.' - '.$cdpylider[0]->ApeCon.' '.$cdpylider[0]->NomCon, 'members' => $miembros];
@@ -84,16 +88,13 @@ class DashboardController extends Controller
         $liderred = DB::select("SELECT ApeCon, NomCon FROM TabCon WHERE CodCon = '".$datosRed->LID_RED."'");        
 
         $CDPs = DB::select("SELECT cdp.CodCasPaz, c.ApeCon, c.NomCon, cdp.ID_Red FROM TabCasasDePaz cdp INNER JOIN TabCon c
-                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$datosRed->ID_RED."'");
+                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$datosRed->ID_RED."' LIMIT 6");
         
-        $fecCulto = Tabasi::select('FecAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->first();        
-        $miembros = array();
         foreach($CDPs as $cdp){
 
             $members = DB::select("SELECT c.CodCon, c.ApeCon, c.NomCon, c.TipCon FROM TabMimCasPaz mcdp INNER JOIN TabCon c ON
                                     mcdp.CodCon = c.CodCon WHERE mcdp.CodCasPaz = '".$cdp->CodCasPaz."' ORDER BY ApeCon ASC");                        
             array_push($datos, ['cdp' => $cdp->CodCasPaz, 'lider' => $cdp->ApeCon.' '.$cdp->NomCon, 'miembros' => collect($members)]);
-            $miembros = [];
         }                        
 
         $data = ['datos' => collect($datos), 'red' => $datosRed->NOM_RED,'liderred' => $liderred[0]];

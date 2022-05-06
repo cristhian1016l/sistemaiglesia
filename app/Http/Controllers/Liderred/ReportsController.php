@@ -25,7 +25,7 @@ class ReportsController extends Controller
         // $fecCulto = Tabasi::select('FecAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->first();
         $fecCulto = $request->culto;
         $cdps = DB::select("SELECT cdp.CodCasPaz, c.ApeCon, c.NomCon FROM TabCasasDePaz cdp INNER JOIN TabCon c 
-                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' ORDER BY cdp.CodCasPaz LIMIT 10");
+                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' ORDER BY cdp.CodCasPaz");
         
         $miembros = array();
         // dd($cdps);
@@ -43,13 +43,13 @@ class ReportsController extends Controller
                                             WHERE a.FecAsi = '".$fecCulto."' AND da.CodCon = '".$member->CodCon."' AND CodAct = '001'");
                 
                 $faltas = 0;
-                for($i = 1; $i < count($asistenciaCulto); $i++){
+                for($i = 0; $i < count($asistenciaCulto); $i++){
                     if($asistenciaCulto[$i]->EstAsi == "F"){
                         $faltas = $faltas + 1;    
                     }
                 }
-
-                if($faltas >= 0){
+                // dd("FASF ".$faltas);
+                if($faltas > 1){
                     array_push($miembros, ["miembro" => $member]);
                 }                
             }
