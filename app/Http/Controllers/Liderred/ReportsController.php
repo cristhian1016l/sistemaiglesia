@@ -25,11 +25,11 @@ class ReportsController extends Controller
         // $fecCulto = Tabasi::select('FecAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->first();
         $fecCulto = $request->culto;
         $cdps = DB::select("SELECT cdp.CodCasPaz, c.ApeCon, c.NomCon FROM TabCasasDePaz cdp INNER JOIN TabCon c 
-                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' ORDER BY cdp.CodCasPaz");
+                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' AND CodCasPaz = 'CP0155' ORDER BY cdp.CodCasPaz");
         
         $miembros = array();
         // dd($cdps);
-        foreach($cdps as $cdp){
+        foreach($cdps as $key => $cdp){
             // $cdps = DB::select("SELECT da.NomApeCon, da.EstAsi, c.NumCel FROM TabDetAsi da
             //                 INNER JOIN TabMimCasPaz mcdp ON da.CodCon = mcdp.CodCon
             //                 INNER JOIN TabCon c ON mcdp.CodCon = c.CodCon
@@ -54,8 +54,15 @@ class ReportsController extends Controller
                 }                
             }
 
-            array_push($datos, ["cdp" => $cdp->CodCasPaz, "lider" => $cdp->ApeCon.' '.$cdp->NomCon, "members" => $miembros]);
+            array_push($datos, ["cdp" => $cdp->CodCasPaz, "lider" => $cdp->ApeCon.' '.$cdp->NomCon, "members" => $miembros]);            
+
             $miembros = [];
+        }
+
+        foreach($datos as $key=>$dato){
+            if(count($datos[$key]['members']) < 1){
+                unset($datos[$key]);
+            }
         }
         
         $data = ['cdps' => $datos];
