@@ -25,7 +25,7 @@ class ReportsController extends Controller
         // $fecCulto = Tabasi::select('FecAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->first();
         $fecCulto = $request->culto;
         $cdps = DB::select("SELECT cdp.CodCasPaz, c.ApeCon, c.NomCon FROM TabCasasDePaz cdp INNER JOIN TabCon c 
-                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' AND CodCasPaz = 'CP0155' ORDER BY cdp.CodCasPaz");
+                            ON cdp.CodLid = c.CodCon WHERE cdp.ID_Red = '".$id_red."' ORDER BY cdp.CodCasPaz");
         
         $miembros = array();
         // dd($cdps);
