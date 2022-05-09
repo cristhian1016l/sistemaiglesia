@@ -134,7 +134,7 @@ class DashboardController extends Controller
         $fecasi = DB::select("SELECT FecAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC LIMIT 1");
         $fecha_culto = date('Y-m-d', strtotime($fecasi[0]->FecAsi));
         $discipulosArray = array();
-        $grupos = DB::select("SELECT CodArea, DesArea FROM TabGrupos WHERE TipGrup = 'D' ORDER BY CodArea");
+        $grupos = DB::select("SELECT CodArea, DesArea FROM TabGrupos WHERE TipGrup = 'D' ORDER BY CodArea LIMIT 1");
         foreach($grupos as $key => $gp){            
             $i = 0;
             $discipulos = DB::select("SELECT c.CodCon, c.ApeCon, c.NomCon, gm.CarDis, gm.CodArea FROM TabGruposMiem gm INNER JOIN TabCon c ON

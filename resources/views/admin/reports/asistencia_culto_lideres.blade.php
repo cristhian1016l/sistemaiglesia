@@ -100,7 +100,8 @@
                 </td>
             </tr>
         </table>
-        <p style="margin-top: -8px; font-family: 'Inter', sans-serif; font-size: 20px; font-weight: bold; text-align: center;">FALTA DEL LIDERAZGO</p>    
+        <p style="margin-top: -8px; font-family: 'Inter', sans-serif; font-size: 20px; font-weight: bold; text-align: center;">LISTADO DE LÍDERES QUE</p>
+        <p style="margin-top: -8px; font-family: 'Inter', sans-serif; font-size: 20px; font-weight: bold; text-align: center; margin-top: -30px;">FALTARON O LLEGARON TARDE</p>
         <p style="margin-top: -15px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold; text-align: center;">FECHA DEL CULTO: {{ $fecha }}</p>
         
         @foreach($discipulados as $disp)
@@ -152,10 +153,10 @@
                             <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">{{ $i }}</span>
                         </td>                        
                         <td style="width: 25%;">
-                            <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">{{ $dis['NomApeCon'] }}</span>
+                            <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">{{ substr($dis['NomApeCon'], 0, 33) }}</span>
                         </td>
                         <td style="text-align: center; width: 15%;">
-                            <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">{{ $dis['CarDis'] }}</span>
+                            <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">{{ $dis['CarDis'] }}</span>
                         </td>
                         <td colspan="4"></td>                        
                     </tr> 
@@ -187,11 +188,11 @@
                         </td>
                         <td style="text-align: center; width: 10%;">
                         @if($asis['HorLlegAsi'] != null)
-                            <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
+                            <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">
                                 {{ \Carbon\Carbon::parse($asis['HorLlegAsi'])->format('H:i A') }}
                             </span>
                         @else
-                            <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
+                            <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">
                                 -----
                             </span>
                         @endif                                                    
