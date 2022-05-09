@@ -1,3 +1,4 @@
+<?php setlocale(LC_ALL,'es_PE'); ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
@@ -78,94 +79,55 @@
 </head>
 <body> 
     @foreach($cdps as $cdp)
-    <p style="font-family: 'Inter', sans-serif; font-size: 12x; font-weight: bold; text-align: center;">REPORTE DE VISITAS - {{ $cdp['cdp'] }}</p>
-    <div id="left">
-        <!-- PRIMERA PARTE -->
-        <div>
-            <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000;">LÍDER:
-                <span style="font-family: 'Inter', sans-serif;">{{ $cdp['lider'] }}</span>
-            </p>
-        </div>            
-        <u style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold; text-decoration: none;">sub-lider</u>
-        <span style="font-family: 'Inter', sans-serif; font-size: 12px; margin: 0; color: blue; color: #002138;">1____________________________________</span>
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000;">
-            <span style="font-family: 'Inter', sans-serif; font-size: 11px; margin: 0; color: blue; color: #002138; margin-left: 55px;">2_______________________________________</span>
-        </p>        
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000;">
-            <span style="font-family: 'Inter', sans-serif; font-size: 11px; margin: 0; color: blue; color: #002138; margin-left: 55px;">3_______________________________________</span>
-        </p>        
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000;">
-            <span style="font-family: 'Inter', sans-serif; font-size: 11px; margin: 0; color: blue; color: #002138; margin-left: 55px;">4_______________________________________</span>
-        </p> 
-        <!-- PRIMERA PARTE FIN -->
-        
-        <!-- SEGUNDA PARTE -->
-        <div>
-            <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000;">Discípulo y/o miembros que les acompañaron:</p>
-        </div>                    
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000;">
-            <span style="font-family: 'Inter', sans-serif; font-size: 11px; margin: 0; color: blue; color: #002138; margin-left: 5px;">1. ______________________________________________________</span>
-        </p>        
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000;">
-            <span style="font-family: 'Inter', sans-serif; font-size: 11px; margin: 0; color: blue; color: #002138; margin-left: 5px;">2. ______________________________________________________</span>
-        </p>        
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000;">
-            <span style="font-family: 'Inter', sans-serif; font-size: 11px; margin: 0; color: blue; color: #002138; margin-left: 5px;">3. ______________________________________________________</span>
-        </p>        
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000;">
-            <span style="font-family: 'Inter', sans-serif; font-size: 11px; margin: 0; color: blue; color: #002138; margin-left: 5px;">4. ______________________________________________________</span>
-        </p> 
-        <!-- SEGUNDA PARTE FIN -->
-
-    </div>    
-    <div id="right">
-        <!-- PRIMERA PARTE -->
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px;">Firma ______________________________ 
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px;">Firma ______________________________ 
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px;">Firma ______________________________ 
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px;">Firma ______________________________         
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px;">Firma ______________________________         
-        <!-- PRIMERA PARTE FIN -->
-
-        <!-- SEGUNDA PARTE -->
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px; color: white">....................................
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px;">Firma ______________________________ 
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px;">Firma ______________________________         
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px;">Firma ______________________________         
-        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: #000; margin-left: 150px;">Firma ______________________________         
-        <!-- SEGUNDA PARTE FIN -->
-    </div>    
-    <div>
-        <u style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold; text-decoration: none;">VISITAS A LOS MIEMBROS QUE FALTARON EL DOMINGO</u>        
-        <div style="margin-top: 10px;">
+        <p style="font-family: 'Inter', sans-serif; font-size: 12x; font-weight: bold; text-align: center; margin-top: -15px;">VISITA SEMANAL - {{ $cdp['cdp'] }}</p>
+        <p style="font-family: 'Inter', sans-serif; font-size: 10x; font-weight: bold; text-align: center; margin-top: -20px;">Listado de Miembros de Casa de Paz</p>
+        <p style="font-family: 'Inter', sans-serif; font-size: 10x; font-weight: bold; text-align: center; margin-top: -10px;">Reporte a la Fecha: <?php echo date('Y-m-d'); ?></p>
+        <hr style="border: none; border-top: 1px dashed #f00; color: #fff; background-color: #fff; height: 1px; width: 100%;">    
+        <?php $vuelta = 0; ?>        
+        @foreach($cdp['members'] as $key=>$member)
+        <div id="left">
             <table id="table">
-                <thead>                    
-                    <tr>
-                        <th style="width: 5%">N°</th>
-                        <th style="width: 30%">APELLIDOS Y NOMBRES</th>
-                        <th style="width: 5%">TIPO</th>
-                        <th style="width: 5%">SOLO CDP</th>
-                        <th style="width: 55%">¿CÓMO LES FUE?</th>
-                    </tr>                    
-                </thead>
-                <tbody> 
-                    @foreach($cdp['members'] as $key=>$member)
-                    <tr>
-                        <td class="td">{{ $key+1 }}</td>
-                        <td class="td" style="text-align: left !important; padding-left: 10px;">{{ $member['miembro']->ApeCon.' '.$member['miembro']->NomCon }}</td>
-                        <td class="td">{{ $member['miembro']->TipCon }}</td>
-                        @if($member['miembro']->SoloCasPaz)
-                            <td class="td">SI</td>
-                        @else
-                            <td class="td">NO</td>
-                        @endif                        
-                        <td class="td"></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>            
-        </div>
-    </div>
+                <tr>
+                    <td class="td" style="width: 10%; border: none; font-weight: bold;">{{ $key+1 }}</td>
+                    <td class="td" style="width: 30%; border: none; font-weight: bold; text-align: left;">{{ $member['miembro']->ApeCon.' '.$member['miembro']->NomCon }}</td>
+                    <td class="td" style="width: 30%; border: none; font-weight: bold;">VISITAR</td>
+                    <td class="td" style="width: 30%; border: none; font-weight: bold;">{{ $member['miembro']->TipCon }}</td>
+                </tr>
+            </table><br/>
+            <hr style="border: none; border-top: 1px dashed #f00; color: #fff; background-color: #fff; height: 1px; width: 90%; margin-top: 10px;"><br/>
+            <hr style="border: none; border-top: 1px dashed #f00; color: #fff; background-color: #fff; height: 1px; width: 90%; margin-top: -15px"><br/>        
+            <hr style="border: none; border-top: 1px dashed #f00; color: #fff; background-color: #fff; height: 1px; width: 90%; margin-top: -20px"><br/>        
+        </div>   
+        <div id="right">
+            <div id=tabla1 style="border: 1px solid #1E679A; width: 550px">
+                <div id=cabtab1 style="background-color: #1E679A; font-weight: bold; color: #ffffff; padding: 2 2 2 2px; font-size: 11px; text-align: center;">
+                    FALTÓ AL ÚLTIMO CULTO
+                </div>
+                <div id=cuerpotab1 style="padding: 4 4 4 4px; font-size: 11px; font-weight: bold;">
+                    ¿Considera que se debe seguir trabajando con El(la)?
+                    SI
+                    <label style="width: 20px; height: 20px; background: #fff; border: 1px solid #000; font-size: 11px;">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    NO
+                    <label style="width: 20px; height: 20px; background: #fff; border: 1px solid #000; font-size: 11px;">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                </div>
+                <div id=cuerpotab1 style="padding: 4 4 4 4px; font-size: 11px; font-weight: bold; margin-top: -10px;">
+                    ¿Motivo de su inasistencia?&nbsp;&nbsp;&nbsp;&nbsp;
+                    TRABAJO
+                    <label style="width: 20px; height: 20px; background: #fff; border: 1px solid #000; font-size: 11px;">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    ESTUDIOS
+                    <label style="width: 20px; height: 20px; background: #fff; border: 1px solid #000; font-size: 11px;">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    OTROS
+                    <label style="width: 20px; height: 20px; background: #fff; border: 1px solid #000; font-size: 11px;">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                </div>
+            </div>
+        </div>    
+        <br/><br/><br/><br/><br/>
+        <?php $vuelta++ ?>
+        @if($vuelta == 5)
+        <div style="page-break-after:always;"></div>
+        <?php $vuelta = 0; ?>
+        @endif
+        @endforeach    
     <div style="page-break-after:always;"></div>
     @endforeach
 </body>
