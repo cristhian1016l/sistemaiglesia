@@ -131,30 +131,48 @@ class DashboardController extends Controller
     public function reportAsisCultLideresDownload($codasi)
     {        
         // dd($codasi);
-        $fecasi = DB::select("SELECT FecAsi FROM TabAsi WHERE CodAsi = '".$codasi."'");
+        $fecasi = DB::select("SELECT FecAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC LIMIT 1");
         $fecha_culto = date('Y-m-d', strtotime($fecasi[0]->FecAsi));
         $discipulosArray = array();
-        $grupos = DB::select("SELECT CodArea, DesArea FROM TabGrupos WHERE TipGrup = 'D' ORDER BY CodArea");        
+        $grupos = DB::select("SELECT CodArea, DesArea FROM TabGrupos WHERE TipGrup = 'D' ORDER BY CodArea");
         foreach($grupos as $key => $gp){            
             $i = 0;
             $discipulos = DB::select("SELECT c.CodCon, c.ApeCon, c.NomCon, gm.CarDis, gm.CodArea FROM TabGruposMiem gm INNER JOIN TabCon c ON
                                     gm.CodCon = c.CodCon WHERE CodArea = '".$gp->CodArea."' AND CarDis 
-                                    in('MENTOR', 'LIDER CDP', 'SUBLIDER CDP')  ORDER BY c.ApeCon");                
-            foreach($discipulos as $ms){         
-                $SQLAsistencia = DB::select("SELECT da.NomApeCon,  da.Asistio, da.EstAsi, da.HorLlegAsi, da.Motivo FROM TabAsi a INNER JOIN 
-                                TabDetAsi da ON a.Codasi = da.CodAsi WHERE da.CodAsi = '".$codasi."' 
-                                AND da.CodCon = '".$ms->CodCon."' ORDER BY a.FecAsi");
-                if($SQLAsistencia[0]->EstAsi == 'F' || $SQLAsistencia[0]->EstAsi == 'T'){
-                    $i++;
+                                    in('MENTOR', 'LIDER CDP', 'SUBLIDER CDP')  ORDER BY c.ApeCon");        
+            $asisCulto = array();
+            $asisTarCont = 0;
+            foreach($discipulos as $ms){
+
+                $asistenciaCulto = DB::select("SELECT a.TipAsi, da.Asistio, da.EstAsi, da.HorLlegAsi, da.Motivo FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi
+                                            WHERE a.FecAsi = '".$fecha_culto."' AND da.CodCon = '".$ms->CodCon."' AND CodAct = '001'");
+                
+                foreach($asistenciaCulto as $ac){
+                    if($ac->EstAsi == 'F' || $ac->EstAsi == 'T'){
+                        $i++;
+                        $asisTarCont++;
+                        array_push($asisCulto, [
+                            'TipAsi' => $ac->TipAsi,
+                            'EstAsi' => $ac->EstAsi,
+                            'HorLlegAsi' => $ac->HorLlegAsi,    
+                            'Motivo' => $ac->Motivo,
+                        ]);
+                    }
+                }
+
+                if($asisTarCont > 0){
                     array_push($discipulosArray, [
-                        'NomApeCon' => $SQLAsistencia[0]->NomApeCon,
-                        'EstAsi' => $SQLAsistencia[0]->EstAsi,
-                        'HorLlegAsi' => $SQLAsistencia[0]->HorLlegAsi,
+                        'NomApeCon' => $ms->ApeCon.' '.$ms->NomCon,                        
                         'CodArea' => $gp->CodArea,
-                        'CarDis' => $ms->CarDis,
-                        'Motivo' => $SQLAsistencia[0]->Motivo
+                        'CarDis' => $ms->CarDis,                        
+                        'asistencias' => $asisCulto
                     ]);
                 }                
+
+
+                $asisCulto = [];
+                $asisTarCont++;
+
             }
             if($i==0){
                 unset($grupos[$key]);
@@ -162,6 +180,7 @@ class DashboardController extends Controller
         }
 
         $data = ['discipulados' => $grupos, 'discipulos' => collect($discipulosArray), 'fecha' => $fecha_culto];
+        // dd($data);
         $pdf=PDF::loadView('admin.reports.asistencia_culto_lideres', $data);
         return $pdf->stream();
     }

@@ -102,9 +102,6 @@
         </table>
         <p style="margin-top: -8px; font-family: 'Inter', sans-serif; font-size: 20px; font-weight: bold; text-align: center;">FALTA DEL LIDERAZGO</p>    
         <p style="margin-top: -15px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold; text-align: center;">FECHA DEL CULTO: {{ $fecha }}</p>
-
-
-
         
         @foreach($discipulados as $disp)
         <?php $codarea = $disp->CodArea; ?>
@@ -160,15 +157,27 @@
                         <td style="text-align: center; width: 15%;">
                             <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">{{ $dis['CarDis'] }}</span>
                         </td>
+                        <td colspan="4"></td>                        
+                    </tr> 
+                    @foreach($dis['asistencias'] as $asis)
+
+                    @if($asis['EstAsi']=="F")
+                        <tr style="color: #de214a;">
+                    @else
+                        <tr>
+                    @endif                    
+                        <td style="text-align: center; width: 55%;" colspan="3">
+                            <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">{{ $asis['TipAsi'] }}</span>                            
+                        </td>
                         <td style="text-align: center; width: 10%;">
-                        @switch($dis['EstAsi'])
+                        @switch($asis['EstAsi'])
                             @case ('F')
-                                <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
+                                <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">
                                     FALTÓ
                                 </span>
                                 @break
                             @case ('T')
-                                <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
+                                <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">
                                     TARDE
                                 </span>
                                 @break
@@ -177,9 +186,9 @@
                         @endswitch                                                    
                         </td>
                         <td style="text-align: center; width: 10%;">
-                        @if($dis['HorLlegAsi'] != null)
+                        @if($asis['HorLlegAsi'] != null)
                             <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
-                                {{ \Carbon\Carbon::parse($dis['HorLlegAsi'])->format('H:i A') }}
+                                {{ \Carbon\Carbon::parse($asis['HorLlegAsi'])->format('H:i A') }}
                             </span>
                         @else
                             <span style="text-align: center; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center; color: #de214a;">
@@ -188,10 +197,11 @@
                         @endif                                                    
                         </td>
                         <td style="text-align: center; width: 20%">
-                            <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">{{ $dis['Motivo'] }}</span>
+                            <span style="font-family: 'Inter', sans-serif; font-size: 9px; font-weight: bold; text-align: center">{{ $asis['Motivo'] }}</span>
                         </td>
                         <td style="width: 5%;"></td>
-                    </tr> 
+                    </tr>
+                    @endforeach
                     <?php 
                     $i++; 
                     switch($dis['CarDis']){
