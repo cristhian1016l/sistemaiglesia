@@ -411,6 +411,35 @@ CREATE TABLE miembros_observados(
 	PRIMARY KEY(id)
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS TabPermisosUsu;
+CREATE TABLE TabPermisosUsu (
+  CodUsu VARCHAR(3) NOT NULL, 
+  IDMenu VARCHAR(2), 
+  EstMenu TINYINT(1) DEFAULT 0
+) ENGINE=innodb DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS TabUsuarios;
+CREATE TABLE TabUsuarios (
+  CodUsu VARCHAR(3) NOT NULL, 
+  NomApeUsu VARCHAR(150), 
+  NomUsu VARCHAR(70), 
+  ClaveUsu VARCHAR(10), 
+  SkinUsu VARCHAR(30), 
+  PerEliReg TINYINT(1) DEFAULT 0, 
+  SoloRed TINYINT(1) DEFAULT 0, 
+  Id_Red VARCHAR(1),
+  PRIMARY KEY(CodUsu)
+) ENGINE=innodb DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS TabHistorialVis;
+CREATE TABLE TabHistorialVis (
+  CodAsi VARCHAR(12), 
+  CodCon VARCHAR(8), 
+  FecReg DATETIME, 
+  Motivo VARCHAR(30), 
+  Reporte VARCHAR(150)
+) ENGINE=innodb DEFAULT CHARSET=utf8;
+
 ## FOREIGN KEY ##
 ALTER TABLE users
 ADD FOREIGN KEY (codcon) REFERENCES TabCon(CodCon);
@@ -482,6 +511,9 @@ ADD FOREIGN KEY(CodCon) REFERENCES TabCon(codcon);
 
 ALTER TABLE miembros_observados
 ADD FOREIGN KEY(CodCon) REFERENCES TabCon(codcon);
+
+ALTER TABLE TabPermisosUsu
+ADD FOREIGN KEY(CodUsu) REFERENCES TabUsuarios(CodUsu);
 
 ## CÓDIGO PARA ELIMINAR CLAVES FORÁNEAS DE TABCON
 SELECT

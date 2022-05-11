@@ -40,7 +40,7 @@ class ReportsController extends Controller
             
             foreach($members as $member){
                 $asistenciaCulto = DB::select("SELECT da.Asistio, da.EstAsi FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi
-                                            WHERE a.FecAsi = '".$fecCulto."' AND da.CodCon = '".$member->CodCon."' AND CodAct = '001'");
+                                            WHERE a.FecAsi = '".$fecCulto."' AND da.CodCon = '".$member->CodCon."' AND (CodAct = '001' || CodAct = '012' )");
                 
                 $faltas = 0;
                 for($i = 0; $i < count($asistenciaCulto); $i++){
