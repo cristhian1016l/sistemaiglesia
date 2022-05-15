@@ -32,7 +32,7 @@
         </div>
         <div class="col-sm-9">
           <ol class="breadcrumb float-sm-right">
-            @if($asistencia->CodAct == '001')
+            @if($asistencia->CodAct == '001' || $asistencia->CodAct == '012')
             <a>
               <button class="btn btn-success mr-4" id="faultsDS" onclick="faultsProcessDS()">
                 Procesar faltas [Discipulados]
