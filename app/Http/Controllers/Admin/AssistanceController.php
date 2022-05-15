@@ -150,7 +150,7 @@ class AssistanceController extends Controller
                             }
                         }
                         // dd("FASF ".$faltas);
-                        if($faltas > count($asistenciaCulto)-1){
+                        if($faltas > 1){
                             $this->InsertFaltasCultoCp($cp->CodCasPaz, 
                                                         $cp->CodLid, 
                                                         $SQLLiderCP[0]->nombres, 
