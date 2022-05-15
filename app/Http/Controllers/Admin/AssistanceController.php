@@ -142,7 +142,7 @@ class AssistanceController extends Controller
 
                         $asistenciaCulto = DB::select("SELECT da.CodCon, da.NomApeCon, da.Asistio, da.EstAsi, da.Motivo
                                                 FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi
-                                                WHERE a.FecAsi = '".$fecCulto[0]->FecAsi."' AND da.CodCon = '".$ms->CodCon."' AND a.CodAct = '001'");
+                                                WHERE a.FecAsi = '".$fecCulto[0]->FecAsi."' AND da.CodCon = '".$ms->CodCon."' AND (a.CodAct = '001' OR a.CodAct = '012')");
                         $faltas = 0;
                         for($i = 0; $i < count($asistenciaCulto); $i++){
                             if($asistenciaCulto[$i]->EstAsi == "F"){
