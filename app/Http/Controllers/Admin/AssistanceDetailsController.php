@@ -213,7 +213,7 @@ class AssistanceDetailsController extends Controller
 
                 $estado = 'A';
 
-                if($request->codact == '001'){
+                if($request->codact == '001' OR $request->codact == '012'){
                     $date1 = Carbon::parse($tabasi->FecAsi)->format('Y-m-d'); // FECHA DE LA ACTIVIDAD TRAÍDA DESDE LA BASE DE DATOS CON FORMATO 2022-04-07
                     $date2 = Carbon::now()->format('Y-m-d'); // FECHA ACTUAL CON FORMATO 2022-04-07
                     $result = Carbon::createFromFormat('Y-m-d', $date1)->eq(Carbon::createFromFormat('Y-m-d', $date2)); // SE VERIFICA QUE LA FECHA DE REGISTRO SEA LA QUE ESTÉ EN LA BASE DE DATOS

@@ -131,7 +131,7 @@ class DashboardController extends Controller
     public function reportAsisCultLideresDownload($codasi)
     {        
         // dd($codasi);
-        $fecasi = DB::select("SELECT FecAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC LIMIT 1");
+        $fecasi = DB::select("SELECT FecAsi FROM TabAsi WHERE CodAct = '001' OR CodAct = '012' ORDER BY FecAsi DESC LIMIT 1");
         $fecha_culto = date('Y-m-d', strtotime($fecasi[0]->FecAsi));
         $discipulosArray = array();
         $grupos = DB::select("SELECT CodArea, DesArea FROM TabGrupos WHERE TipGrup = 'D' ORDER BY CodArea");
@@ -142,10 +142,10 @@ class DashboardController extends Controller
                                     in('MENTOR', 'LIDER CDP', 'SUBLIDER CDP')  ORDER BY c.ApeCon");        
             $asisCulto = array();
             $asisTarCont = 0;
-            foreach($discipulos as $ms){
+            foreach($discipulos as $keyDis => $ms){
 
                 $asistenciaCulto = DB::select("SELECT a.TipAsi, da.Asistio, da.EstAsi, da.HorLlegAsi, da.Motivo FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi
-                                            WHERE a.FecAsi = '".$fecha_culto."' AND da.CodCon = '".$ms->CodCon."' AND CodAct = '001'");
+                                            WHERE a.FecAsi = '".$fecha_culto."' AND da.CodCon = '".$ms->CodCon."' AND ( CodAct = '001' OR CodAct = '012')");
                 
                 foreach($asistenciaCulto as $ac){
                     if($ac->EstAsi == 'F' || $ac->EstAsi == 'T'){
@@ -167,7 +167,9 @@ class DashboardController extends Controller
                         'CarDis' => $ms->CarDis,                        
                         'asistencias' => $asisCulto
                     ]);
-                }                
+                }else{
+                    unset($discipulosArray[$keyDis]);
+                }
 
 
                 $asisCulto = [];
