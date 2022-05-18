@@ -169,6 +169,10 @@ Route::group(['middleware' => 'isAdmin'], function(){
         // GRUPOS
         Route::post('administracion/grupo/baja', 'Admin\MembersController@removeFromGroup')->name('admin.membership.removeFromGroup'); // QUITAR DE UN GRUPO
         Route::post('administracion/membresia/baja', 'Admin\MembersController@toDown')->name('admin.membership.toDown'); // DAR DE BAJA        
+
+        // MEMBRESIA - AJAX
+        
+        Route::post('administracion/membresia/depurar-miembros', 'Admin\MembersController@debugMembers')->name('admin.membership.debugMembers'); // DEPURAR TODOS LOS MIEMBROS
     });    
 
     Route::group(['middleware' => ['can:registro asistencia']], function() {

@@ -66,6 +66,16 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+
+        <div class="row mb-2">            
+            <div class="col-md-3" id="add_disciples">
+              <label for="">OPCIONES</label>
+              <a>
+                  <button  type="button" class="btn btn-block btn-primary" onclick="debug_members()">DEPURAR MIEMBROS</button>
+              </a>                
+            </div>                      
+        </div>
+        
       <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Membresía total</h3>                
@@ -369,4 +379,21 @@
     return age;
   }
 </script>
+
+<script>
+  function debug_members(){
+    event.preventDefault();       
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type:'POST',
+        url:'/administracion/membresia/depurar-miembros',        
+        success:function(data) {            
+          console.log(data);
+        }
+    });    
+  }
+</script>
+
 @endsection

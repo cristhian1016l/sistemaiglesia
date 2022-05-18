@@ -137,11 +137,18 @@
             <table id="table">
                 <thead>
                     <tr>
+                       <th colspan="2">
+                       </th> 
+                       <th colspan="2" style="width: 12%; font-size: 10px; background-color: #c7c71e">ASISTENCIAS</th>
+                       <th colspan="2"></th>
+                    </tr>
+                    <tr>
                         <th style="width: 5%; background-color: #c7c71e">N°</th>
                         <th style="width: 36%; font-size: 10px; background-color: #c7c71e">NOMBRES Y APELLIDOS</th>
                         <th style="width: 6%; font-size: 10px; background-color: #c7c71e">CDP</th>
+                        <th style="width: 6%; font-size: 10px; background-color: #c7c71e">VIRTUAL</th>
                         <th style="width: 13%; font-size: 10px; background-color: #c7c71e">TIPO</th>
-                        <th style="width: 40%; font-size: 10px; background-color: #c7c71e">OBSERVACIÓN Y/O MOTIVO DE FALTA</th>
+                        <th style="width: 34%; font-size: 10px; background-color: #c7c71e">OBSERVACIÓN Y/O MOTIVO DE FALTA</th>
                     </tr>                    
                 </thead>
                 <tbody>                     
@@ -151,6 +158,7 @@
                             <td class="td" style="text-align: left !important; padding-left: 10px;">
                                 {{ substr($miembro->ApeCon.' '.$miembro->NomCon, 0, 34) }}
                             </td>                            
+                            <td class="td"></td>
                             <td class="td"></td>
                             <td class="td">{{ $miembro->TipCon }}</td>
                             <td class="td"></td>
@@ -172,6 +180,9 @@
         <!-- PRIMERA PARTE -->        
         <span style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: blue; color: #002138;">
         Asistencia PRESENCIAL:  _____
+        </span><br/>
+        <span style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: blue; color: #002138;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asistencia VIRTUAL:  _____
         </span><br/>
         <span style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; margin: 0; color: blue; color: #002138;">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Faltas Justificadas:  _____

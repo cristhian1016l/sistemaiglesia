@@ -176,33 +176,58 @@ SET autocommit=1;
 
 -- --------------- TABLAS DE INFORMES DE CASAS DE PAZ --------------- 
 
-DROP TABLE IF EXISTS TabInfCaspaz;
-CREATE TABLE TabInfCasPaz (
-	NumInf int(10) unsigned NOT NULL AUTO_INCREMENT,
-    CodCasPaz VARCHAR(8),
-    FecInf DATETIME,
-    NumSem INTEGER,
-    Anio INTEGER,
-    ReuSiNo TINYINT(1),
-    TotAsiReu INTEGER,
-    TotAusReu INTEGER,
-    OfreReu DECIMAL(5,2),
-    TemSem VARCHAR(255),
-    Enviado TINYINT(1) DEFAULT 1,
-    PRIMARY KEY(NumInf)
+DROP TABLE IF EXISTS `TabInfCasPaz`;
+CREATE TABLE `TabInfCasPaz` (
+  `NumInf` INTEGER NOT NULL AUTO_INCREMENT, 
+  `CodCasPaz` VARCHAR(6), 
+  `FecInf` DATETIME, 
+  `NumSem` INTEGER, 
+  `ReuSiNo` VARCHAR(2), 
+  `EntSiNo` VARCHAR(2), 
+  `TotAsiReu` INTEGER, 
+  `TotAusReu` INTEGER, 
+  `OfreReu` DOUBLE NULL, 
+  `EvanCasPaz` VARCHAR(2), 
+  `MotNoEvan` VARCHAR(30), 
+  `ConvEvan` INTEGER, 
+  `ConvReu` INTEGER, 
+  `TotConv` INTEGER, 
+  `HogMiemVis` INTEGER, 
+  `HogNueVis` INTEGER, 
+  `TemaSem` VARCHAR(150), 
+  `ApeReunion` TINYINT(1) DEFAULT 0, 
+  `CulJueMiem` INTEGER, 
+  `CulJueVis` INTEGER, 
+  `CulJueNue` INTEGER, 
+  `CulSabMiem` INTEGER, 
+  `CulSabVis` INTEGER, 
+  `CulSabNue` INTEGER, 
+  `CulDomMiem` INTEGER, 
+  `CulDomVis` INTEGER, 
+  `CulDomNue` INTEGER, 
+  `InfReco` LONGTEXT, 
+  `ProAsi` TINYINT(1) DEFAULT 0,
+  PRIMARY KEY(NumInf)
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
+SET autocommit=1;
 
-DROP TABLE IF EXISTS TabDetInfCas;
-CREATE TABLE TabDetInfCas (
-	NumInf int(10) unsigned NOT NULL AUTO_INCREMENT,
-    CodCon VARCHAR(8) NOT NULL, 
-    NomCon VARCHAR(150),
-    ApeCon VARCHAR(150),
-    TipCon VARCHAR(150),
-    EstAsi VARCHAR(1) DEFAULT 'F', 
-    AsiReu TINYINT(1) DEFAULT 0,    
-    PRIMARY KEY (`NumInf`, `CodCon`)
+DROP TABLE IF EXISTS `TabDetInfCas`;
+CREATE TABLE `TabDetInfCas` (
+  `NumInf` INTEGER, 
+  `CodCon` VARCHAR(8), 
+  `NomCon` VARCHAR(70), 
+  `ApeCon` VARCHAR(70), 
+  `TipCon` VARCHAR(30), 
+  `AsiReu` VARCHAR(2) DEFAULT 'NO', 
+  `VisTraidas` INTEGER, 
+  `CulJue` VARCHAR(2), 
+  `ObsJue` VARCHAR(100), 
+  `CulSab` VARCHAR(2), 
+  `ObsSab` VARCHAR(100), 
+  `CulDom` VARCHAR(2), 
+  `ObsDom` VARCHAR(100)
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
+SET autocommit=1;
 
 -- --------------- FIN TABLAS DE INFORMES DE CASAS DE PAZ --------------- 
 
