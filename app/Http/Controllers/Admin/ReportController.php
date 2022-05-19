@@ -148,7 +148,7 @@ class ReportController extends Controller
                                 FROM TabCon c LEFT JOIN miembros_observados mo ON c.CodCon = mo.CodCon
                                 WHERE c.EstCon = 'ACTIVO' AND c.FecReg > '".$dt->subMonth(3)->format('Y-m-d')."' AND c.ID_Red = '".$idred."' ORDER BY c.ApeCon");
                             
-        $asistencias = DB::select("SELECT CodAsi, FecAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC LIMIT 7");
+        $asistencias = DB::select("SELECT CodAsi, FecAsi FROM TabAsi WHERE (CodAct = '001' || CodAct = '012')  ORDER BY FecAsi DESC LIMIT 7");
 
         foreach($members as $member){
             $vuelta = 0;     
