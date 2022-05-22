@@ -90,10 +90,19 @@ class AssistanceDetailsController extends Controller
                 }else{                    
                     $date = \Carbon\Carbon::now();
                     define('_CodAsi', $date->format('dmYhi'));
-                    $miembros = DB::table('TabCon')
-                    ->select('CodCon', 'ApeCon', 'NomCon')
-                    ->where('EstCon', 'ACTIVO')
-                    ->get();
+
+                    if($activities->CodAct == '001' || $activities->CodAct == '012'){
+                        $miembros = DB::table('TabCon')
+                        ->select('CodCon', 'ApeCon', 'NomCon')
+                        ->where('EstCon', 'ACTIVO')
+                        ->where('SoloCasPaz', '0')
+                        ->get();
+                    }else{
+                        $miembros = DB::table('TabCon')
+                        ->select('CodCon', 'ApeCon', 'NomCon')
+                        ->where('EstCon', 'ACTIVO')
+                        ->get();
+                    }                    
 
                     $asistencia = new Tabasi();
                     $asistencia->CodAsi = _CodAsi;
