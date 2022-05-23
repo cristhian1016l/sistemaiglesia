@@ -71,21 +71,25 @@ class AssistanceController extends Controller
                     $asistenciaCulto = DB::select("SELECT da.CodCon, da.NomApeCon, da.Asistio, da.EstAsi, da.Motivo
                                                 FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi
                                                 WHERE a.FecAsi = '".$fecCulto[0]->FecAsi."' AND da.CodCon = '".$mg->CodCon."' AND (a.CodAct = '001' OR a.CodAct = '012')");
-                    $faltas = 0;
-                    for($i = 0; $i < count($asistenciaCulto); $i++){
-                        if($asistenciaCulto[$i]->EstAsi == "F"){
-                            $faltas = $faltas + 1;    
+
+                    if(count($asistenciaCulto) > 0){
+                        $faltas = 0;
+                        for($i = 0; $i < count($asistenciaCulto); $i++){
+                            if($asistenciaCulto[$i]->EstAsi == "F"){
+                                $faltas = $faltas + 1;    
+                            }
                         }
+                        // dd("FASF ".$faltas);
+                        if($faltas > count($asistenciaCulto)-1){
+                            $this->InsertFaltasCultoDs($discipulado->CodArea, 
+                                                        $mg->CodCon, 
+                                                        $discipulado->DesArea, 
+                                                        $asistenciaCulto[0]->NomApeCon, 
+                                                        $mg->CarDis, 
+                                                        $asistenciaCulto[0]->Motivo);
+                        }                                    
                     }
-                    // dd("FASF ".$faltas);
-                    if($faltas > count($asistenciaCulto)-1){
-                        $this->InsertFaltasCultoDs($discipulado->CodArea, 
-                                                    $mg->CodCon, 
-                                                    $discipulado->DesArea, 
-                                                    $asistenciaCulto[0]->NomApeCon, 
-                                                    $mg->CarDis, 
-                                                    $asistenciaCulto[0]->Motivo);
-                    }                                    
+                    
                 }                                
             }
 
