@@ -96,15 +96,19 @@ class DashboardController extends Controller
             $total_members_faults = 0;
             $total_members_permissions = 0;
             foreach($cdps as $cdp){
+
+                $total = DB::select("SELECT COUNT(*) AS total FROM TabMimCasPaz WHERE CodCasPaz = '".$cdp->CodCasPaz."'");
                 $total_members = DB::table('TabMimCasPaz AS m')
                                     ->join('TabDetAsi AS da', 'm.CodCon', '=', 'da.CodCon')
                                     ->where('m.CodCasPaz', $cdp->CodCasPaz)
                                     ->where('da.CodAsi', $codasi)->get();
+                
+                // $total_members = DB::select("SELECT * FROM TabMimCasPaz AS m INNER JOIN TabDetAsi AS da ON m.CodCon = da.CodCon WHERE m.CodCasPaz = '".$cdp->CodCasPaz."' AND da.CodAsi = '".$codasi."' ");
                 // $asistencias = $total_members->sum('Asistio');
                 $asistencias = $total_members->where('Asistio', '=', 1); // OBTIENE EN UNA COLECCIÓN LOS DATOS DE LOS MIEMBROS QUE ASISTIERON
                 $faltas = $total_members->where('Asistio', '=', 0); // OBTIENE EN UNA COLECCIÓN LOS DATOS DE LOS MIEMBROS QUE FALTARON
                 $permisos = $total_members->where('EstAsi', '=', 'P'); // OBTIENE EN UNA COLECCIÓN LOS DATOS DE LOS MIEMBROS QUE TIENEN PERMISO                
-                array_push($full_data, ['cdp' => $cdp->CodCasPaz, 'direccion' => $cdp->DirCasPaz, 'lider' => $cdp->Nombres, 'total_miembros' => count($total_members), 
+                array_push($full_data, ['cdp' => $cdp->CodCasPaz, 'direccion' => $cdp->DirCasPaz, 'lider' => $cdp->Nombres, 'total_miembros' => $total[0]->total, 
                                         'asistencias' => count($asistencias), 'faltas' => count($faltas)-count($permisos), 'permisos' => count($permisos), 
                                         'id_red' => $red->ID_RED]);
                 $total_members_network = $total_members_network + count($total_members);

@@ -117,13 +117,14 @@
                         <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 6%">N° CDP</td>
                         <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 35%">DIRECCIÓN</td>
                         <td class="td" rowspan="2" style="font-size: 13px; font-weight: bold; width: 24%;">NOMBRE DEL LIDER</td>
-                        <td class="td" colspan="4" style="font-size: 13px; font-weight: bold; width: 30%;">SERVICIO {{ $dia.' '.$dia_numero .' DE '.$mes.' DEL '.$anio }}</td>
+                        <td class="td" colspan="5" style="font-size: 13px; font-weight: bold; width: 30%;">SERVICIO {{ $dia.' '.$dia_numero .' DE '.$mes.' DEL '.$anio }}</td>
                     </tr>
                     <tr style="background-color: #275DAD; color: white;">
-                        <td class="td" style="font-size: 10px; font-weight: bold;">TOT. MIEM</td>
-                        <td class="td" style="font-size: 10px; font-weight: bold;">ASISTENCIA</td>
-                        <td class="td" style="font-size: 10px; font-weight: bold;">FALTAS</td>
-                        <td class="td" style="font-size: 10px; font-weight: bold;">PERMISOS</td>
+                        <td class="td" style="font-size: 8px; font-weight: bold;">TOT. MIEM</td>
+                        <td class="td" style="font-size: 8px; font-weight: bold;">ASISTENCIA</td>
+                        <td class="td" style="font-size: 8px; font-weight: bold;">FALTAS</td>
+                        <td class="td" style="font-size: 8px; font-weight: bold;">PERMISOS</td>
+                        <td class="td" style="font-size: 8px; font-weight: bold;">SOLO CDP</td>
                     </tr>
                     <?php $i = 1; ?>
                     @foreach($detalles as $detalle)                                      
@@ -141,6 +142,7 @@
                                 <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['asistencias'] }}</td>
                                 <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['faltas'] }}</td>
                                 <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['permisos'] }}</td>
+                                <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['total_miembros'] - $detalle['asistencias'] - $detalle['faltas'] - $detalle['permisos'] }}</td>
                             </tr> 
                             <?php $i++; ?>
                         @endif
