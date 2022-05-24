@@ -212,7 +212,8 @@ Route::group(['middleware' => 'isAdmin'], function(){
         Route::get('administracion/asistencia/{CodAct}','Admin\AssistanceDetailsController@getDiaryRegister')->name('admin.asistencia.getDiaryRegister');
         Route::post('administracion/asistencia/','Admin\AssistanceDetailsController@registerAssistance')->name('admin.asistencia.registerAssistance');
         Route::get('administracion/verasistencia/{CodAct}','Admin\AssistanceDetailsController@checkDiaryRegister')->name('admin.asistencia.checkDiaryRegister');
-        Route::post('administracion/registrarAsistencia','Admin\AssistanceDetailsController@updateAssistanceMember')->name('admin.asistencia.updateAssistanceMember');
+        Route::post('administracion/registrarAsistencia','Admin\AssistanceDetailsController@updateAssistanceMember')->name('admin.asistencia.updateAssistanceMember'); //REGISTRAR ASISTENCIA 
+        Route::post('administracion/registrarAsistenciaQR','Admin\AssistanceDetailsController@updateAssistanceMemberForQR')->name('admin.asistencia.updateAssistanceMemberForQR'); //REGISTRAR ASISTENCIA POR CÓDIGO QR
         Route::post('administracion/eliminarAsistencia','Admin\AssistanceDetailsController@deleteAssistanceMember')->name('admin.asistencia.deleteAssistanceMember');
         Route::post('administracion/getNumbers/{Codasi}','Admin\AssistanceDetailsController@getNumbers')->name('admin.asistencia.getNumbers');
     });        

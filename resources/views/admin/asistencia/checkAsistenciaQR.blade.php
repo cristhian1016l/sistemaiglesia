@@ -111,7 +111,7 @@
                     <input name="desde" type="text" class="form-control form-control-lg" id="exampleInputPassword1" value="{{ \Carbon\Carbon::parse($asistencia->HorDesde)->toTimeString() }}" readonly>
                   </div>                  
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" style="text-align: center;">
                   <div class="clock">
                     <span id="hours" class="hours" style="font-size: 100px;"></span>
                     <span style="font-size: 100px;">:</span>
@@ -137,6 +137,14 @@
                     </div>
                 </div>
                 <div class="col-md-2"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                  <div class="form-group">
+                      <label id="name" style="font-size: 60px"></label>
+                    </div>
+                </div>
               </div>
                                
               <div class="row">
@@ -203,16 +211,18 @@
 
   function updateRegisterMember(Codcon) {    
     var codasi = document.getElementById("asistencia").value;
-    
+    var codact = $('#codact').val();
+
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       type: 'POST',
-      url: '/administracion/registrarAsistencia',
+      url: '/administracion/registrarAsistenciaQR',
       data: {
           'codcon': Codcon,
-          "codasi": codasi
+          "codasi": codasi,
+          "codact": codact
           },      
       success: function(data) {
         console.log(data);
@@ -223,13 +233,29 @@
         } else {
           if (data.state === "OK") {
             // alert("El usuario ya está registrado, intenta recargando la página");
-            location.reload();
+            // location.reload();
+            let name = document.getElementById('name');          
+            name.innerHTML = "EL MIEMBRO YA ESTÁ REGISTRADO";
+            name.style.color = "blue";
+            toastr.info(data.msg);
           } else {
             toastr.options.positionClass = 'toast-bottom-right';
             miembros = data.miembros;
             toastr.success('Asistencia de miembro registrada correctamente');
-            getDetailsNumbers(codasi);
-            return data.miembros;
+            getDetailsNumbers(codasi);            
+            let estado = data.estado;
+            let name = document.getElementById('name');
+            console.log(estado)
+            name.innerHTML = data.msg;
+
+            if(estado == 'A'){
+              name.style.color = "green";
+            }
+
+            if(estado == 'T'){
+              name.style.color = "red";
+            }            
+            
           }
         }        
       }
