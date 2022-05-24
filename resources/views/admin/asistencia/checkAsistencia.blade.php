@@ -302,7 +302,6 @@
           "codact": codact
         },
         "dataSrc": function(data) {
-          console.log(data);
           val = data.error;
           if (val === "500") {
             // toastr.error("Ha ocurrido un error, no se puede registrar la asistencia del miembro")
