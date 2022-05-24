@@ -11,6 +11,7 @@ use App\Tabmimcaspaz;
 use App\Tabredes;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -111,10 +112,10 @@ class DashboardController extends Controller
                 array_push($full_data, ['cdp' => $cdp->CodCasPaz, 'direccion' => $cdp->DirCasPaz, 'lider' => $cdp->Nombres, 'total_miembros' => $total[0]->total, 
                                         'asistencias' => count($asistencias), 'faltas' => count($faltas)-count($permisos), 'permisos' => count($permisos), 
                                         'id_red' => $red->ID_RED]);
-                $total_members_network = $total_members_network + count($total_members);
+                $total_members_network = $total_members_network + $total[0]->total;
                 $total_members_assistances = $total_members_assistances + count($asistencias);
                 $total_members_faults = $total_members_faults + count($faltas)-count($permisos);
-                $total_members_permissions = $total_members_permissions + count($permisos);
+                $total_members_permissions = $total_members_permissions + count($permisos);                
             }
             array_push($total_data, ['total_miembros_red' => $total_members_network, 
                                     'total_miembros_asistencias' => $total_members_assistances,

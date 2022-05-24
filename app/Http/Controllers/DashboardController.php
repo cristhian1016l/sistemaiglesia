@@ -73,7 +73,7 @@ class DashboardController extends Controller
         $asis = Tabasi::where('FecAsi', date('Y-m-d'))->first();
         $members = Tabcon::where('EstCon', 'ACTIVO')->count();
         // $cultos = TabAsi::select('CodAsi', 'FecAsi', 'TipAsi')->where('CodAct', '001')->OrderBy('FecAsi', 'desc')->take(10)->get();
-        $cultos = DB::select("SELECT CodAsi, FecAsi, TipAsi FROM TabAsi WHERE CodAct = '001' ORDER BY FecAsi DESC LIMIT 10");
+        $cultos = DB::select("SELECT CodAsi, FecAsi, TipAsi FROM TabAsi WHERE CodAct = '001' OR CodAct = '012' ORDER BY FecAsi DESC LIMIT 10");
         $data = ['CDPs' => $CDPs, 'asis' => $asis, 'members' => $members, 'cultos' => $cultos];
         return view('dashboard.administracion', $data);
     }

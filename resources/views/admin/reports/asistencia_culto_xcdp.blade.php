@@ -126,8 +126,9 @@
                         <td class="td" style="font-size: 8px; font-weight: bold;">PERMISOS</td>
                         <td class="td" style="font-size: 8px; font-weight: bold;">SOLO CDP</td>
                     </tr>
-                    <?php $i = 1; ?>
+                    <?php $i = 1; $solocdp = 0; $solocdpsum = 0;?>
                     @foreach($detalles as $detalle)                                      
+                        <?php $solocdp = $detalle['total_miembros'] - $detalle['asistencias'] - $detalle['faltas'] - $detalle['permisos']; ?>
                         @if($red['id_red'] == $detalle['id_red'])                                                
                             @if($detalle['faltas'] > 0.5*$detalle['total_miembros'])
                             <tr style="background-color: red; color: #fff;">
@@ -142,9 +143,9 @@
                                 <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['asistencias'] }}</td>
                                 <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['faltas'] }}</td>
                                 <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['permisos'] }}</td>
-                                <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $detalle['total_miembros'] - $detalle['asistencias'] - $detalle['faltas'] - $detalle['permisos'] }}</td>
+                                <td class="td" style="font-weight: bold; padding: 2.5px;">{{ $solocdp }}</td>
                             </tr> 
-                            <?php $i++; ?>
+                            <?php $i++; $solocdpsum = $solocdpsum + $solocdp; ?>
                         @endif
                     @endforeach
                     <tr>
@@ -152,7 +153,8 @@
                         <td class="td" style="font-size: 12px; font-weight: bold; background-color: #44AF69; color: white;">{{ $red['total_miembros_red'] }}</td>
                         <td class="td" style="font-size: 12px; font-weight: bold; background-color: #44AF69; color: white;">{{ $red['total_miembros_asistencias'] }}</td>
                         <td class="td" style="font-size: 12px; font-weight: bold; background-color: #44AF69; color: white;">{{ $red['total_miembros_faltas'] }}</td>
-                        <td class="td" style="font-size: 12px; font-weight: bold; background-color: #44AF69; color: white;">{{ $red['total_miembros_permisos'] }}</td>
+                        <td class="td" style="font-size: 12px; font-weight: bold; background-color: #44AF69; color: white;">{{ $red['total_miembros_permisos'] }}</td>                        
+                        <td class="td" style="font-size: 12px; font-weight: bold; background-color: #44AF69; color: white;">{{ $solocdpsum }}</td>
                     </tr>                    
                 </tbody>
             </table>
