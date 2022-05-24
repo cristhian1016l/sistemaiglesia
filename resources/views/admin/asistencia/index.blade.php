@@ -110,15 +110,23 @@
             <div class="form-group">
               <label>Registros anteriores</label>
                 {!! Form::open(array('route' => 'admin.asistencia.getDetailsDetAsi', 'role' => 'form', 'id' => "quickForm")) !!}
-                  <select name="CodAsi" class="form-control select2" style="width: 100%;" id="miselect">
-                  </select>
+                  <div class="form-group">
+                    <select name="CodAsi" class="form-control select2" style="width: 100%;" id="miselect">
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-switch">
+                      <input name="QrCode" type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1">Registrar por Código de Barras</label>
+                    </div>
+                  </div>
                   <a href="{{ route('admin.asistencia.getDetailsDetAsi') }}">
                     <button type="submit" class='btn btn-success btn-block'>
                         Ir a asistencia anterior
                     </button>
                   </a>
                 {!! Form::close() !!}            
-            </div>
+            </div>            
             <div class="card card-danger">
               <div class="card-header">
                 <h3 class="card-title">Fecha</h3>

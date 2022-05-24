@@ -180,28 +180,32 @@ class AssistanceDetailsController extends Controller
     }
 
     public function getDetailsDetAsi(Request $request){
-        
         $asistencia = DB::table('TabAsi')
-                        ->select('CodAsi', 'FecAsi', 'TipAsi', 'HorDesde', 'HorHasta', 'CodAct')
-                        ->where('CodAsi', $request->CodAsi)
-                        ->first();
+        ->select('CodAsi', 'FecAsi', 'TipAsi', 'HorDesde', 'HorHasta', 'CodAct')
+        ->where('CodAsi', $request->CodAsi)
+        ->first();
 
         $detasi = DB::table('TabDetAsi')
-                    ->select('CodAsi', 'CodCon', 'NomApeCon', 'HorLlegAsi', 'EstAsi','Asistio')
-                    ->where('CodAsi', $request->CodAsi)
-                    ->orderBy('NomApeCon')
-                    ->get();
-        
+                ->select('CodAsi', 'CodCon', 'NomApeCon', 'HorLlegAsi', 'EstAsi','Asistio')
+                ->where('CodAsi', $request->CodAsi)
+                ->orderBy('NomApeCon')
+                ->get();
+
         $FilterAssistance = count($detasi->where('EstAsi', 'A'));
         $filterFoul = count($detasi->where('EstAsi', 'T'));
         $assistance = $FilterAssistance+$filterFoul;
         $filterDelay = count($detasi->where('EstAsi', 'F'));
-
         $data = ['asistencia' => $asistencia, 'detasi' => $detasi, 'asistentes' => $assistance, 'faltantes' => $filterDelay];
-        return view('admin.asistencia.checkAsistencia', $data);
+        if(isset($request->QrCode)){                        
+            return view('admin.asistencia.checkAsistenciaQR', $data);
+        }else{        
+            
+            return view('admin.asistencia.checkAsistencia', $data);
+        }        
     }
 
     public function updateAssistanceMember(Request $request)
+<<<<<<< HEAD
     {        
         try{
             $fecha = Carbon::now();
@@ -229,33 +233,68 @@ class AssistanceDetailsController extends Controller
                     if($result == true){ //SI ES VERDADERO
                         if($HORA_ACTUAL >= $HORA_MINIMA && $HORA_ACTUAL<=$HORA_MAXIMA || $HORA_ACTUAL >= $HORA_MINIMA_NOCHE && $HORA_ACTUAL<=$HORA_MAXIMA_NOCHE){ // SE VERIFICA QUE LA EL REGISTRO  SEA ENTRE LAS HORAS DE TOLERANCIA PARA MARCAR ASISTENCIA TEMPRANO, SI NO SE MARCA COMO TARDANZA
                             DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]); // SI ESTÁN EN LAS HORA DE TOLERANCIA ENTONCES SE MARCA COMO ASISTENCIA
+=======
+    {               
+        $isset = DB::table('TabAsi')->where('CodAsi', $request->codasi)->first();
+        
+        if(isset($isset)){
+            try{
+                $fecha = Carbon::now();
+                $tabasi = DB::table('TabAsi')->select('FecAsi', 'HorDesde', 'HorHasta')->where('CodAsi', $request->codasi)->first();
+                $asis = DB::table('TabDetAsi')
+                    ->select('Asistio')
+                    ->where('CodAsi', $request->codasi)
+                    ->where('CodCon', $request->codcon)
+                    ->first();
+                if($asis->Asistio == 1){                
+                    return response()->json(["state" => "OK"]);
+                }else{
+                    $HORA_ACTUAL = Carbon::parse($fecha)->toTimeString(); // HORA ACTUAL -> FORMATO (20:53:47)
+                    $HORA_MINIMA = Carbon::parse($tabasi->HorDesde)->format('H:i:s'); // HORA MÍNIMA DE TOLERANCIA (EN ESTE CASO 09:15:00) HORA TRAÍDA DESDE LA BASE DE DATOS
+                    $HORA_MAXIMA = Carbon::parse($tabasi->HorHasta)->format('H:i:s'); // HORA MÁXIMA DE TOLERANCIA (EN ESTE CASO 09:15:00) HORA TRAÍDA DESDE LA BASE DE DATOS
+                    $HORA_MINIMA_NOCHE = '18:00:00'; // HORA MÍNIMA DE TOLERANCIA PARA EL CULTO DE NOCHE
+                    $HORA_MAXIMA_NOCHE = '18:45:00'; // HORA MÁXIMA DE TOLERANCIA PARA EL CULTO DE NOCHE
+    
+                    $estado = 'A';
+    
+                    if($request->codact == '001'){
+                        $date1 = Carbon::parse($tabasi->FecAsi)->format('Y-m-d'); // FECHA DE LA ACTIVIDAD TRAÍDA DESDE LA BASE DE DATOS CON FORMATO 2022-04-07
+                        $date2 = Carbon::now()->format('Y-m-d'); // FECHA ACTUAL CON FORMATO 2022-04-07
+                        $result = Carbon::createFromFormat('Y-m-d', $date1)->eq(Carbon::createFromFormat('Y-m-d', $date2)); // SE VERIFICA QUE LA FECHA DE REGISTRO SEA LA QUE ESTÉ EN LA BASE DE DATOS
+                        if($result == true){ //SI ES VERDADERO
+                            if($HORA_ACTUAL >= $HORA_MINIMA && $HORA_ACTUAL<=$HORA_MAXIMA || $HORA_ACTUAL >= $HORA_MINIMA_NOCHE && $HORA_ACTUAL<=$HORA_MAXIMA_NOCHE){ // SE VERIFICA QUE LA EL REGISTRO  SEA ENTRE LAS HORAS DE TOLERANCIA PARA MARCAR ASISTENCIA TEMPRANO, SI NO SE MARCA COMO TARDANZA
+                                DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]); // SI ESTÁN EN LAS HORA DE TOLERANCIA ENTONCES SE MARCA COMO ASISTENCIA
+                            }else{
+                                $estado = 'T';
+                                DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]); // SI NO ESTÁN EN LAS HORA DE TOLERANCIA ENTONCES SE MARCA COMO TARDANZA
+                            }
+>>>>>>> edit-reports
                         }else{
                             $estado = 'T';
-                            DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]); // SI NO ESTÁN EN LAS HORA DE TOLERANCIA ENTONCES SE MARCA COMO TARDANZA
-                        }
+                            DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]); // SI ESTÁ FUERA DEL DÍA DE REGISTRO ENTONCES SE MARCA COMO TARDANZA
+                        }                
                     }else{
-                        $estado = 'T';
-                        DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]); // SI ESTÁ FUERA DEL DÍA DE REGISTRO ENTONCES SE MARCA COMO TARDANZA
-                    }                
-                }else{
-                    DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);
-                }
-                
-                DB::update("UPDATE TabAsi set TotFaltas = TotFaltas - 1, TotAsistencia = TotAsistencia + 1 WHERE CodAsi = '".$request->codasi."'");
-                
-                $detasi = DB::table('TabDetAsi')
-                    ->select('CodAsi', 'CodCon', 'NomApeCon', 'HorLlegAsi', 'EstAsi','Asistio')
-                    ->where('CodAsi', $request->codasi)
-                    ->orderBy('NomApeCon')
-                    ->get();                
+                        DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);
+                    }
                     
-                return response()->json(['200', "miembros" => $detasi]);
-                // Carbon::parse($fecha)->addMinutes(15)->toTimeString()
-            }  
+                    DB::update("UPDATE TabAsi set TotFaltas = TotFaltas - 1, TotAsistencia = TotAsistencia + 1 WHERE CodAsi = '".$request->codasi."'");
+                    
+                    $detasi = DB::table('TabDetAsi')
+                        ->select('CodAsi', 'CodCon', 'NomApeCon', 'HorLlegAsi', 'EstAsi','Asistio')
+                        ->where('CodAsi', $request->codasi)
+                        ->orderBy('NomApeCon')
+                        ->get();                
                         
-        }catch(\Exception $th){
-            return response()->json(["error" => "500", "msg" => $th->getMessage()]);
-            // return response()->json('500');
+                    return response()->json(['200', "miembros" => $detasi]);
+                    // Carbon::parse($fecha)->addMinutes(15)->toTimeString()
+                }  
+                            
+            }catch(\Exception $th){
+                return response()->json(["error" => "500", "msg" => $th->getMessage()]);
+                // return response()->json('500');
+            }        
+        }else{
+            return response()->json(["error" => "500", "msg" => 'NO EXISTE EL REGISTRO']);
         }        
     }
 
