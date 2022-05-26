@@ -209,7 +209,7 @@
   document.getElementById("adminasistenciaactive").className += " active";    
   document.getElementById("assistance").className += " active";   
 
-  function updateRegisterMember(Codcon) {    
+  function updateRegisterMember(codbarras) {    
     var codasi = document.getElementById("asistencia").value;
     var codact = $('#codact').val();
 
@@ -220,7 +220,7 @@
       type: 'POST',
       url: '/administracion/registrarAsistenciaQR',
       data: {
-          'codcon': Codcon,
+          'codbarras': codbarras,
           "codasi": codasi,
           "codact": codact
           },      
@@ -230,6 +230,8 @@
         if (val === "500") {
           // toastr.error("Ha ocurrido un error, no se puede registrar la asistencia del miembro")
           toastr.error(data.msg);
+          let name = document.getElementById('name');
+          name.innerHTML = "";
         } else {
           if (data.state === "OK") {
             // alert("El usuario ya está registrado, intenta recargando la página");

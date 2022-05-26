@@ -263,14 +263,23 @@ class AssistanceDetailsController extends Controller
 
     public function updateAssistanceMemberForQR(Request $request)
     {        
+        $barcode = DB::select("SELECT CodCon FROM TabCon WHERE CodBarras= '".$request->codbarras."' LIMIT 1");
+        if($barcode == null){
+            return response()->json(["error" => "500", "msg" => "NO SE ENCONTRÓ EL CÓDIGO DE BARRAS"]);            
+        }        
         try{
             $fecha = Carbon::now();
             $tabasi = DB::table('TabAsi')->select('FecAsi', 'HorDesde', 'HorHasta')->where('CodAsi', $request->codasi)->first();
             $asis = DB::table('TabDetAsi')
                 ->select('Asistio', 'NomApeCon')
                 ->where('CodAsi', $request->codasi)
-                ->where('CodCon', $request->codcon)
+                ->where('CodCon',  $barcode[0]->CodCon)
                 ->first();
+                
+            if($asis == null){
+                return response()->json(["error" => "500", "msg" => "EL MIEMBRO NO ESTA ACTIVO O ESTÁ REGISTRADO COMO SOLO CASA DE PAZ"]);
+            }
+
             if($asis->Asistio == 1){                
                 return response()->json(["state" => "OK", "msg" => "EL MIEMBRO YA ESTÁ REGISTRADO EN EL SISTEMA"]);
             }else{
@@ -286,17 +295,17 @@ class AssistanceDetailsController extends Controller
                     $result = Carbon::createFromFormat('Y-m-d', $date1)->eq(Carbon::createFromFormat('Y-m-d', $date2)); // SE VERIFICA QUE LA FECHA DE REGISTRO SEA LA QUE ESTÉ EN LA BASE DE DATOS
                     if($result == true){ //SI ES VERDADERO
                         if($HORA_ACTUAL >= $HORA_MINIMA && $HORA_ACTUAL<=$HORA_MAXIMA){ // SE VERIFICA QUE LA EL REGISTRO  SEA ENTRE LAS HORAS DE TOLERANCIA PARA MARCAR ASISTENCIA TEMPRANO, SI NO SE MARCA COMO TARDANZA
-                            DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]); // SI ESTÁN EN LAS HORA DE TOLERANCIA ENTONCES SE MARCA COMO ASISTENCIA
+                            DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi, $barcode[0]->CodCon]); // SI ESTÁN EN LAS HORA DE TOLERANCIA ENTONCES SE MARCA COMO ASISTENCIA
                         }else{
                             $estado = 'T';
-                            DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]); // SI NO ESTÁN EN LAS HORA DE TOLERANCIA ENTONCES SE MARCA COMO TARDANZA
+                            DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi, $barcode[0]->CodCon]); // SI NO ESTÁN EN LAS HORA DE TOLERANCIA ENTONCES SE MARCA COMO TARDANZA
                         }
                     }else{
                         $estado = 'T';
-                        DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]); // SI ESTÁ FUERA DEL DÍA DE REGISTRO ENTONCES SE MARCA COMO TARDANZA
+                        DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi, $barcode[0]->CodCon]); // SI ESTÁ FUERA DEL DÍA DE REGISTRO ENTONCES SE MARCA COMO TARDANZA
                     }                
                 }else{
-                    DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi,$request->codcon]);
+                    DB::update('UPDATE TabDetAsi set HorLlegAsi = ?, EstAsi=?, Asistio=? WHERE CodAsi = ? AND CodCon = ? ',[$fecha, $estado,true,$request->codasi, $barcode[0]->CodCon]);
                 }
                 
                 DB::update("UPDATE TabAsi set TotFaltas = TotFaltas - 1, TotAsistencia = TotAsistencia + 1 WHERE CodAsi = '".$request->codasi."'");
