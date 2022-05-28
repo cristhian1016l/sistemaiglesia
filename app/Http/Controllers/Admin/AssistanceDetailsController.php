@@ -349,13 +349,19 @@ class AssistanceDetailsController extends Controller
 
     public function getNumbers($Codasi){
         try{
-            $numbers = DB::table('TabAsi')
-                    ->select('TotAsistencia', 'TotFaltas')
-                    ->where('CodAsi', $Codasi)
-                    ->get();
+            // $numbers = DB::table('TabAsi')
+            //         ->select('TotAsistencia', 'TotFaltas')
+            //         ->where('CodAsi', $Codasi)
+            //         ->get();
+
+            $asistencias = DB::table('TabDetAsi')->where(['EstAsi' => 'A', 'EstAsi' => 'T'])->where('CodAsi', $Codasi)->count();
+            $faltas = DB::table('TabDetAsi')->where('EstAsi', 'F')->where('CodAsi', $Codasi)->count();
+
+            $numbers = ['totAsistencias' => $asistencias, 'TotFaltas' => $faltas];
+
             return response()->json(['numbers' => $numbers,'status' => '500']);
         }catch(\Exception $th){
-            $numbers = ['TotAsistencia' => 'error', 'TotFaltas' => 'error'];
+            $numbers = ['TotAsistencias' => $th->getMessage(), 'TotFaltas' => 'error'];
             return response()->json(['numbers' => $numbers,'status' => '500', 'msg' => $th]);
         }
     }

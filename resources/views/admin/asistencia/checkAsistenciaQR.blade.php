@@ -276,8 +276,8 @@
         console.log(data.numbers);
         var asistencias = document.getElementById('TotAsistencias');
         var faltas = document.getElementById('TotFaltas');
-        asistencias.textContent = data.numbers[0].TotAsistencia;
-        faltas.textContent = data.numbers[0].TotFaltas;
+        asistencias.textContent = data.numbers.totAsistencias;
+        faltas.textContent = data.numbers.TotFaltas;
       }
     });
   }
