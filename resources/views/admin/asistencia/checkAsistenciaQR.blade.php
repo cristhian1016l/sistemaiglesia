@@ -133,7 +133,7 @@
                 <div class="col-md-8">
                   <div class="form-group">
                       <label for="QrCode">CÓDIGO DE BARRAS</label>
-                      <input name="QrCode" class="form-control form-control-lg" id="QrCode">
+                      <input name="QrCode" class="form-control form-control-lg" id="QrCode" oninput="if(document.getElementById('QrCode').value.length == 6) { registerAssistance() }">
                     </div>
                 </div>
                 <div class="col-md-2"></div>
@@ -204,6 +204,21 @@
 
 <!-- ADMINISTRACION -->
 <script>
+
+  $(function(){
+      $("#QrCode").on("change", function(){
+          // var a = $("#sifre_text").val();
+          // var b = $("#sifre_tekrar_text").val();
+          // if(a == b)
+          //     $("#sifre_check").css("background-color", "yellow");     
+          console.log("first");
+      });
+  })
+
+  // setTimeout(function() {
+  //   // document.querySelector(".continuebutton a").click();
+  //   console.log("Continue Clicked");
+  // }, 50); 
 
   document.getElementById("menuasistenciaopen").className += ' menu-open';    
   document.getElementById("adminasistenciaactive").className += " active";    
@@ -383,13 +398,26 @@
     });
   }
 
-  $("#QrCode").on('keyup', function(e){
-    if(event.keyCode === 'Enter' || e.keyCode === 13 ){
-      // toastr.error("Ha ocurrido un error, no se puede eliminar la asistencia del miembro");
-      updateRegisterMember(document.getElementById("QrCode").value);
-      document.getElementById("QrCode").value = '';
-    }    
-  })
+  function registerAssistance(){
+    var barcode = document.getElementById("QrCode").value;
+    console.log(barcode.length + " dsd");
+    updateRegisterMember(barcode);
+    document.getElementById("QrCode").value = '';
+    // updateRegisterMember(document.getElementById("QrCode").value);
+    // document.getElementById("QrCode").value = '';
+    // if(event.keyCode === 'Enter' || e.keyCode === 13 ){
+    //   updateRegisterMember(document.getElementById("QrCode").value);
+    //   document.getElementById("QrCode").value = '';
+    // }    
+
+    // $("#QrCode").on('keyup', function(e){
+    //   if(event.keyCode === 'Enter' || e.keyCode === 13 ){
+    //     // toastr.error("Ha ocurrido un error, no se puede eliminar la asistencia del miembro");
+    //     updateRegisterMember(document.getElementById("QrCode").value);
+    //     document.getElementById("QrCode").value = '';
+    //   }    
+    // })
+  }  
 
 </script>
 @endsection 
