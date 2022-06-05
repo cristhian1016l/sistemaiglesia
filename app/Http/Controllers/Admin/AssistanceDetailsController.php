@@ -352,12 +352,16 @@ class AssistanceDetailsController extends Controller
             // $numbers = DB::table('TabAsi')
             //         ->select('TotAsistencia', 'TotFaltas')
             //         ->where('CodAsi', $Codasi)
-            //         ->get();
-
-            $asistencias = DB::table('TabDetAsi')->where(['EstAsi' => 'A', 'EstAsi' => 'T'])->where('CodAsi', $Codasi)->count();
+            //         ->get();            
+            // $asistencias = DB::table('TabDetAsi')
+            //                     ->where('EstAsi', 'A')
+            //                     ->orWhere('EstAsi', 'T')
+            //                     ->where('CodAsi', $Codasi)->count();
+            $asistencias = DB::select("SELECT COUNT(*) AS count FROM TabDetAsi WHERE CodAsi = '".$Codasi."' AND (EstAsi = 'A' OR EstAsi = 'T')");
+            
             $faltas = DB::table('TabDetAsi')->where('EstAsi', 'F')->where('CodAsi', $Codasi)->count();
 
-            $numbers = ['totAsistencias' => $asistencias, 'TotFaltas' => $faltas];
+            $numbers = ['totAsistencias' => $asistencias[0]->count, 'TotFaltas' => $faltas];
 
             return response()->json(['numbers' => $numbers,'status' => '500']);
         }catch(\Exception $th){

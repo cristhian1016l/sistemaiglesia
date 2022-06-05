@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}">     -->
-    <title>Reporte Almas Nuevas</title>
+    <title>Reporte faltas al culto</title>
     <style>
         body {
             margin: 0;
@@ -77,7 +77,7 @@
     <!-- <img src="{{ asset('dist/img/logo.png') }}" alt="Logo" width="50" height="50" align="right"> -->        
     <div>
         <!-- <u style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold;">REGISTRO DE ASISTENCIA</u>         -->
-        <p style="font-family: 'Inter', sans-serif; font-size: 12x; font-weight: bold; text-align: center;">ASISTENCIAS POR CASAS DE PAZ</p>    
+        <p style="font-family: 'Inter', sans-serif; font-size: 12x; font-weight: bold; text-align: center;">ASISTENCIAS A LOS ÚLTIMOS 5 CULTOS {{ $cdp }}</p>    
         <div style="margin-top: 10px;">
             <hr style="border-top: 1px trashed;">
             <table id="table">

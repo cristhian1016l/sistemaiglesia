@@ -71,7 +71,7 @@ class DashboardController extends Controller
                                         'Nombrescomp' => $member->ApeCon.' '.$member->NomCon, 'NumCel' => $member->NumCel,
                                         'asis1' => $datosvuelta[0], 'asis2' => $datosvuelta[1], 'asis3' => $datosvuelta[2],
                                         'asis4' => $datosvuelta[3], 'asis5' => $datosvuelta[4], 'faltas' => $faltas]);
-            dd($miembros);
+            // dd($miembros);
         }
 
         $data = ['asistencias' => $asistencias, 'cdp' => $codcaspaz.' - '.$cdpylider[0]->ApeCon.' '.$cdpylider[0]->NomCon, 'members' => $miembros];

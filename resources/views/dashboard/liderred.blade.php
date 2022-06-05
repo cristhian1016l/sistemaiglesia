@@ -127,7 +127,7 @@
             </div>
               <!-- /.card -->            
           </div>          
-          <!-- <div class="col-md-6">
+          <div class="col-md-6">
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Faltas de miembros (Reporte)</h3>
@@ -155,7 +155,7 @@
                 </div>
               </div>            
             </div>
-          </div>           -->
+          </div>          
         </div>   
         <div class="row">
           <div class="col-md-6">
