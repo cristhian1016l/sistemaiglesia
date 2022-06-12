@@ -462,6 +462,7 @@
       url: '/administracion/asistencia/procesar-faltas-CP/' + codasi,
       data: '_token = <?php echo csrf_token() ?>',
       success: function(data) {
+        console.log(data);
         if (data.code == 200) {
           Swal.fire({
             title: 'Faltas de discipulos procesados!',

@@ -505,39 +505,6 @@ CREATE TABLE TabHistorialVis (
 
 -- --------------- FIN TABLAS DE HISTORIAL DE VISITAS --------------- 
 
--- --------------- TABLAS DE DISCIPULADOS --------------- 
-
-DROP TABLE IF EXISTS tabasidiscipulados;
-CREATE TABLE tabasidiscipulados
-(
-	codasi VARCHAR(12) NOT NULL,
-    codarea VARCHAR(4) NOT NULL,
-    fecasi DATETIME,
-    tema VARCHAR(255),
-    ofrenda DECIMAL(5,2),
-    testimonios text,
-    observaciones text,
-    totfaltas INTEGER,
-    totasistencia INTEGER,
-    mes INTEGER,
-    anio INTEGER,
-    activo TINYINT(1) DEFAULT 1,
-    PRIMARY KEY(codasi)
-) ENGINE=innodb DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS tabdetasidiscipulados;
-CREATE TABLE tabdetasidiscipulados (
-  codasi VARCHAR(12) NOT NULL, 
-  codcon VARCHAR(8) NOT NULL, 
-  nomapecon VARCHAR(150), 
-  estasi VARCHAR(1) DEFAULT 'F', 
-  asistio TINYINT(1) DEFAULT 0, 
-  motivo VARCHAR(100), 
-  PRIMARY KEY (`codasi`, `codcon`)
-) ENGINE=innodb DEFAULT CHARSET=utf8;
-
--- --------------- FIN TABLAS DE DISCIPULADOS --------------- 
-
 DROP TABLE IF EXISTS `TabCon`;
 CREATE TABLE `TabCon` (
   `CodCon` VARCHAR(8) NOT NULL, 
@@ -1019,16 +986,6 @@ ALTER TABLE TabHistorialVis
 ADD FOREIGN KEY (CodCon) REFERENCES TabCon (CodCon);
 
 -- --------------- FIN RELACIONES HISTORIAL DE VISITAS --------------- 
-
-
--- --------------- RELACIONES DISCIPULADOS --------------- 
-ALTER TABLE tabdetasidiscipulados
-ADD FOREIGN KEY (codasi) REFERENCES tabasidiscipulados(codasi);
-
-ALTER TABLE tabdetasidiscipulados
-ADD FOREIGN KEY (codcon) REFERENCES TabCon(codcon);
-
--- --------------- FIN RELACIONES DISCIPULADOS --------------- 
 
 
 -- --------------- RELACIONES MIEMBROS OBSERVADOS --------------- 

@@ -135,40 +135,33 @@ class AssistanceController extends Controller
                 $SQLLiderCP = DB::select("SELECT CONCAT(ApeCon, ' ', NomCon) as nombres FROM TabCon WHERE
                                         CodCon ='".$cp->CodLid."'");
                 foreach($SQLMiembros as $ms){
-                        // $SQLAsis = DB::select("SELECT da.CodCon, da.NomApeCon, da.Asistio FROM TabAsi a INNER JOIN TabDetAsi 
-                        //                         da ON a.Codasi = da.CodAsi WHERE a.CodAsi = '".$codasi."' AND da.CodCon = '".$ms->CodCon."'");
-                        // foreach($SQLAsis as $as){
-                        //     if($as->Asistio == 0){
-                        //         $this->InsertFaltasCultoCp($cp->CodCasPaz, $cp->CodLid, $SQLLiderCP[0]->nombres, $as->CodCon, $as->NomApeCon);
-                        //     }
-                        // }
-
 
                         $asistenciaCulto = DB::select("SELECT da.CodCon, da.NomApeCon, da.Asistio, da.EstAsi, da.Motivo
                                                 FROM TabAsi a INNER JOIN TabDetAsi da ON a.CodAsi = da.CodAsi
                                                 WHERE a.FecAsi = '".$fecCulto[0]->FecAsi."' AND da.CodCon = '".$ms->CodCon."' AND (a.CodAct = '001' OR a.CodAct = '012')");
-                        $faltas = 0;
-                        for($i = 0; $i < count($asistenciaCulto); $i++){
-                            if($asistenciaCulto[$i]->EstAsi == "F"){
-                                $faltas = $faltas + 1;    
+                        if(count($asistenciaCulto) != 0){
+                            $faltas = 0;
+                            for($i = 0; $i < count($asistenciaCulto); $i++){
+                                if($asistenciaCulto[$i]->EstAsi == "F"){
+                                    $faltas = $faltas + 1;    
+                                }
                             }
-                        }
-                        // dd("FASF ".$faltas);
-                        if($faltas > 1){
-                            $this->InsertFaltasCultoCp($cp->CodCasPaz, 
-                                                        $cp->CodLid, 
-                                                        $SQLLiderCP[0]->nombres, 
-                                                        $asistenciaCulto[0]->CodCon, 
-                                                        $asistenciaCulto[0]->NomApeCon);
-
-                            // $this->InsertFaltasCultoDs($discipulado->CodArea, 
-                            //                             $mg->CodCon, 
-                            //                             $discipulado->DesArea, 
-                            //                             $asistenciaCulto[0]->NomApeCon, 
-                            //                             $mg->CarDis, 
-                            //                             $asistenciaCulto[0]->Motivo);
-                        }        
-
+                            // dd("FASF ".$faltas);
+                            if($faltas > count($asistenciaCulto)-1){
+                                $this->InsertFaltasCultoCp($cp->CodCasPaz, 
+                                                            $cp->CodLid, 
+                                                            $SQLLiderCP[0]->nombres, 
+                                                            $asistenciaCulto[0]->CodCon, 
+                                                            $asistenciaCulto[0]->NomApeCon);
+    
+                                // $this->InsertFaltasCultoDs($discipulado->CodArea, 
+                                //                             $mg->CodCon, 
+                                //                             $discipulado->DesArea, 
+                                //                             $asistenciaCulto[0]->NomApeCon, 
+                                //                             $mg->CarDis, 
+                                //                             $asistenciaCulto[0]->Motivo);
+                            }        
+                        }                        
 
                 }
             }
