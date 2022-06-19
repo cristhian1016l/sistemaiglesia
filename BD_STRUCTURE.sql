@@ -537,12 +537,11 @@ CREATE TABLE `TabCon` (
   `MotBaja` VARCHAR(150), 
   `CheckDat` TINYINT(1) DEFAULT 0, 
   `FalConsCP` VARCHAR(2) DEFAULT '0', 
-  `SoloCasPaz` TINYINT(1) DEFAULT 0, 
   `ParticipaCasaPaz` TINYINT(1) DEFAULT 0, 
-  `SoloCultos` TINYINT(1) DEFAULT 0, 
   `EstaEnProceso` TINYINT(1) DEFAULT 0, 
   `DiscipuloCon` VARCHAR(10), 
   `ID_Red` VARCHAR(1) DEFAULT '0', 
+  `TipoAsi` VARCHAR(12) DEFAULT 'NORMAL',
   INDEX (`ID_Red`), 
   INDEX (`Id_Zona`), 
   PRIMARY KEY (`CodCon`)

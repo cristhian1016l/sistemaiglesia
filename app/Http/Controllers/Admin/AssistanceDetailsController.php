@@ -95,7 +95,7 @@ class AssistanceDetailsController extends Controller
                         $miembros = DB::table('TabCon')
                         ->select('CodCon', 'ApeCon', 'NomCon')
                         ->where('EstCon', 'ACTIVO')
-                        ->where('SoloCasPaz', '0')
+                        ->where('TipoAsi', '!=', 'SOLO CP')
                         ->get();
                     }else{
                         $miembros = DB::table('TabCon')

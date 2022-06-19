@@ -181,15 +181,15 @@
                   <p>Ver casas de paz</p>
                 </a>
               </li>              
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="{{ route('liderred.getreports') }}" class="nav-link" id="reports">
                   <i class="fas fa-eye nav-icon"></i>
                   <p>Informes Recibidos</p>
                 </a>
-              </li>              
+              </li> -->
             </ul>
           </li>
-          <li class="nav-item" id="menugestioncpopen">
+          <!-- <li class="nav-item" id="menugestioncpopen">
             <a href="#" class="nav-link" id="menugestioncpactive">
               <i class="nav-icon fas fa-user-cog"></i>
               <p>
@@ -205,7 +205,7 @@
                 </a>
               </li>              
             </ul>
-          </li>
+          </li> -->
           <!-- <li class="nav-item" id="menuusuariosopen">
             <a href="#" class="nav-link" id="menuusuariosactive">              
               <i class="nav-icon fas fa-users"></i>
@@ -314,7 +314,7 @@
               </li>
             </ul>
             @endif
-            @if(auth()->user()->can('permisos'))
+            <!--@if(auth()->user()->can('permisos'))
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('admin.permissions.index') }}" class="nav-link" id="assistance">
@@ -332,10 +332,10 @@
                   <p>Reportes</p>
                 </a>
               </li>
-            </ul>
+            </ul>-->
             @endif
           </li>
-          <li class="nav-item" id="adminusuarioopen">
+          <!--<li class="nav-item" id="adminusuarioopen">
             @if(auth()->user()->hasAnyPermission(['usuarios mentores']))
             <a href="#" class="nav-link" id="adminusuarioactive">
               <i class="nav-icon fas fa-users"></i>
@@ -355,7 +355,7 @@
               </li>
             </ul>
             @endif
-          </li>
+          </li>-->
           <li class="nav-item" id="admindiscipuladoopen">
             @if(auth()->user()->hasAnyPermission(['reunion de discipulados', 'administrar discipulados']))
             <a href="#" class="nav-link" id="admindiscipuladoactive">
@@ -366,7 +366,7 @@
               </p>
             </a>
             @endif
-            @if(auth()->user()->can('reunion de discipulados'))
+            <!--@if(auth()->user()->can('reunion de discipulados'))
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('admin.discipulado.index') }}" class="nav-link" id="admindiscipulado">
@@ -375,7 +375,7 @@
                 </a>
               </li>
             </ul>
-            @endif
+            @endif-->
             @if(auth()->user()->can('administrar discipulados'))
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -446,7 +446,7 @@
               </li>
             </ul>
           </li>              
-          <li class="nav-item" id="menudiscipuladoopen">
+          <!-- <li class="nav-item" id="menudiscipuladoopen">
             <a href="#" class="nav-link" id="menudiscipuladoactive">
               <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>
@@ -462,7 +462,7 @@
                 </a>
               </li>              
             </ul>
-          </li>              
+          </li> -->
           @endrole    
           @role('tesorero')
           <li class="nav-header">TESORERÍA</li>          
