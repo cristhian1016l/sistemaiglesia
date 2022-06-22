@@ -95,14 +95,13 @@
         </div>
         <br>
         <div class="row">
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Faltas al culto por casas de paz general para visitas</h3>
               </div>
               <div class="card-body"> 
-                <div class="form-group">
-                  <!-- <label>Faltas consecutivas de discipulos al culto</label> -->
+                <div class="form-group">                  
                   {!! Form::open(array('route' => 'liderred.faltasmiembros.FaultsOfMemberDownload', 'role' => 'form', 'id' => "quickForm")) !!}
                     <div class="form-row">
                       <div class="col-md-8">
@@ -122,11 +121,9 @@
                     </div>
                   {!! Form::close() !!}            
                 </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-              <!-- /.card -->            
-          </div>          
+              </div>              
+            </div>              
+          </div>           -->
           <div class="col-md-6">
             <div class="card card-primary">
               <div class="card-header">
@@ -158,15 +155,13 @@
           </div>          
         </div>   
         <div class="row">
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Informe semanal de casas de paz</h3>
               </div>
               <div class="card-body"> 
                 <div class="form-group">
-                  <!-- <label>Faltas consecutivas de discipulos al culto</label> -->
-
                   <div class="form-row">                    
                     <div class="col-md-12">
                       <a >
@@ -176,13 +171,10 @@
                       </a> 
                     </div>
                   </div>
-
                 </div>
               </div>
-              <!-- /.card-body -->
-            </div>
-              <!-- /.card -->            
-          </div>          
+            </div>              
+          </div>           -->
         </div>
       </div><!--/. container-fluid -->
     </section>

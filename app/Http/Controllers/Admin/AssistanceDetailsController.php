@@ -204,6 +204,17 @@ class AssistanceDetailsController extends Controller
         }        
     }
 
+    public function getDetailsDetAsiAjax(Request $request){
+        $detasi = DB::table('TabDetAsi')
+                ->select('CodAsi', 'CodCon', 'NomApeCon', 'HorLlegAsi', 'EstAsi','Asistio')
+                ->where('CodAsi', $request->codasi)
+                ->orderBy('NomApeCon')
+                ->get();        
+        
+        return response()->json(['200', 'miembros' => $detasi]);
+
+    }
+
     public function updateAssistanceMember(Request $request){        
         try{
             $fecha = Carbon::now();

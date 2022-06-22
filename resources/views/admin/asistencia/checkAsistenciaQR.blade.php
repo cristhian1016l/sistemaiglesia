@@ -76,6 +76,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
+          <button id="modal" type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" hidden></button>
           <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">REGISTRO EN {{ $asistencia->TipAsi }}</h3>
@@ -168,6 +169,49 @@
 
 </div>
 <!-- /.container-fluid -->
+
+  <div class="modal fade" id="modal-default">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">REGISTRO MANUAL</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>CODIGO</th>
+                <th>MIEMBROS</th>
+                <th>HORA</th>
+                <th>ESTADO</th>
+                <th>CHECK</th>
+              </tr>
+            </thead>
+            <tbody>            
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>CODIGO</th>
+                <th>MIEMBROS</th>
+                <th>HORA</th>
+                <th>ESTADO</th>                
+                <th>CHECK</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
 </section>
 <!-- /.content -->
 </div>
@@ -205,15 +249,114 @@
 <!-- ADMINISTRACION -->
 <script>
 
-  $(function(){
-      $("#QrCode").on("change", function(){
-          // var a = $("#sifre_text").val();
-          // var b = $("#sifre_tekrar_text").val();
-          // if(a == b)
-          //     $("#sifre_check").css("background-color", "yellow");     
-          console.log("first");
-      });
-  })
+$(document).bind('keyup', function(e){
+  if(e.which==115) {    
+    var Codasi = $('#asistencia').val();
+    $('#example1').dataTable().fnClearTable();
+    $('#example1').dataTable().fnDestroy();
+    $("#example1").DataTable({
+      "ajax": {
+      "type": "POST",
+      "url": "/administracion/detalleAsistenciaAjax",
+      "data": {
+        "codasi": Codasi,          
+      },
+      "dataSrc": function(data) {
+        console.log(data);
+        return data.miembros;
+      },
+      "headers": {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+      },
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      // "buttons": ["excel", "pdf", "print"],
+      "language": {
+        "search": "Buscar:",
+        "lengthMenu": "Mostrar _MENU_ miembros",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Miembros",
+        "infoFiltered": "(Filtrado de _MAX_ registros)",
+        "zeroRecords": "No se encontraron resultados",
+        "emptyTable": "Ningún dato disponible en esta tabla",
+        "paginate": {
+          "first": "primero",
+          "last": "último",
+          "next": "siguiente",
+          "previous": "anterior"
+        },
+      },
+      "columns": [{
+          "data": "CodCon"
+        },
+        {
+          "data": "NomApeCon"
+        },
+        {
+          "data": "HorLlegAsi"
+        },
+        {
+          "data": "EstAsi"
+        },
+        {
+          "data": "Asistio"
+        },
+      ],
+      "columnDefs": [{
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      },
+      {
+        "targets": [2],
+        "searchable": false
+      },
+      {
+        "targets": [3],
+        "searchable": false,
+        render: function(data, type, row) {
+          switch (data) {
+            case 'A':
+              return 'ASISTIO'
+              break;
+            case 'T':
+              return 'TARDE'
+              break;
+            case 'F':
+              return 'FALTO'
+              break;
+            case 'P':
+              return 'PERMISO'
+              break;
+          }
+        }
+      },
+      {
+        "targets": [4],
+        "searchable": false,
+        render: function(data, type, row) {
+          return createManageBtn(row.CodCon, row.CodAsi, data)
+        }
+      },
+    ],
+    });
+    var table = $('#example1').DataTable();
+    $('div.dataTables_filter input', table.table().container()).focus();
+    document.getElementById("modal").click();
+  }    
+});
+
+$(function(){
+    $("#QrCode").on("change", function(){
+        // var a = $("#sifre_text").val();
+        // var b = $("#sifre_tekrar_text").val();
+        // if(a == b)
+        //     $("#sifre_check").css("background-color", "yellow");     
+        console.log("first");
+    });
+})
 
   // setTimeout(function() {
   //   // document.querySelector(".continuebutton a").click();
@@ -224,7 +367,7 @@
   document.getElementById("adminasistenciaactive").className += " active";    
   document.getElementById("assistance").className += " active";   
 
-  function updateRegisterMember(codbarras) {    
+  function updateRegisterMemberBarcode(codbarras) {    
     var codasi = document.getElementById("asistencia").value;
     var codact = $('#codact').val();
 
@@ -401,23 +544,238 @@
   function registerAssistance(){
     var barcode = document.getElementById("QrCode").value;
     console.log(barcode.length + " dsd");
-    updateRegisterMember(barcode);
+    updateRegisterMemberBarcode(barcode);
     document.getElementById("QrCode").value = '';
-    // updateRegisterMember(document.getElementById("QrCode").value);
-    // document.getElementById("QrCode").value = '';
-    // if(event.keyCode === 'Enter' || e.keyCode === 13 ){
-    //   updateRegisterMember(document.getElementById("QrCode").value);
-    //   document.getElementById("QrCode").value = '';
-    // }    
-
-    // $("#QrCode").on('keyup', function(e){
-    //   if(event.keyCode === 'Enter' || e.keyCode === 13 ){
-    //     // toastr.error("Ha ocurrido un error, no se puede eliminar la asistencia del miembro");
-    //     updateRegisterMember(document.getElementById("QrCode").value);
-    //     document.getElementById("QrCode").value = '';
-    //   }    
-    // })
   }  
 
+  function updateRegisterMember(Codcon, Codasi) {
+    var codact = $('#codact').val();
+    $('#example1').dataTable().fnClearTable();
+    $('#example1').dataTable().fnDestroy();
+    $('#example1').DataTable({
+      "ajax": {
+        "type": "POST",
+        "url": "/administracion/registrarAsistencia",
+        "data": {
+          'codcon': Codcon,
+          "codasi": Codasi,
+          "codact": codact
+        },
+        "dataSrc": function(data) {
+          val = data.error;
+          if (val === "500") {
+            // toastr.error("Ha ocurrido un error, no se puede registrar la asistencia del miembro")
+            toastr.error(data.msg);
+          } else {
+            if (data.state === "OK") {
+              // alert("El usuario ya está registrado, intenta recargando la página");
+              location.reload();
+            } else {
+              toastr.options.positionClass = 'toast-bottom-right';
+              miembros = data.miembros;
+              toastr.success('Asistencia de miembro registrada correctamente');
+              getDetailsNumbers(Codasi);
+              return data.miembros;
+            }
+          }
+        },
+        "headers": {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      },
+      "responsive": true,
+      "lengthChange": true,
+      "autoWidth": false,
+      "buttons": ["excel", "pdf", "print"],
+      "language": {
+        "search": "Buscar:",
+        "lengthMenu": "Mostrar _MENU_ miembros",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Miembros",
+        "infoFiltered": "(Filtrado de _MAX_ registros)",
+        "zeroRecords": "No se encontraron resultados",
+        "emptyTable": "Ningún dato disponible en esta tabla",
+        "paginate": {
+          "first": "primero",
+          "last": "último",
+          "next": "siguiente",
+          "previous": "anterior"
+        },
+      },
+      "columns": [{
+          "data": "CodCon"
+        },
+        {
+          "data": "NomApeCon"
+        },
+        {
+          "data": "HorLlegAsi"
+        },
+        {
+          "data": "EstAsi"
+        },
+        {
+          "data": "Asistio"
+        },
+      ],
+      "columnDefs": [{
+          "targets": [0],
+          "visible": false,
+          "searchable": false
+        },
+        {
+          "targets": [2],
+          "searchable": false
+        },
+        {
+          "targets": [3],
+          "searchable": false,
+          render: function(data, type, row) {
+            switch (data) {
+              case 'A':
+                return 'ASISTIO'
+                break;
+              case 'T':
+                return 'TARDE'
+                break;
+              case 'F':
+                return 'FALTO'
+                break;
+              case 'P':
+                return 'PERMISO'
+                break;
+            }
+          }
+        },
+        {
+          "targets": [4],
+          "searchable": false,
+          render: function(data, type, row) {
+            return createManageBtn(row.CodCon, row.CodAsi, data)
+          }
+        },
+      ],
+    });
+    var table = $('#example1').DataTable();
+    $('div.dataTables_filter input', table.table().container()).focus();
+  }
+
+  function deleteAssistanceMember(Codcon, Codasi) {
+    var codact = $('#codact').val();
+    $('#example1').dataTable().fnClearTable();
+    $('#example1').dataTable().fnDestroy();
+    $('#example1').DataTable({
+      "ajax": {
+        "type": "POST",
+        "url": "/administracion/eliminarAsistencia",
+        "data": {
+          'codcon': Codcon,
+          "codasi": Codasi,
+          "codact": codact
+        },
+        "dataSrc": function(data) {
+          val = data.error;
+          if (val === "500") {
+            toastr.error("Ha ocurrido un error, no se puede eliminar la asistencia del miembro")
+          } else {
+            if (data.state == "OK") {
+              // alert("Ya ha sido eliminada la asistencia del miembro, intenta a recargar la página");
+              location.reload();
+            } else {
+              miembros = data.miembros;
+              toastr.info('Asistencia de miembro eliminada correctamente');
+              getDetailsNumbers(Codasi);
+              return data.miembros;
+            }
+          }
+        },
+        "headers": {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      },
+      "responsive": true,
+      "lengthChange": true,
+      "autoWidth": false,
+      "buttons": ["excel", "pdf", "print"],
+      "language": {
+        "search": "Buscar:",
+        "lengthMenu": "Mostrar _MENU_ miembros",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Miembros",
+        "infoFiltered": "(Filtrado de _MAX_ registros)",
+        "zeroRecords": "No se encontraron resultados",
+        "emptyTable": "Ningún dato disponible en esta tabla",
+        "paginate": {
+          "first": "primero",
+          "last": "último",
+          "next": "siguiente",
+          "previous": "anterior"
+        },
+      },
+      "columns": [{
+          "data": "CodCon"
+        },
+        {
+          "data": "NomApeCon"
+        },
+        {
+          "data": "HorLlegAsi"
+        },
+        {
+          "data": "EstAsi"
+        },
+        {
+          "data": "Asistio"
+        },
+      ],
+      "columnDefs": [{
+          "targets": [0],
+          "visible": false,
+          "searchable": false
+        },
+        {
+          "targets": [2],
+          "searchable": false
+        },
+        {
+          "targets": [3],
+          "searchable": false,
+          render: function(data, type, row) {
+            switch (data) {
+              case 'A':
+                return 'ASISTIO'
+                break;
+              case 'T':
+                return 'TARDE'
+                break;
+              case 'F':
+                return 'FALTO'
+                break;
+              case 'P':
+                return 'PERMISO'
+                break;
+            }
+          }
+        },
+        {
+          "targets": [4],
+          "searchable": false,
+          render: function(data, type, row) {
+            return createManageBtn(row.CodCon, row.CodAsi, data)
+          }
+        },
+      ],
+    });
+    var table = $('#example1').DataTable();
+    $('div.dataTables_filter input', table.table().container()).focus();
+  }
+</script>
+<script type="text/javascript">
+  function createManageBtn(codcon, codasi, asistio) {
+    // return codcon+' '+codasi+' '+asistio;
+    if (asistio == 1) {
+      return '<button class="btn btn-success btn-sm" onclick="deleteAssistanceMember(' + "'" + codcon + "'" + ',' + "'" + codasi + "'," + 1 + ')"><i class="fas fa-minus-circle"></i></button>';
+    } else {
+      return '<button class="btn btn-danger btn-sm" onclick="updateRegisterMember(' + "'" + codcon + "'" + ',' + "'" + codasi + "'," + 1 + ')"><i class="far fa-check-circle"></i></button>';
+    }
+  }
 </script>
 @endsection 

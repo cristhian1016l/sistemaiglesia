@@ -198,17 +198,17 @@ Route::group(['middleware' => 'isAdmin'], function(){
 
     Route::group(['middleware' => ['can:reportar asistencias']], function () {
         // ASISTENCIA
-        Route::get('administracion/asistencia', 'Admin\AssistanceController@getAssistance')->name('admin.asistencia.index');
-        Route::post('administracion/asistencia/{act}','Admin\AssistanceController@getTabActMes')->name('admin.asistencia.getTabActMes');
-        Route::post('administracion/asistenciaAnterior/{fec}','Admin\AssistanceController@getPrevAssists')->name('admin.asistencia.getPrevAssists');
-        Route::post('administracion/asistencia/faltas/{act}','Admin\AssistanceController@getFaltasDiscipulosOracion')->name('admin.asistencia.getFaltasDiscipulosOracion');
-        Route::post('administracion/asistencia/procesar-faltas/{codasi}', 'Admin\AssistanceController@faultsProcess');
-        Route::post('administracion/asistencia/procesar-faltas-CP/{codasi}', 'Admin\AssistanceController@faultsProcessCP');
-        Route::post('administracion/asistencia/procesar-oracion/{codasi}', 'Admin\AssistanceController@prayerProcess');
-        Route::get('administracion/asistencia/reporte/imprimir-oracion', 'Admin\AssistanceController@printPrayer')->name('admin.imprimir_oracion');
+        Route::get('administracion/asistencia', 'Admin\AssistanceController@obtenerAsistencia')->name('admin.asistencia.index');
+        Route::post('administracion/asistencia/{act}','Admin\AssistanceController@obtenerActividadesMensuales')->name('admin.asistencia.obtenerActividadesMensuales');
+        Route::post('administracion/asistenciaAnterior/{fec}','Admin\AssistanceController@obtenerAsistenciasPrevias')->name('admin.asistencia.obtenerAsistenciasPrevias');
+        Route::post('administracion/asistencia/faltas/{act}','Admin\AssistanceController@obtenerFaltasDeDiscipulosAOracion')->name('admin.asistencia.obtenerFaltasDeDiscipulosAOracion');
+        Route::post('administracion/asistencia/procesar-faltas/{codasi}', 'Admin\AssistanceController@procesarFaltasDiscipulados');
+        Route::post('administracion/asistencia/procesar-faltas-CP/{codasi}', 'Admin\AssistanceController@procesarFaltasACdp');
+        Route::post('administracion/asistencia/procesar-oracion/{codasi}', 'Admin\AssistanceController@procesarAsistenciasDeOracion');
+        Route::get('administracion/asistencia/reporte/imprimir-oracion', 'Admin\AssistanceController@imprimirReporteDeOracion')->name('admin.imprimirReporteDeOracion');
 
         // DETALLE ASISTENCIA
-        Route::post('administracion/asistenciaAnterior','Admin\AssistanceDetailsController@getDetailsDetAsi')->name('admin.asistencia.getDetailsDetAsi');
+        Route::post('administracion/asistenciaAnterior','Admin\AssistanceDetailsController@getDetailsDetAsi')->name('admin.asistencia.getDetailsDetAsi');        
         Route::get('administracion/asistencia/{CodAct}','Admin\AssistanceDetailsController@getDiaryRegister')->name('admin.asistencia.getDiaryRegister');
         Route::post('administracion/asistencia/','Admin\AssistanceDetailsController@registerAssistance')->name('admin.asistencia.registerAssistance');
         Route::get('administracion/verasistencia/{CodAct}','Admin\AssistanceDetailsController@checkDiaryRegister')->name('admin.asistencia.checkDiaryRegister');
@@ -216,6 +216,9 @@ Route::group(['middleware' => 'isAdmin'], function(){
         Route::post('administracion/registrarAsistenciaQR','Admin\AssistanceDetailsController@updateAssistanceMemberForQR')->name('admin.asistencia.updateAssistanceMemberForQR'); //REGISTRAR ASISTENCIA POR CÓDIGO QR
         Route::post('administracion/eliminarAsistencia','Admin\AssistanceDetailsController@deleteAssistanceMember')->name('admin.asistencia.deleteAssistanceMember');
         Route::post('administracion/getNumbers/{Codasi}','Admin\AssistanceDetailsController@getNumbers')->name('admin.asistencia.getNumbers');
+
+        // AJAX
+        Route::post('administracion/detalleAsistenciaAjax','Admin\AssistanceDetailsController@getDetailsDetAsiAjax')->name('admin.asistencia.getDetailsDetAsiAjax');
     });        
 
     Route::group(['middleware' => ['can:permisos']], function () {
