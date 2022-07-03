@@ -167,15 +167,24 @@ class AssistanceDetailsController extends Controller
     public function InsertDetAsi($codasi, $miembros){
         
         foreach($miembros as $miembro){            
-
-            if($miembro->TipoAsi == 'SOLO CP'){
-                $tabdetasi = new Tabdetasi();
-                $tabdetasi->CodAsi = $codasi;
-                $tabdetasi->CodCon = $miembro->CodCon;
-                $tabdetasi->NomApeCon = $miembro->ApeCon.' '.$miembro->NomCon;
-                $tabdetasi->EstAsi = 'P';
-                $tabdetasi->Asistio = false;
-                $tabdetasi->save();
+            if(isset($miembro->TipoAsi)){
+                if($miembro->TipoAsi == 'SOLO CP'){
+                    $tabdetasi = new Tabdetasi();
+                    $tabdetasi->CodAsi = $codasi;
+                    $tabdetasi->CodCon = $miembro->CodCon;
+                    $tabdetasi->NomApeCon = $miembro->ApeCon.' '.$miembro->NomCon;
+                    $tabdetasi->EstAsi = 'P';
+                    $tabdetasi->Asistio = false;
+                    $tabdetasi->save();
+                }else{
+                    $tabdetasi = new Tabdetasi();
+                    $tabdetasi->CodAsi = $codasi;
+                    $tabdetasi->CodCon = $miembro->CodCon;
+                    $tabdetasi->NomApeCon = $miembro->ApeCon.' '.$miembro->NomCon;
+                    $tabdetasi->EstAsi = 'F';
+                    $tabdetasi->Asistio = false;
+                    $tabdetasi->save();
+                }
             }else{
                 $tabdetasi = new Tabdetasi();
                 $tabdetasi->CodAsi = $codasi;
