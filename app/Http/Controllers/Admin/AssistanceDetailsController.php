@@ -93,9 +93,8 @@ class AssistanceDetailsController extends Controller
 
                     if($activities->CodAct == '001' || $activities->CodAct == '012'){
                         $miembros = DB::table('TabCon')
-                        ->select('CodCon', 'ApeCon', 'NomCon')
+                        ->select('CodCon', 'ApeCon', 'NomCon', 'TipoAsi')
                         ->where('EstCon', 'ACTIVO')
-                        ->where('TipoAsi', '!=', 'SOLO CP')
                         ->get();
                     }else{
                         $miembros = DB::table('TabCon')
@@ -169,13 +168,23 @@ class AssistanceDetailsController extends Controller
         
         foreach($miembros as $miembro){            
 
-            $tabdetasi = new Tabdetasi();
-            $tabdetasi->CodAsi = $codasi;
-            $tabdetasi->CodCon = $miembro->CodCon;
-            $tabdetasi->NomApeCon = $miembro->ApeCon.' '.$miembro->NomCon;
-            $tabdetasi->EstAsi = 'F';
-            $tabdetasi->Asistio = false;
-            $tabdetasi->save();
+            if($miembro->TipoAsi == 'SOLO CP'){
+                $tabdetasi = new Tabdetasi();
+                $tabdetasi->CodAsi = $codasi;
+                $tabdetasi->CodCon = $miembro->CodCon;
+                $tabdetasi->NomApeCon = $miembro->ApeCon.' '.$miembro->NomCon;
+                $tabdetasi->EstAsi = 'P';
+                $tabdetasi->Asistio = false;
+                $tabdetasi->save();
+            }else{
+                $tabdetasi = new Tabdetasi();
+                $tabdetasi->CodAsi = $codasi;
+                $tabdetasi->CodCon = $miembro->CodCon;
+                $tabdetasi->NomApeCon = $miembro->ApeCon.' '.$miembro->NomCon;
+                $tabdetasi->EstAsi = 'F';
+                $tabdetasi->Asistio = false;
+                $tabdetasi->save();
+            }
         }
     }
 
