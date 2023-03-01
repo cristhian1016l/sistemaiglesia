@@ -112,7 +112,7 @@
                 </tr>            
                 <tr>
                     <td style="width: 40%; text-align: center;">
-                        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-align: center">Descripción: {{ $disp->Encargado }}</p>            
+                        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-align: center">Encargado: {{ $disp->Encargado }}</p>            
                     </td>                    
                 </tr>    
             </table>        
