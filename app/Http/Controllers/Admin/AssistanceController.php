@@ -267,7 +267,7 @@ class AssistanceController extends Controller
     public function imprimirReporteDeOracion()
     {
         $discipulos = DB::select("SELECT t.CodArea, t.CodCon, t.NomCon, t.ApeCon, t.Lunes, t.Martes, t.Miercoles, t.Jueves, t.Viernes,
-                                t.Sabado, t.Domingo, t.NumAsi, t.TotAsi, g.DesArea, g.EncArea, g.TipGrup FROM TabTempOracion t INNER JOIN
+                                t.Sabado, t.Domingo, t.NumAsi, t.TotAsi, g.DesArea, g.TipGrup FROM TabTempOracion t INNER JOIN
                                 TabGrupos g ON t.CodArea = g.CodArea ORDER BY t.CodArea, t.ApeCon ASC");
         $discipulados = DB::select("SELECT g.CodArea, CONCAT(c.ApeCon, ' ', c.NomCon) as Encargado FROM
                                     TabGrupos g INNER JOIN TabCon c ON g.CodCon = c.CodCon WHERE g.TipGrup = 'D'");
