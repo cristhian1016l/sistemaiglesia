@@ -66,11 +66,13 @@ class AssistanceController extends Controller
             {
                 return response()->json(['cod' => 1, 'msg' => 'La tabla se mostrará cuando la actividad sea de oración']);
             }else{
-                $discipulados = DB::select("SELECT CodArea, DesArea FROM TabGrupos WHERE TipGrup = 'D'");
+                $discipulados = DB::select("SELECT g.CodArea, CONCAT(c.ApeCon, ' ', c.NomCon) AS Encargado
+                                            FROM TabGrupos g INNER JOIN TabCon c ON g.CodCon = c.CodCon
+                                            WHERE g.TipGrup = 'D'");
                 $dis = array();
                 foreach($discipulados as $ds)
                 {
-                    array_push($dis, ['CodArea' => $ds->CodArea, 'DesArea' => $ds->DesArea]);
+                    array_push($dis, ['CodArea' => $ds->CodArea, 'DesArea' => $ds->Encargado]);
                 }
                 $i = 0;
                 foreach($discipulados as $ds)
