@@ -307,7 +307,7 @@
               $('#table-prayer').append(
                 '<tr>' +
                   '<td>' + opt.CodArea + '</td>' +
-                  '<td>' + opt.DesArea + '</td>' +                
+                  '<td>DISCIPULADO DE ' + opt.DesArea + '</td>' +                
                 '</tr>'
               );               
             });
