@@ -179,9 +179,7 @@ class DiscipleshipController extends Controller
             DB::beginTransaction();
             $gruposmiem = new Tabgruposmiem();
             $gruposmiem->CodArea = $request->codmentor;
-            $gruposmiem->CodCon = $request->coddisciple;
-            $gruposmiem->CarDis = 'SIN CARGO';
-            $gruposmiem->FecEnv = null;
+            $gruposmiem->CodCon = $request->coddisciple;            
             $gruposmiem->EstMim = 1;
             $gruposmiem->FecInhab = null;
             $gruposmiem->ObsMim = null;
