@@ -239,7 +239,7 @@ class AssistanceController extends Controller
         $inicioSemana = $fechas['week_start'];
         $finSemana = $fechas['week_end'];
         TabTempOracion::truncate();
-        $grupos = DB::select("SELECT CodArea, DesArea FROM TabGrupos WHERE TipGrup = 'D' ORDER BY CodArea");
+        $grupos = DB::select("SELECT CodArea, DesArea FROM TabGrupos WHERE TipGrup = 'D' AND CodArea = 'A010' ORDER BY CodArea");
         try{
             DB::beginTransaction();
             foreach($grupos as $gp)
